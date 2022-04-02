@@ -8,7 +8,7 @@ import timber.log.Timber
 /**
  * @author Dheeraj Kotwani on 02/04/22.
  */
-@HiltAndroidApp
+//@HiltAndroidApp
 class ZealiconApp: Application() {
 
     override fun onCreate() {
