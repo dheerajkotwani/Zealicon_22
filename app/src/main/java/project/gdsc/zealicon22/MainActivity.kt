@@ -20,7 +20,6 @@ import project.gdsc.zealicon22.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
 
     private lateinit var duoAdapter: DuoMenuAdapter
-    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,10 +34,10 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
 
     private fun handleMenu() {
         val menuOptions: ArrayList<String> = ArrayList()
-        menuOptions.add("Home")
-        menuOptions.add("Reach us")
-        menuOptions.add("Team")
-        menuOptions.add("About")
+        menuOptions.add(getString(R.string.home))
+        menuOptions.add(getString(R.string.reach))
+        menuOptions.add(getString(R.string.team))
+        menuOptions.add(getString(R.string.about))
 
         duoAdapter = DuoMenuAdapter(menuOptions)
         binding.duoMenuView.adapter = duoAdapter
@@ -57,7 +56,7 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
     }
 
     override fun onOptionClicked(position: Int, objectClicked: Any?) {
-        Toast.makeText(this, position.toString(), Toast.LENGTH_SHORT).show()
+
         binding.duoDrawerLayout.closeDrawer()
         duoAdapter.setViewSelected(position, true)
 
