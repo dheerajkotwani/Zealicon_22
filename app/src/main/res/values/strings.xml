@@ -14,4 +14,12 @@
     <string name="sponsors">Sponsors</string>
     <string name="team">Team</string>
     <string name="about">About</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="explore_events">Explore Events</string>
+    <string name="upcoming_events">Upcoming Events</string>
+    <string name="day_one">DAY ONE</string>
+    <string name="day_two">DAY TWO</string>
+    <string name="day_three">DAY THREE</string>
+    <string name="day_four">DAY FOUR</string>
 </resources>

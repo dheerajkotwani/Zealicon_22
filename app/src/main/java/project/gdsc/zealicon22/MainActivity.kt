@@ -13,6 +13,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import nl.psdcompany.duonavigationdrawer.views.DuoMenuView
 import project.gdsc.zealicon22.databinding.ActivityMainBinding
+import project.gdsc.zealicon22.home.HomeFragment
 
 /**
  * @author Dheeraj Kotwani on 23/02/22.
@@ -63,7 +64,8 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
         when (position) {
             0 -> {
                 // TODO handle case for home screen
-                binding.mainConstraintLayout.setBackgroundColor(Color.WHITE)
+//                binding.mainConstraintLayout.setBackgroundColor(Color.WHITE)
+                supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, HomeFragment()).commit()
             }
             1 -> {
                 // TODO handle case for reach us
