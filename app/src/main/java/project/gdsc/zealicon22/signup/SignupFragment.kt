@@ -1,6 +1,5 @@
 package project.gdsc.zealicon22.signup
 
-import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.text.InputFilter
@@ -9,10 +8,14 @@ import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import project.gdsc.zealicon22.R
 import project.gdsc.zealicon22.databinding.FragmentSignupBinding
 import project.gdsc.zealicon22.databinding.ItemAvatarBinding
+import project.gdsc.zealicon22.utils.animateOnClick
+import project.gdsc.zealicon22.utils.animateToRemoveErrorMessage
+import project.gdsc.zealicon22.utils.animateToShowErrorMessage
 
 
 class SignupFragment : Fragment() {
@@ -26,6 +29,11 @@ class SignupFragment : Fragment() {
     private var selectedAvatarPosition = 1
 
     private var avatarBindingList: ArrayList<ItemAvatarBinding> = ArrayList()
+
+    private var nameError: Boolean = false
+    private var emailError: Boolean = false
+    private var phoneError: Boolean = false
+    private var admNumberError: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,8 +54,83 @@ class SignupFragment : Fragment() {
 
     private fun setupButton() {
 
+        binding.btSignup.apply {
+            setOnClickListener {
+                animateOnClick(it)
+                signup()
+            }
+        }
 
+    }
 
+    private fun signup() {
+
+        if (haveInputErrors()) return
+
+        // TODO handle signup case
+
+    }
+
+    private fun haveInputErrors(): Boolean {
+        val name = binding.etName.input.text.toString()
+        if (name.isEmpty() || name.length <= 3) {
+            nameError = true
+            disableSignupButton()
+            animateToShowErrorMessage(binding.etName.errorCard)
+            return true
+        }
+
+        val email = binding.etEmail.input.text.toString()
+        if (!email.matches(emailPattern.toRegex())){
+            emailError = true
+            disableSignupButton()
+            animateToShowErrorMessage(binding.etEmail.errorCard)
+            return true
+        }
+
+        val phoneNumber = binding.etPhone.input.text.toString()
+        if (phoneNumber.length != 10 || !phoneNumber.all { char -> char.isDigit() }) {
+            phoneError = true
+            disableSignupButton()
+            animateToShowErrorMessage(binding.etPhone.errorCard)
+            return true
+        }
+
+        val admissionNumber = binding.etAdmNumber.input.text.toString()
+        if (admissionNumber.length < 7) {
+            admNumberError = true
+            disableSignupButton()
+            animateToShowErrorMessage(binding.etAdmNumber.errorCard)
+        }
+        return false
+    }
+
+    private fun clearErrors() {
+        if (nameError) {
+            animateToRemoveErrorMessage(binding.etName.errorCard)
+            nameError = false
+        }
+        if (emailError) {
+            animateToRemoveErrorMessage(binding.etEmail.errorCard)
+            emailError = false
+        }
+        if (phoneError) {
+            animateToRemoveErrorMessage(binding.etPhone.errorCard)
+            phoneError = false
+        }
+        if (admNumberError) {
+            animateToRemoveErrorMessage(binding.etAdmNumber.errorCard)
+            admNumberError = false
+        }
+        enableSignupButton()
+    }
+
+    private fun enableSignupButton() {
+        binding.btSignup.isEnabled = true
+    }
+
+    private fun disableSignupButton() {
+        binding.btSignup.isEnabled = false
     }
 
     private fun setupEditTexts() {
@@ -56,12 +139,20 @@ class SignupFragment : Fragment() {
             input.apply {
                 inputType = InputType.TYPE_TEXT_VARIATION_PERSON_NAME
                 hint = getString(R.string.hint_name)
+                doOnTextChanged { _, _, _, _ -> clearErrors() }
+            }
+            errorMessage.apply {
+                text = getString(R.string.error_name)
             }
         }
         binding.etEmail.apply {
             input.apply {
                 inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
                 hint = getString(R.string.hint_email)
+                doOnTextChanged { _, _, _, _ -> clearErrors() }
+            }
+            errorMessage.apply {
+                text = getString(R.string.error_email)
             }
         }
         binding.etPhone.apply {
@@ -69,12 +160,20 @@ class SignupFragment : Fragment() {
                 inputType = InputType.TYPE_CLASS_PHONE
                 filters = arrayOf<InputFilter>(LengthFilter(10))
                 hint = getString(R.string.hint_phone)
+                doOnTextChanged { _, _, _, _ -> clearErrors() }
+            }
+            errorMessage.apply {
+                text = getString(R.string.error_phone)
             }
         }
         binding.etAdmNumber.apply {
             input.apply {
                 inputType = InputType.TYPE_CLASS_TEXT
                 hint = getString(R.string.hint_adm_number)
+                doOnTextChanged { _, _, _, _ -> clearErrors() }
+            }
+            errorMessage.apply {
+                text = getString(R.string.error_adm_number)
             }
         }
 
@@ -119,6 +218,7 @@ class SignupFragment : Fragment() {
     private fun selectAvatar(avatarPosition: Int) {
         if (avatarPosition == selectedAvatarPosition) return
         avatarBindingList[selectedAvatarPosition - 1].avatarBackground.setCardBackgroundColor(Color.BLACK)
+        animateOnClick(avatarBindingList[avatarPosition - 1].avatarConstraint)
         avatarBindingList[avatarPosition - 1].avatarBackground.setCardBackgroundColor(Color.WHITE)
         selectedAvatarPosition = avatarPosition
     }

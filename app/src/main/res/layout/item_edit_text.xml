@@ -6,9 +6,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/error_card"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         app:cardCornerRadius="20dp"
+        android:layout_marginBottom="16dp"
         android:layout_marginEnd="-32dp"
         android:layout_marginStart="14dp"
         app:strokeColor="@color/black"
@@ -17,7 +19,23 @@
         app:cardBackgroundColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/error_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red"
+            android:fontFamily="@font/webcomic"
+            android:textSize="12sp"
+            android:gravity="start"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="6dp"/>
+
+
+    </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
