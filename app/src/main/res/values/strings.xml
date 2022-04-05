@@ -22,4 +22,15 @@
     <string name="day_two">DAY TWO</string>
     <string name="day_three">DAY THREE</string>
     <string name="day_four">DAY FOUR</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="hint_name">NAME</string>
+    <string name="hint_email">EMAIL ID</string>
+    <string name="hint_phone">MOBILE NUMBER (10 DIGITS)</string>
+    <string name="hint_adm_number">ADMISSION NUMBER</string>
+    <string name="register_now">REGISTER NOW</string>
+    <string name="select_avatar">SELECT AVATAR</string>
+    <string name="error_name">ENTER A VALID NAME</string>
+    <string name="error_email">ENTER A VALID EMAIL ADDRESS</string>
+    <string name="error_phone">ENTER A VALID PHONE NUMBER</string>
+    <string name="error_adm_number">ENTER A VALID ADMISSION NUMBER</string>
 </resources>

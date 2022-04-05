@@ -2,18 +2,11 @@ package project.gdsc.zealicon22
 
 import android.graphics.Color
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
-import android.widget.Toast
 import nl.psdcompany.duonavigationdrawer.views.DuoMenuView
 import project.gdsc.zealicon22.databinding.ActivityMainBinding
 import project.gdsc.zealicon22.home.HomeFragment
+import project.gdsc.zealicon22.signup.SignupFragment
 
 /**
  * @author Dheeraj Kotwani on 23/02/22.
@@ -39,6 +32,7 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
         menuOptions.add(getString(R.string.reach))
         menuOptions.add(getString(R.string.team))
         menuOptions.add(getString(R.string.about))
+        menuOptions.add(getString(R.string.sign_up)) // TODO remove after testing
 
         duoAdapter = DuoMenuAdapter(menuOptions)
         binding.duoMenuView.adapter = duoAdapter
@@ -78,6 +72,10 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
             3 -> {
                 // TODO handle case for about
                 binding.mainConstraintLayout.setBackgroundColor(Color.YELLOW)
+            }
+            4 -> {
+                // TODO added code to navigate to SignupFragment (remove on testing)
+                supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, SignupFragment()).commit()
             }
         }
 
