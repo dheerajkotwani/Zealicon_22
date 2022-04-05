@@ -101,6 +101,7 @@ class SignupFragment : Fragment() {
             admNumberError = true
             disableSignupButton()
             animateToShowErrorMessage(binding.etAdmNumber.errorCard)
+            return true
         }
         return false
     }
