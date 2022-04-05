@@ -33,4 +33,8 @@
     <string name="error_email">ENTER A VALID EMAIL ADDRESS</string>
     <string name="error_phone">ENTER A VALID PHONE NUMBER</string>
     <string name="error_adm_number">ENTER A VALID ADMISSION NUMBER</string>
+    <string name="title_activity_splash_screen">SplashScreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="app_logo">app_logo</string>
 </resources>
