@@ -1,12 +1,18 @@
-package project.gdsc.zealicon22.loginsignup
+package project.gdsc.zealicon22.signup
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
+import android.text.InputFilter
+import android.text.InputFilter.LengthFilter
+import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import project.gdsc.zealicon22.R
 import project.gdsc.zealicon22.databinding.FragmentSignupBinding
+import project.gdsc.zealicon22.databinding.ItemAvatarBinding
 
 
 class SignupFragment : Fragment() {
@@ -15,8 +21,11 @@ class SignupFragment : Fragment() {
 
     private val binding get() = _binding!!
 
-    // checks to true or false according to visible fragment on the screen
-    private var isLoginActive = false
+
+    private val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
+    private var selectedAvatarPosition = 1
+
+    private var avatarBindingList: ArrayList<ItemAvatarBinding> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,40 +39,88 @@ class SignupFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupButtons()
+        setupButton()
+        setupEditTexts()
+        setupAvatars()
     }
 
-    private fun setupButtons() {
+    private fun setupButton() {
 
-        binding.btLogin.apply {
-            actionText.apply {
-                text = getString(R.string.login)
-            }
-            buttonConst.apply {
-                setOnClickListener(loginClickListener)
+
+
+    }
+
+    private fun setupEditTexts() {
+
+        binding.etName.apply {
+            input.apply {
+                inputType = InputType.TYPE_TEXT_VARIATION_PERSON_NAME
+                hint = getString(R.string.hint_name)
             }
         }
-        binding.btSignup.apply {
-            actionText.apply {
-                text = getString(R.string.sign_up)
+        binding.etEmail.apply {
+            input.apply {
+                inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
+                hint = getString(R.string.hint_email)
             }
-            buttonConst.apply {
-                setOnClickListener(signupClickListener)
+        }
+        binding.etPhone.apply {
+            input.apply {
+                inputType = InputType.TYPE_CLASS_PHONE
+                filters = arrayOf<InputFilter>(LengthFilter(10))
+                hint = getString(R.string.hint_phone)
+            }
+        }
+        binding.etAdmNumber.apply {
+            input.apply {
+                inputType = InputType.TYPE_CLASS_TEXT
+                hint = getString(R.string.hint_adm_number)
             }
         }
 
     }
 
-    private val loginClickListener: (view: View) -> Unit = {
+    private fun setupAvatars() {
 
-
+        binding.avatar1.apply {
+            avatarBindingList.add(this)
+            avatarConstraint.setOnClickListener { selectAvatar(1) }
+            avatar.setImageResource(R.drawable.avatar1)
+            avatarBackground.setCardBackgroundColor(Color.WHITE)
+        }
+        binding.avatar2.apply {
+            avatarBindingList.add(this)
+            avatarConstraint.setOnClickListener { selectAvatar(2) }
+            avatar.setImageResource(R.drawable.avatar2)
+        }
+        binding.avatar3.apply {
+            avatarBindingList.add(this)
+            avatarConstraint.setOnClickListener { selectAvatar(3) }
+            avatar.setImageResource(R.drawable.avatar3)
+        }
+        binding.avatar4.apply {
+            avatarBindingList.add(this)
+            avatarConstraint.setOnClickListener { selectAvatar(4) }
+            avatar.setImageResource(R.drawable.avatar4)
+        }
+        binding.avatar5.apply {
+            avatarBindingList.add(this)
+            avatarConstraint.setOnClickListener { selectAvatar(5) }
+            avatar.setImageResource(R.drawable.avatar5)
+        }
+        binding.avatar6.apply {
+            avatarBindingList.add(this)
+            avatarConstraint.setOnClickListener { selectAvatar(6) }
+            avatar.setImageResource(R.drawable.avatar6)
+        }
 
     }
 
-    private val signupClickListener: (view: View) -> Unit = {
-
-
-
+    private fun selectAvatar(avatarPosition: Int) {
+        if (avatarPosition == selectedAvatarPosition) return
+        avatarBindingList[selectedAvatarPosition - 1].avatarBackground.setCardBackgroundColor(Color.BLACK)
+        avatarBindingList[avatarPosition - 1].avatarBackground.setCardBackgroundColor(Color.WHITE)
+        selectedAvatarPosition = avatarPosition
     }
 
 }
