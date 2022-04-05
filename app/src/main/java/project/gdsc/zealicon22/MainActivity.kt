@@ -23,7 +23,19 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
         setContentView(binding.root)
 
         handleMenu()
+        setSelectedPageData()
+        setupClickListener()
+    }
 
+    private fun setupClickListener() {
+        binding.buttonMenu.setOnClickListener {
+            binding.duoDrawerLayout.openDrawer()
+        }
+    }
+
+    private fun setSelectedPageData() {
+        duoAdapter.setViewSelected(0, true)
+        supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, HomeFragment()).commit()
     }
 
     private fun handleMenu() {
@@ -38,7 +50,6 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
         binding.duoMenuView.adapter = duoAdapter
         binding.duoMenuView.setOnMenuClickListener(this)
         duoAdapter.setViewSelected(0, true)
-        binding.duoDrawerLayout.openDrawer()
 
     }
 
