@@ -38,4 +38,8 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="app_logo">app_logo</string>
     <string name="menu_icon">menu_icon</string>
+
+    <string name="example_event">Line Up</string>
+    <string name="example_date">26 April, 2022</string>
+    <string name="example_society">Google Developer Student Clubs</string>
 </resources>

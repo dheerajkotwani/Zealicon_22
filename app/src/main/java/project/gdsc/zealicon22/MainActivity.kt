@@ -3,6 +3,7 @@ package project.gdsc.zealicon22
 import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import nl.psdcompany.duonavigationdrawer.views.DuoMenuView
 import project.gdsc.zealicon22.databinding.ActivityMainBinding
 import project.gdsc.zealicon22.home.HomeFragment
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        window.statusBarColor = ContextCompat.getColor(this, R.color.black)
         handleMenu()
         setSelectedPageData()
         setupClickListener()
