@@ -9,7 +9,7 @@ fun animateOnClick(view: View) {
         scaleX(0.9f)
     }.withEndAction {
         view.animate().apply {
-            duration = 25
+            duration = 50
             scaleY(1f)
             scaleX(1f)
         }

@@ -3,9 +3,11 @@ package project.gdsc.zealicon22
 import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import nl.psdcompany.duonavigationdrawer.views.DuoMenuView
 import project.gdsc.zealicon22.databinding.ActivityMainBinding
 import project.gdsc.zealicon22.home.HomeFragment
+import project.gdsc.zealicon22.myevents.MyEventsFragment
 import project.gdsc.zealicon22.signup.SignupFragment
 
 /**
@@ -22,6 +24,7 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        window.statusBarColor = ContextCompat.getColor(this, R.color.black)
         handleMenu()
         setSelectedPageData()
         setupClickListener()
@@ -45,6 +48,7 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
         menuOptions.add(getString(R.string.team))
         menuOptions.add(getString(R.string.about))
         menuOptions.add(getString(R.string.sign_up)) // TODO remove after testing
+        menuOptions.add("My Events")// TODO remove after setting up bottom navigation
 
         duoAdapter = DuoMenuAdapter(menuOptions)
         binding.duoMenuView.adapter = duoAdapter
@@ -87,6 +91,10 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
             4 -> {
                 // TODO added code to navigate to SignupFragment (remove on testing)
                 supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, SignupFragment()).commit()
+            }
+            5 -> {
+                // TODO remove after setting up bottom navigation
+                supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, MyEventsFragment()).commit()
             }
         }
 
