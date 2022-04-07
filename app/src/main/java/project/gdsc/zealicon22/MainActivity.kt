@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import nl.psdcompany.duonavigationdrawer.views.DuoMenuView
+import project.gdsc.zealicon22.SearchEvents.SearchEventsFragment
 import project.gdsc.zealicon22.databinding.ActivityMainBinding
 import project.gdsc.zealicon22.home.HomeFragment
 import project.gdsc.zealicon22.signup.SignupFragment
@@ -74,7 +75,7 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
             }
             1 -> {
                 // TODO handle case for reach us
-                binding.mainConstraintLayout.setBackgroundColor(Color.RED)
+                supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, SearchEventsFragment()).commit()
             }
             2 -> {
                 // TODO handle case for team
