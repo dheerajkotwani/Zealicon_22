@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="15dp"
+    android:layout_marginEnd="-10dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="10dp"
+        android:background="@drawable/search_item_background"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/search_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/dummy_image"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/search_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@+id/search_image"
+            android:fontFamily="@font/webcomic"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            tools:text="Ethnic Walk" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/search_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="27th April . Dance"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/webcomic"
+            android:textColor="@color/white"
+            android:layout_below="@+id/search_title"
+            android:layout_alignStart="@+id/search_title"/>
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
