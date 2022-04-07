@@ -49,7 +49,9 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
         menuOptions.add(getString(R.string.team))
         menuOptions.add(getString(R.string.about))
         menuOptions.add(getString(R.string.sign_up)) // TODO remove after testing
+        menuOptions.add(getString(R.string.day_one)) // TODO remove after testing
         menuOptions.add("My Events")// TODO remove after setting up bottom navigation
+        menuOptions.add("Search")// TODO remove after setting up bottom navigation
 
         duoAdapter = DuoMenuAdapter(menuOptions)
         binding.duoMenuView.adapter = duoAdapter
@@ -79,7 +81,7 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
             }
             1 -> {
                 // TODO handle case for reach us
-                supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, SearchEventsFragment()).commit()
+                supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, ReachFragment()).commit()
             }
             2 -> {
                 // TODO handle case for team
@@ -93,9 +95,16 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
                 // TODO added code to navigate to SignupFragment (remove on testing)
                 supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, SignupFragment()).commit()
             }
-            5 -> {
+            5-> {
+                // TODO added code to navigate to SignupFragment (remove on testing)
+                supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, DayWiseEventsFragment()).commit()
+            }
+            6 -> {
                 // TODO remove after setting up bottom navigation
                 supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, MyEventsFragment()).commit()
+            }
+            7 -> {
+                supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, SearchEventsFragment()).commit()
             }
         }
 
