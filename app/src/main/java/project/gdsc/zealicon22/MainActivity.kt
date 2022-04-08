@@ -29,8 +29,34 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
 
         window.statusBarColor = ContextCompat.getColor(this, R.color.black)
         handleMenu()
+        setupBottomNav()
         setSelectedPageData()
         setupClickListener()
+    }
+
+    private fun setupBottomNav() {
+
+        binding.bottomNavBar.apply {
+            itemIconTintList = null
+
+            setOnItemSelectedListener {
+                when (it.itemId) {
+
+                    R.id.home_screen -> {
+                        supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, HomeFragment()).commit()
+                    }
+                    R.id.search_screen -> {
+//                        supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, ).commit()
+                    }
+                    R.id.my_events_screen -> {
+                        supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, MyEventsFragment()).commit()
+                    }
+                }
+                return@setOnItemSelectedListener true
+            }
+
+        }
+
     }
 
     private fun setupClickListener() {
@@ -51,9 +77,9 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
         menuOptions.add(getString(R.string.team))
         menuOptions.add(getString(R.string.about))
         menuOptions.add(getString(R.string.sign_up)) // TODO remove after testing
+        menuOptions.add("Event Detail") // TODO (remove) after setting up navigation
         menuOptions.add(getString(R.string.day_one)) // TODO remove after testing
-        menuOptions.add("My Events")// TODO remove after setting up bottom navigation
-        menuOptions.add("Search")// TODO remove after setting up bottom navigation
+        menuOptions.add("Search") // TODO remove after setting up bottom navigation
 
         duoAdapter = DuoMenuAdapter(menuOptions)
         binding.duoMenuView.adapter = duoAdapter
@@ -78,7 +104,6 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
         when (position) {
             0 -> {
                 // TODO handle case for home screen
-//                binding.mainConstraintLayout.setBackgroundColor(Color.WHITE)
                 supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, HomeFragment()).commit()
             }
             1 -> {
@@ -97,13 +122,12 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
                 // TODO added code to navigate to SignupFragment (remove on testing)
                 supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, SignupFragment()).commit()
             }
-            5-> {
+            5 -> {
+                supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, EventDetailsFragment()).commit()
+            }
+            6-> {
                 // TODO added code to navigate to SignupFragment (remove on testing)
                 supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, DayWiseEventsFragment()).commit()
-            }
-            6 -> {
-                // TODO remove after setting up bottom navigation
-                supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, MyEventsFragment()).commit()
             }
             7 -> {
                 supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, SearchEventsFragment()).commit()
