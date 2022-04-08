@@ -33,6 +33,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setExploreEvents()
+        setClickListener()
     }
 
     private fun setExploreEvents() {
@@ -59,6 +60,12 @@ class HomeFragment : Fragment() {
             image.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.comic4, null))
             day.text = getString(R.string.day_four)
             scaleMatrix(sx = 0.8f, sy=0.8f)
+        }
+    }
+
+    private fun setClickListener() {
+        binding.dayOne.root.setOnClickListener {
+
         }
     }
 

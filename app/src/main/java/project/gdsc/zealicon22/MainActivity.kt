@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import nl.psdcompany.duonavigationdrawer.views.DuoMenuView
+import project.gdsc.zealicon22.SearchEvents.SearchEventsFragment
 import project.gdsc.zealicon22.databinding.ActivityMainBinding
 import project.gdsc.zealicon22.home.HomeFragment
 import project.gdsc.zealicon22.myevents.MyEventsFragment
@@ -75,6 +76,8 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
         menuOptions.add(getString(R.string.about))
         menuOptions.add(getString(R.string.sign_up)) // TODO remove after testing
         menuOptions.add("Event Detail") // TODO (remove) after setting up navigation
+        menuOptions.add(getString(R.string.day_one)) // TODO remove after testing
+        menuOptions.add("Search") // TODO remove after setting up bottom navigation
 
         duoAdapter = DuoMenuAdapter(menuOptions)
         binding.duoMenuView.adapter = duoAdapter
@@ -99,12 +102,11 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
         when (position) {
             0 -> {
                 // TODO handle case for home screen
-//                binding.mainConstraintLayout.setBackgroundColor(Color.WHITE)
                 supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, HomeFragment()).commit()
             }
             1 -> {
                 // TODO handle case for reach us
-                binding.mainConstraintLayout.setBackgroundColor(Color.RED)
+                supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, ReachFragment()).commit()
             }
             2 -> {
                 // TODO handle case for team
@@ -120,6 +122,13 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
             }
             5 -> {
                 supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, EventDetailsFragment()).commit()
+            }
+            6-> {
+                // TODO added code to navigate to SignupFragment (remove on testing)
+                supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, DayWiseEventsFragment()).commit()
+            }
+            7 -> {
+                supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, SearchEventsFragment()).commit()
             }
         }
 
