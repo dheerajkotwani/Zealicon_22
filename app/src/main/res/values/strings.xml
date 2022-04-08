@@ -53,5 +53,15 @@
     <string name="title_team">TEAM</string>
     <string name="title_reach_us">REACH US</string>
 
+    <string name="example_event_name">LINE-UP</string>
+    <string name="example_event_desc">It will be a fun event,displayed on an android application. \r\nIn this event, players will be divided into teams and they will be unaware of their teammates. Each player has to interact with all other participants to complete his team. The team with maximum or all the members will be the winner.\r\nUse your head, observe and explore, either get in or get out to hunt your teammate!!</string>
+    <string name="example_event_category">OTHERS</string>
+    <string name="example_event_time">16:00 HOURS</string>
+    <string name="example_event_phone">+91 9876543210</string>
+    <string name="example_event_location">CSE BUILDING - AB1</string>
+
+    <string name="date_26">26 April, 2022</string>
+    <string name="date_27">27 April, 2022</string>
+    <string name="date_28">28 April, 2022</string>
 
 </resources>
