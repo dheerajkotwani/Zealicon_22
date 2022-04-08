@@ -50,8 +50,8 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
         menuOptions.add(getString(R.string.about))
         menuOptions.add(getString(R.string.sign_up)) // TODO remove after testing
         menuOptions.add(getString(R.string.day_one)) // TODO remove after testing
-        menuOptions.add("My Events")// TODO remove after setting up bottom navigation
-        menuOptions.add("Search")// TODO remove after setting up bottom navigation
+        menuOptions.add("My Events") // TODO remove after setting up bottom navigation
+        menuOptions.add("Search") // TODO remove after setting up bottom navigation
 
         duoAdapter = DuoMenuAdapter(menuOptions)
         binding.duoMenuView.adapter = duoAdapter
@@ -76,7 +76,6 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
         when (position) {
             0 -> {
                 // TODO handle case for home screen
-//                binding.mainConstraintLayout.setBackgroundColor(Color.WHITE)
                 supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, HomeFragment()).commit()
             }
             1 -> {
