@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import project.gdsc.zealicon22.databinding.FragmentSearchEventsBinding
+import project.gdsc.zealicon22.dayWiseEvent.EventsModel
 import project.gdsc.zealicon22.utils.*
 import project.gdsc.zealicon22.utils.COLORALO
 import project.gdsc.zealicon22.utils.MECHAVOLTZ
@@ -29,14 +30,14 @@ class SearchEventsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var searchEventsCategoryAdapter: SearchEventsCategoryAdapter? = null
-    private var searchEventsAdapter : SearchEventsAdapter? = null
+    private var searchEventsAdapter : SearchEventsAdapter = SearchEventsAdapter()
 
-    private val searchList : ArrayList<String> = arrayListOf()
+    private val searchList : ArrayList<EventsModel> = arrayListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentSearchEventsBinding.inflate(inflater, container, false)
         return binding.root
@@ -52,12 +53,11 @@ class SearchEventsFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = searchEventsCategoryAdapter
         }
-
-        searchEventsAdapter = SearchEventsAdapter(searchList)
         binding.searchRecycler.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = searchEventsAdapter
         }
+        searchEventsAdapter.setList(searchList)
 
         binding.searchBar.search.addTextChangedListener(object : TextWatcher{
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
