@@ -21,7 +21,7 @@
     <string name="day_one">DAY ONE</string>
     <string name="day_two">DAY TWO</string>
     <string name="day_three">DAY THREE</string>
-    <string name="day_four">DAY FOUR</string>
+    <string name="day_four">ALL</string>
     <string name="sign_up">SIGN UP</string>
     <string name="hint_name">NAME</string>
     <string name="hint_email">EMAIL ID</string>
