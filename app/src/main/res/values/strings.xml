@@ -51,4 +51,30 @@
     <string name="example_date">26 April, 2022</string>
     <string name="example_society">Google Developer Student Clubs</string>
 
+    <string name="title_discover">DISCOVER</string>
+    <string name="title_home">HOME</string>
+    <string name="title_profile">PROFILE</string>
+    <string name="title_about">ABOUT</string>
+    <string name="title_team">TEAM</string>
+    <string name="title_reach_us">REACH US</string>
+
+    <string name="example_event_name">LINE-UP</string>
+    <string name="example_event_desc">It will be a fun event,displayed on an android application.\nIn this event, players will be divided into teams and they will be unaware of their teammates. Each player has to interact with all other participants to complete his team. The team with maximum or all the members will be the winner.\nUse your head, observe and explore, either get in or get out to hunt your teammate!!</string>
+    <string name="example_event_category">OTHERS</string>
+    <string name="example_event_time">15:55 HOURS</string>
+    <string name="example_event_phone">+91 9876543210</string>
+    <string name="example_event_location">CSE BUILDING - AB1</string>
+    <string name="example_event_rules">- Team Size: 1 - 5 \n- Team Size: 1 - 5</string>
+    <string name="example_event_prize">- INR 25,555 - First Place \n- INR 15,555 - Second Place</string>
+    <string name="example_event_contact">- DHRUV BALIYAN: +91 9877553211</string>
+
+    <string name="date_26">26 April, 2022</string>
+    <string name="date_27">27 April, 2022</string>
+    <string name="date_28">28 April, 2022</string>
+
+    <string name="event_detail_heading_info">INFO</string>
+    <string name="event_detail_heading_rules">RULES</string>
+    <string name="event_detail_heading_prizes">PRIZES</string>
+    <string name="event_detail_heading_contact">CONTACT</string>
+
 </resources>
