@@ -45,4 +45,13 @@
     <string name="example_event">Line Up</string>
     <string name="example_date">26 April, 2022</string>
     <string name="example_society">Google Developer Student Clubs</string>
+
+    <string name="title_discover">DISCOVER</string>
+    <string name="title_home">HOME</string>
+    <string name="title_profile">PROFILE</string>
+    <string name="title_about">ABOUT</string>
+    <string name="title_team">TEAM</string>
+    <string name="title_reach_us">REACH US</string>
+
+
 </resources>

@@ -26,6 +26,8 @@
         android:layout_height="0dp"
         android:orientation="vertical"
         android:layout_marginTop="4dp"
+        android:paddingBottom="120dp"
+        android:clipToPadding="false"
         tools:listitem="@layout/item_event_card"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
