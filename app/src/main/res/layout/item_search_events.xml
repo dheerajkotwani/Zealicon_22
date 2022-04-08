@@ -23,7 +23,7 @@
             android:src="@drawable/dummy_image"/>
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/search_title"
+            android:id="@+id/event_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -35,15 +35,15 @@
             tools:text="Ethnic Walk" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/search_date"
+            android:id="@+id/event_date_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="27th April . Dance"
+            android:layout_below="@+id/event_title"
+            android:layout_alignStart="@+id/event_title"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/webcomic"
             android:textColor="@color/white"
-            android:layout_below="@+id/search_title"
-            android:layout_alignStart="@+id/search_title"/>
+            tools:text="27th April . Dance" />
 
     </RelativeLayout>
 

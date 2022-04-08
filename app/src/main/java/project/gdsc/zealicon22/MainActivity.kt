@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat
 import nl.psdcompany.duonavigationdrawer.views.DuoMenuView
 import project.gdsc.zealicon22.SearchEvents.SearchEventsFragment
 import project.gdsc.zealicon22.databinding.ActivityMainBinding
+import project.gdsc.zealicon22.dayWiseEvent.DayWiseEventsFragment
 import project.gdsc.zealicon22.home.HomeFragment
 import project.gdsc.zealicon22.myevents.MyEventsFragment
 import project.gdsc.zealicon22.signup.SignupFragment
