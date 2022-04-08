@@ -93,6 +93,207 @@
             app:layout_constraintTop_toBottomOf="@id/view_above_image"
             app:layout_constraintBottom_toTopOf="@id/view_below_image"/>
 
+        <LinearLayout
+            android:id="@+id/event_detail_linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_below_image">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <include
+                    android:id="@+id/event_calendar"
+                    layout="@layout/item_event_detail_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="28dp"
+                    android:layout_weight="1"/>
+
+                <include
+                    android:id="@+id/event_location"
+                    layout="@layout/item_event_detail_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp">
+                <include
+                    android:id="@+id/event_clock"
+                    layout="@layout/item_event_detail_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="28dp"
+                    android:layout_weight="1"/>
+
+                <include
+                    android:id="@+id/event_phone"
+                    layout="@layout/item_event_detail_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/info_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_two_bars"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/event_detail_linear"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/info_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="@string/event_detail_heading_info"
+            android:fontFamily="@font/giants"
+            android:textSize="32sp"
+            app:layout_constraintTop_toTopOf="@id/info_img"
+            app:layout_constraintBottom_toBottomOf="@id/info_img"
+            app:layout_constraintStart_toEndOf="@id/info_img"
+            android:layout_marginStart="12dp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/event_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/info_img"
+            android:layout_marginTop="12dp"
+            android:text="@string/example_event_desc"
+            android:fontFamily="@font/webcomic"
+            android:lineSpacingExtra="12dp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginHorizontal="28dp"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/rules_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_two_bars"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/event_info"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/rules_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="@string/event_detail_heading_rules"
+            android:fontFamily="@font/giants"
+            android:textSize="32sp"
+            app:layout_constraintTop_toTopOf="@id/rules_img"
+            app:layout_constraintBottom_toBottomOf="@id/rules_img"
+            app:layout_constraintStart_toEndOf="@id/rules_img"
+            android:layout_marginStart="12dp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/event_rules"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/rules_img"
+            android:layout_marginTop="12dp"
+            android:text="@string/example_event_rules"
+            android:fontFamily="@font/webcomic"
+            android:lineSpacingExtra="12dp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginHorizontal="28dp"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/prize_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_two_bars"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/event_rules"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/prize_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="@string/event_detail_heading_prizes"
+            android:fontFamily="@font/giants"
+            android:textSize="32sp"
+            app:layout_constraintTop_toTopOf="@id/prize_img"
+            app:layout_constraintBottom_toBottomOf="@id/prize_img"
+            app:layout_constraintStart_toEndOf="@id/prize_img"
+            android:layout_marginStart="12dp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/event_prize"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/prize_img"
+            android:layout_marginTop="12dp"
+            android:text="@string/example_event_prize"
+            android:fontFamily="@font/webcomic"
+            android:lineSpacingExtra="12dp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginHorizontal="28dp"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/contact_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_two_bars"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/event_prize"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/contact_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="@string/event_detail_heading_contact"
+            android:fontFamily="@font/giants"
+            android:textSize="32sp"
+            app:layout_constraintTop_toTopOf="@id/contact_img"
+            app:layout_constraintBottom_toBottomOf="@id/contact_img"
+            app:layout_constraintStart_toEndOf="@id/contact_img"
+            android:layout_marginStart="12dp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/event_contact"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/contact_img"
+            android:layout_marginTop="12dp"
+            android:text="@string/example_event_contact"
+            android:fontFamily="@font/webcomic"
+            android:lineSpacingExtra="12dp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginHorizontal="28dp"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>
