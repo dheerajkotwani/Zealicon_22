@@ -7,18 +7,26 @@ import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.scaleMatrix
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import dagger.hilt.android.AndroidEntryPoint
+import project.gdsc.zealicon22.MainViewModel
 import project.gdsc.zealicon22.R
 import project.gdsc.zealicon22.databinding.FragmentHomeBinding
+import project.gdsc.zealicon22.models.ResultHandler
+import timber.log.Timber
 
 /**
  * Created by Nakul
  * on 4,April,2022
  */
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
 
     private val binding get() = _binding!!
+
+    private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,10 +38,34 @@ class HomeFragment : Fragment() {
 
     }
 
+    private var subscribed = false
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setExploreEvents()
         setClickListener()
+        if (!subscribed)
+        subscribeUI()
+    }
+
+    private fun subscribeUI() {
+        subscribed = true
+        Timber.d("jbecjkwjknjkeInHome")
+        viewModel.events.observe(viewLifecycleOwner) {
+            Timber.d("jbecjkwjknjke")
+            when(it) {
+                is ResultHandler.Loading -> {
+//                    TODO()
+                    Timber.d("RequestingRightNow")
+                }
+                is ResultHandler.Success -> {
+                    Timber.d("SuccessRequest: ${it.result}")
+                }
+                is ResultHandler.Failure -> {
+                    Timber.e("FailureRequest: ${it.message}")
+                }
+            }
+        }
     }
 
     private fun setExploreEvents() {
@@ -65,7 +97,6 @@ class HomeFragment : Fragment() {
 
     private fun setClickListener() {
         binding.dayOne.root.setOnClickListener {
-
         }
     }
 

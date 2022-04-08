@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import dagger.hilt.android.AndroidEntryPoint
 import nl.psdcompany.duonavigationdrawer.views.DuoMenuView
 import project.gdsc.zealicon22.SearchEvents.SearchEventsFragment
 import project.gdsc.zealicon22.databinding.ActivityMainBinding
@@ -15,6 +16,7 @@ import project.gdsc.zealicon22.signup.SignupFragment
 /**
  * @author Dheeraj Kotwani on 23/02/22.
  */
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
 
     private lateinit var duoAdapter: DuoMenuAdapter
