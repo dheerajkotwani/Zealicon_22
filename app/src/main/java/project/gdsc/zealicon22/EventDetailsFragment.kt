@@ -7,9 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import project.gdsc.zealicon22.databinding.FragmentEventDetailsBinding
-import project.gdsc.zealicon22.databinding.FragmentMyEventsBinding
 import project.gdsc.zealicon22.databinding.ItemEventDetailUnitBinding
-import java.util.*
 
 class EventDetailsFragment : Fragment() {
 
