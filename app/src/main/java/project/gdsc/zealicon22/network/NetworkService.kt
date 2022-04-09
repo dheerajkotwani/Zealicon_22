@@ -11,7 +11,7 @@ import retrofit2.http.GET
  */
 interface NetworkService {
 
-    @GET("/custom-apis/zealicon/api/events.json")
-    suspend fun getEvents(): Response<ModelWrapper<List<Events>>>
+    @GET("/events/all")
+    suspend fun getEvents(): Response<List<Events>>
 
 }

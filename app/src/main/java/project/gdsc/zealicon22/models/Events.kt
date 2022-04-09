@@ -1,7 +1,10 @@
 package project.gdsc.zealicon22.models
 
+import android.annotation.SuppressLint
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * Created by Nakul
@@ -12,15 +15,35 @@ data class Events(
     val id: Int,
     val name: String,
     val description: String,
-    val society_id: Int,
-    val category_id: Int,
-    val winner1: Int,
-    val winner2: Int,
-    val contact_name: String,
-    val contact_no: String,
-    val is_active: Int,
+    val datetime: String,
+    val duration: String,
+    val society: String,
+    val category: String,
+    val prizes: String,
+    val contact: String,
+    val contact_no: String?,
+    val is_active: Boolean,
     val rules: String,
-    val day: Int,
     @PrimaryKey(autoGenerate = true)
     val dbId: Int = 0
-)
+) {
+    var day: Int
+
+    init {
+        day = (getDateTime().formatTo("dd").toIntOrNull()?:26) - 25
+    }
+
+    private fun getDateTime(): Date =
+        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
+            .apply{ timeZone = TimeZone.getTimeZone("UTC") }
+            .parse(datetime.substringBefore('+'))!!
+
+    private fun Date.formatTo(
+        dateFormat: String,
+        timeZone: TimeZone = TimeZone.getDefault()
+    ): String {
+        val formatter = SimpleDateFormat(dateFormat, Locale.getDefault())
+        formatter.timeZone = timeZone
+        return formatter.format(this)
+    }
+}

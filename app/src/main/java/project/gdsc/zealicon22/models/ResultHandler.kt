@@ -13,5 +13,9 @@ sealed class ResultHandler<out T> {
         }
     }
     object Loading : ResultHandler<Nothing>()
-    class Failure(exception: Throwable, val message: String = exception.message.toString()) : ResultHandler<Nothing>()
+    class Failure(exception: Throwable, val message: String = exception.message.toString()) : ResultHandler<Nothing>(){
+        init {
+            Timber.d("Error: $exception")
+        }
+    }
 }
