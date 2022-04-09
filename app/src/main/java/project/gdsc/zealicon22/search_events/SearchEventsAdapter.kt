@@ -1,10 +1,11 @@
-package project.gdsc.zealicon22.SearchEvents
+package project.gdsc.zealicon22.search_events
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import project.gdsc.zealicon22.databinding.ItemSearchEventsBinding
 import project.gdsc.zealicon22.dayWiseEvent.EventsModel
+import project.gdsc.zealicon22.models.Events
 import timber.log.Timber
 
 /**
@@ -14,9 +15,9 @@ import timber.log.Timber
  */
 class SearchEventsAdapter() : RecyclerView.Adapter<SearchEventsAdapter.VH>() {
 
-    private var list: List<EventsModel> = arrayListOf()
+    private var list: List<Events> = arrayListOf()
 
-    fun setList(data: List<EventsModel>){
+    fun setList(data: List<Events>){
         list = data
         notifyDataSetChanged()
     }
@@ -25,17 +26,18 @@ class SearchEventsAdapter() : RecyclerView.Adapter<SearchEventsAdapter.VH>() {
         ItemSearchEventsBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-        Timber.d(list.toString())
         val comic = list[position]
+        holder.itemView.setOnClickListener{
+        }
         holder.onBind(comic)
     }
 
     override fun getItemCount(): Int = list.size
 
     class VH(val binding: ItemSearchEventsBinding) : RecyclerView.ViewHolder(binding.root){
-        fun onBind(comic: EventsModel){
-            binding.eventTitle.text = comic.title
-            binding.eventDateCategory.text = "${comic.date} . ${comic.category}"
+        fun onBind(comic: Events){
+            binding.eventTitle.text = comic.name
+            binding.eventDateCategory.text = "${comic.day}"
         }
     }
 }

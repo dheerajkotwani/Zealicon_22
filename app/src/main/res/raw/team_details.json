@@ -1,0 +1,44 @@
+{
+  "teamsModal":
+    {
+      "management": [
+        {
+          "name": "Dheeraj Kotwani",
+          "position": "Android Developer",
+          "image": "url"
+        },
+        {
+          "name": "Karan Verma",
+          "position": "Android Developer",
+          "image": "url"
+        }
+      ],
+      "core": [
+        {
+          "name": "Dheeraj Kotwani",
+          "position": "Android Developer",
+          "image": "url"
+        },
+        {
+          "name": "Karan Verma",
+          "position": "Android Developer",
+          "image": "url"
+        },
+        {
+          "name": "Anuraj Jain",
+          "position": "Android Developer",
+          "image": "url"
+        },
+        {
+          "name": "Nakul Sharma",
+          "position": "Android Developer",
+          "image": "url"
+        },
+        {
+          "name": "Dhruv Baliyan",
+          "position": "Android Developer",
+          "image": "url"
+        }
+      ]
+    }
+}

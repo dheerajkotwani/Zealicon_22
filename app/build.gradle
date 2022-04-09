@@ -52,6 +52,7 @@ dependencies {
 
     // Hilt - Dagger
     implementation "com.google.dagger:hilt-android:$hilt_version"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
 
     // Timber
@@ -80,5 +81,12 @@ dependencies {
     //Stetho
     implementation 'com.facebook.stetho:stetho:1.5.1'
     implementation 'com.facebook.stetho:stetho-okhttp3:1.5.1'
+
+    //gson
+    implementation 'com.google.code.gson:gson:2.9.0'
+
+    //glide
+    implementation 'com.github.bumptech.glide:glide:4.13.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
 
 }
