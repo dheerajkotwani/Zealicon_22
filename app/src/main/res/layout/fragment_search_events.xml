@@ -68,6 +68,7 @@
                 android:layout_marginHorizontal="26dp"
                 android:layout_marginTop="16dp"
                 android:paddingBottom="120dp"
+                android:clipToPadding="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/categories"

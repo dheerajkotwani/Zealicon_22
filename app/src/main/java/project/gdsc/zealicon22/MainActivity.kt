@@ -79,9 +79,6 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
         menuOptions.add(getString(R.string.team))
         menuOptions.add(getString(R.string.about))
         menuOptions.add(getString(R.string.sign_up)) // TODO remove after testing
-        menuOptions.add("Event Detail") // TODO (remove) after setting up navigation
-        menuOptions.add(getString(R.string.day_one)) // TODO remove after testing
-        menuOptions.add("Search") // TODO remove after setting up bottom navigation
 
         duoAdapter = DuoMenuAdapter(menuOptions)
         binding.duoMenuView.adapter = duoAdapter
@@ -123,16 +120,6 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
             4 -> {
                 // TODO added code to navigate to SignupFragment (remove on testing)
                 supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, SignupFragment()).commit()
-            }
-            5 -> {
-                supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, EventDetailsFragment()).commit()
-            }
-            6-> {
-                // TODO added code to navigate to SignupFragment (remove on testing)
-                supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, DayWiseEventsFragment()).commit()
-            }
-            7 -> {
-                supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, SearchEventsFragment()).commit()
             }
         }
 
