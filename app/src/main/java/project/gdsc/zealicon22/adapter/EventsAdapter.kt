@@ -16,7 +16,8 @@ import project.gdsc.zealicon22.utils.updateConstraints
 
 class EventsAdapter(
     private val events: ArrayList<String>,
-    private val context: Context
+    private val context: Context,
+    private val onEventCardClick: (event: String) -> Unit
 ) : RecyclerView.Adapter<EventsAdapter.EventViewHolder>() {
 
     private val ROTATION_CONST = 2f
@@ -129,6 +130,7 @@ class EventsAdapter(
             }
             binding.eventConstraint.setOnClickListener {
                 animateOnClick(it)
+                onEventCardClick(events[position])
             }
         }
     }

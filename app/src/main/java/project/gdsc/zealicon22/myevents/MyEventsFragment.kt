@@ -1,10 +1,12 @@
 package project.gdsc.zealicon22.myevents
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import project.gdsc.zealicon22.DetailActivity
 import project.gdsc.zealicon22.R
 import project.gdsc.zealicon22.adapter.EventsAdapter
 import project.gdsc.zealicon22.databinding.FragmentMyEventsBinding
@@ -52,10 +54,19 @@ class MyEventsFragment : Fragment() {
 
     }
 
+    private val onEventCardClick: (event: String) -> Unit = {
+
+        val intent = Intent(requireActivity(), DetailActivity::class.java).apply {
+            // Pass event data from here, and then to fragment as argument
+            putExtra("fragment_to_show", "event_detail")
+        }
+        startActivity(intent)
+
+    }
 
     private fun setupMyEventsRecycler() {
 
-        eventsAdapter = EventsAdapter(sampleEventNameList, requireContext())
+        eventsAdapter = EventsAdapter(sampleEventNameList, requireContext(), onEventCardClick)
         binding.myEventsRecycler.adapter = eventsAdapter
 
     }
