@@ -13,10 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Zealicon22">
         <activity
+            android:name=".DetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".SplashScreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="true"
-            android:theme="@style/Theme.Zealicon22.Fullscreen" >
+            android:theme="@style/Theme.Zealicon22.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,8 +29,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.Zealicon22.NoActionBar">
-        </activity>
+            android:theme="@style/Theme.Zealicon22.NoActionBar" />
     </application>
 
 </manifest>

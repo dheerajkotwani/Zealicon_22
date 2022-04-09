@@ -36,7 +36,7 @@ class EventDetailsFragment : Fragment() {
 
         event = TestEvent(
             getString(R.string.example_event_name),
-            getString(R.string.example_event_desc),
+            getString(R.string.example_event_info),
             getString(R.string.example_event_category),
             getString(R.string.example_society),
             getString(R.string.date_27),
