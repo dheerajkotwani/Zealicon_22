@@ -9,7 +9,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.scaleMatrix
 import androidx.recyclerview.widget.LinearLayoutManager
 import project.gdsc.zealicon22.R
-import project.gdsc.zealicon22.SearchEvents.SearchEventsAdapter
+import project.gdsc.zealicon22.search_events.SearchEventsAdapter
 import project.gdsc.zealicon22.databinding.FragmentDayWiseEventsBinding
 
 /**
@@ -19,8 +19,7 @@ class DayWiseEventsFragment : Fragment() {
 
     private var _binding: FragmentDayWiseEventsBinding? = null
     private val binding get() = _binding!!
-    private var eventsAdapter : SearchEventsAdapter = SearchEventsAdapter()
-    private val eventsList : ArrayList<EventsModel> = arrayListOf()
+    private var eventsAdapter : SearchEventsAdapter? =null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,6 +39,8 @@ class DayWiseEventsFragment : Fragment() {
             day.text = getString(R.string.day_one)
             scaleMatrix(sx = 0.8f, sy=0.8f)
         }
+
+        eventsAdapter = SearchEventsAdapter()
         binding.comicsRv.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = eventsAdapter
@@ -48,7 +49,7 @@ class DayWiseEventsFragment : Fragment() {
     }
 
     private fun setData() {
-        eventsAdapter.setList(eventsList)
+//        eventsAdapter?.setList(eventsList)
         binding.dayCount.text = getString(R.string.day_one)
         binding.eventDate.text = "26 Apr 2022"
         binding.comicCounts.text = "27 COMICS • 3 CATEGORIES"

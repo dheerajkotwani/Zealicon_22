@@ -14,6 +14,7 @@ import project.gdsc.zealicon22.DetailActivity
 import project.gdsc.zealicon22.MainViewModel
 import project.gdsc.zealicon22.R
 import project.gdsc.zealicon22.databinding.FragmentHomeBinding
+import project.gdsc.zealicon22.dayWiseEvent.DayWiseEventsFragment
 import project.gdsc.zealicon22.models.ResultHandler
 import timber.log.Timber
 
@@ -40,21 +41,17 @@ class HomeFragment : Fragment() {
 
     }
 
-    private var subscribed = false
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setExploreEvents()
         setClickListener()
-        if (!subscribed)
-        subscribeUI()
+        if (!viewModel.subscribed)
+            subscribeUI()
     }
 
     private fun subscribeUI() {
-        subscribed = true
-        Timber.d("jbecjkwjknjkeInHome")
+        viewModel.subscribed = true
         viewModel.events.observe(viewLifecycleOwner) {
-            Timber.d("jbecjkwjknjke")
             when(it) {
                 is ResultHandler.Loading -> {
 //                    TODO()
@@ -113,6 +110,13 @@ class HomeFragment : Fragment() {
 
     private fun setClickListener() {
         binding.dayOne.root.setOnClickListener {
+            viewModel.selectDay(1)
+        }
+        binding.dayTwo.root.setOnClickListener {
+            viewModel.selectDay(2)
+        }
+        binding.dayThree.root.setOnClickListener {
+            viewModel.selectDay(3)
         }
     }
 

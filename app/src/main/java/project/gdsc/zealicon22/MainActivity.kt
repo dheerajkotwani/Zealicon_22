@@ -6,12 +6,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import dagger.hilt.android.AndroidEntryPoint
 import nl.psdcompany.duonavigationdrawer.views.DuoMenuView
-import project.gdsc.zealicon22.SearchEvents.SearchEventsFragment
+import project.gdsc.zealicon22.search_events.SearchEventsFragment
 import project.gdsc.zealicon22.databinding.ActivityMainBinding
 import project.gdsc.zealicon22.dayWiseEvent.DayWiseEventsFragment
 import project.gdsc.zealicon22.home.HomeFragment
 import project.gdsc.zealicon22.myevents.MyEventsFragment
 import project.gdsc.zealicon22.signup.SignupFragment
+import project.gdsc.zealicon22.teams.TeamsFragment
 
 /**
  * @author Dheeraj Kotwani on 23/02/22.
@@ -110,7 +111,7 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
             }
             2 -> {
                 // TODO handle case for team
-                binding.mainConstraintLayout.setBackgroundColor(Color.GREEN)
+                supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, TeamsFragment()).commit()
             }
             3 -> {
                 // TODO handle case for about

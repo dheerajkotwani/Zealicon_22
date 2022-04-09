@@ -1,7 +1,6 @@
-package project.gdsc.zealicon22.SearchEvents
+package project.gdsc.zealicon22.search_events
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import project.gdsc.zealicon22.databinding.ItemCategoriesBinding

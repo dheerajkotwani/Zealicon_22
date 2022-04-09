@@ -5,75 +5,68 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".search_events.SearchEventsFragment">
+    tools:context=".teams.TeamsFragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/search_events"
+                android:id="@+id/management"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="40dp"
                 android:fontFamily="@font/giants"
-                android:text="@string/search_events"
+                android:text="@string/management"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="36sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <include
-                layout="@layout/custom_search_bar_layout"
-                android:id="@+id/search_bar"/>
-
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/search_recycler"
+                android:id="@+id/managementRecycler"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="35dp"
                 android:layout_marginTop="32dp"
-                android:layout_marginStart="28dp"
-                tools:itemCount="1"
-                tools:listitem="@layout/item_search_events"
-                app:layout_constraintTop_toBottomOf="@id/search_bar"
-                app:layout_constraintEnd_toEndOf="parent"/>
-
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/management"
+                app:spanCount="2"
+                tools:itemCount="2"
+                tools:listitem="@layout/item_team" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/categories"
+                android:id="@+id/coreTeam"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
-                android:layout_marginTop="42dp"
+                android:layout_marginTop="40dp"
                 android:fontFamily="@font/giants"
-                android:text="@string/categories"
+                android:text="@string/core_team"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="36sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/search_recycler" />
+                app:layout_constraintTop_toBottomOf="@+id/managementRecycler" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/categories_recycler"
+                android:id="@+id/coreTeamRecycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="26dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="32dp"
                 android:paddingBottom="120dp"
-                android:clipToPadding="false"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginHorizontal="35dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/categories"
-                tools:listitem="@layout/item_categories" />
+                app:layout_constraintTop_toBottomOf="@+id/coreTeam" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
