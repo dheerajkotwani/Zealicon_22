@@ -28,9 +28,9 @@ class RegisterViewModel @Inject constructor(private val repo: Repository) :
     private val mSubmitReceipt  = MutableLiveData<ResultHandler<PaymentSuccess>>()
     val submitReceipt: LiveData<ResultHandler<PaymentSuccess>> = mSubmitReceipt
 
-    fun getOrderId(phone: String) = viewModelScope.launch {
+    fun getOrderId() = viewModelScope.launch {
         mOrderId.postValue(ResultHandler.Loading)
-        repo.getOrderId(phone).collect {
+        repo.getOrderId().collect {
             mOrderId.postValue(it)
         }
     }

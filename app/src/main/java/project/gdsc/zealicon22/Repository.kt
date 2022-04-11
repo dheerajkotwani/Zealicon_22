@@ -5,11 +5,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import project.gdsc.zealicon22.database.EventsDao
 import project.gdsc.zealicon22.models.Events
 import project.gdsc.zealicon22.models.PaymentReceipt
 import project.gdsc.zealicon22.models.ResultHandler
 import project.gdsc.zealicon22.network.NetworkService
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -50,15 +53,26 @@ class Repository @Inject constructor(
         }.getOrElse { emit(ResultHandler.Failure(it)) }
     }.flowOn(Dispatchers.IO)
 
-    suspend fun getOrderId(phone: String) = flow {
+    suspend fun getOrderId() = flow {
         runCatching {
-            emit(ResultHandler.Success(api.getOrderId(phone).body()!!))
+            emit(ResultHandler.Success(api.getOrderId().body()!!))
         }.getOrElse { emit(ResultHandler.Failure(it)) }
     }.flowOn(Dispatchers.IO)
 
     suspend fun submitReceipt(paymentReceipt: PaymentReceipt) = flow {
         runCatching {
-            emit(ResultHandler.Success(api.submitReceipt(paymentReceipt).body()!!))
+            Timber.d("PR $paymentReceipt")
+            emit(ResultHandler.Success(api.submitReceipt(
+                paymentReceipt.razorpay_payment_id!!,
+                paymentReceipt.razorpay_order_id!!,
+                paymentReceipt.razorpay_signature!!,
+                paymentReceipt.server_order_id,
+                paymentReceipt.admission_no!!,
+                paymentReceipt.college!!,
+                paymentReceipt.contact_no,
+                paymentReceipt.fullname,
+                paymentReceipt.email
+            ).body()!!))
         }.getOrElse { emit(ResultHandler.Failure(it)) }
     }.flowOn((Dispatchers.IO))
 
