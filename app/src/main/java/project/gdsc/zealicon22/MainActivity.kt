@@ -47,12 +47,15 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
 
                     R.id.home_screen -> {
                         supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, HomeFragment()).commit()
+                        binding.appBarTitle.text = getString(R.string.title_home)
                     }
                     R.id.search_screen -> {
                         supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, SearchEventsFragment()).commit()
+                        binding.appBarTitle.text = getString(R.string.title_discover)
                     }
                     R.id.my_events_screen -> {
                         supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, MyEventsFragment()).commit()
+                        binding.appBarTitle.text = getString(R.string.my_events)
                     }
                 }
                 return@setOnItemSelectedListener true
@@ -106,26 +109,31 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
                 // TODO handle case for home screen
                 binding.bottomNavBar.visibility = View.VISIBLE
                 supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, HomeFragment()).commit()
+                binding.appBarTitle.text = getString(R.string.title_home)
             }
             1 -> {
                 // TODO handle case for reach us
                 binding.bottomNavBar.visibility = View.INVISIBLE
                 supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, ReachFragment()).commit()
+                binding.appBarTitle.text = getString(R.string.title_reach_us)
             }
             2 -> {
                 // TODO handle case for team
                 binding.bottomNavBar.visibility = View.INVISIBLE
                 supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, TeamsFragment()).commit()
+                binding.appBarTitle.text = getString(R.string.title_team)
             }
             3 -> {
                 // TODO handle case for about
                 binding.bottomNavBar.visibility = View.INVISIBLE
                 binding.mainConstraintLayout.setBackgroundColor(Color.YELLOW)
+                binding.appBarTitle.text = getString(R.string.title_about)
             }
             4 -> {
                 // TODO added code to navigate to SignupFragment (remove on testing)
                 binding.bottomNavBar.visibility = View.INVISIBLE
                 supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, SignupFragment()).commit()
+                binding.appBarTitle.text = getString(R.string.title_profile)
             }
         }
 

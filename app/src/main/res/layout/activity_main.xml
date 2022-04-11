@@ -44,6 +44,7 @@
 
 
             <TextView
+                android:id="@+id/app_bar_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="56dp"
@@ -51,12 +52,12 @@
                 android:textColor="@color/white"
                 android:gravity="center"
                 android:fontFamily="@font/giants"
-                android:textSize="24dp"
+                android:textSize="24sp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:text="DISCOVER"/>
+                android:text="@string/title_home"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
