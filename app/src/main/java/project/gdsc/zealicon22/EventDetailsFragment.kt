@@ -1,23 +1,29 @@
 package project.gdsc.zealicon22
 
+import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.google.gson.Gson
+import dagger.hilt.android.AndroidEntryPoint
 import project.gdsc.zealicon22.databinding.FragmentEventDetailsBinding
 import project.gdsc.zealicon22.databinding.ItemEventDetailUnitBinding
 import project.gdsc.zealicon22.models.Events
-import timber.log.Timber
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class EventDetailsFragment : Fragment() {
 
     private var _binding: FragmentEventDetailsBinding? = null
     private val binding get() = _binding!!
 
+    @Inject lateinit var sp: SharedPreferences
+
+    private val viewModel by activityViewModels<MainViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,6 +64,20 @@ class EventDetailsFragment : Fragment() {
         binding.eventPrize.text = events.prizes
         binding.eventContact.text = "${events.contact?.fullname} : ${events.contact?.contact_no}"
 
+        handleEventRegistration(events)
+    }
+
+    private fun handleEventRegistration(events: Events) {
+        if (sp.getBoolean("EventId:${events.id}", false))
+            binding.registerButton.visibility = View.GONE
+        else {
+            binding.registerButton.apply {
+                visibility = View.VISIBLE
+                setOnClickListener {
+
+                }
+            }
+        }
     }
 
     private fun setIcon(item: ItemEventDetailUnitBinding, drawableId: Int) {

@@ -51,4 +51,10 @@ class Repository @Inject constructor(
     private suspend fun saveEvents(list: List<Events>) {
         dao.saveEvents(list)
     }
+
+    suspend fun registerForEvent() = flow {
+        runCatching {
+            emit(ResultHandler.Success(api.getEvents().body()!!))
+        }.getOrElse { emit(ResultHandler.Failure(it)) }
+    }.flowOn(Dispatchers.IO)
 }

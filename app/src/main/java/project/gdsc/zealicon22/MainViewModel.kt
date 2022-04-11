@@ -3,6 +3,7 @@ package project.gdsc.zealicon22
 import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import project.gdsc.zealicon22.models.Events
 import project.gdsc.zealicon22.models.ResultHandler
@@ -103,6 +104,11 @@ class MainViewModel @Inject constructor(private val repo: Repository) :
             mCategory.value = null
         else
             mCategory.value = category
+    }
+
+    fun registerForEvent(id: String) = flow {
+        emit(ResultHandler.Loading)
+        runCatching { emit(ResultHandler.Success(repo.registerForEvent())) }
     }
 
 }

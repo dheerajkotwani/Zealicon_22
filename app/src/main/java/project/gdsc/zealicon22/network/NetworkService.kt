@@ -4,6 +4,7 @@ import project.gdsc.zealicon22.models.Events
 import project.gdsc.zealicon22.models.ModelWrapper
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.POST
 
 /**
  * Created by Nakul
