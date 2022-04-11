@@ -1,6 +1,7 @@
 package project.gdsc.zealicon22.signup
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -37,11 +38,11 @@ class RegisterFragment : Fragment() {
         binding.cardCreateId.textCardTitle.text = "CREATE ZEAL ID"
         binding.cardSearch.textCardTitle.text = "FIND ZEAL ID"
 
-        binding.cardSearch.root.setOnClickListener {
-
+        binding.cardCreateId.root.setOnClickListener {
+            startActivity(Intent(requireContext(), SignupActivity::class.java))
         }
 
-        binding.cardCreateId.root.setOnClickListener {
+        binding.cardSearch.root.setOnClickListener {
 
         }
 
