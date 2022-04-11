@@ -1,6 +1,5 @@
 package project.gdsc.zealicon22.models
 
-import android.annotation.SuppressLint
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.text.SimpleDateFormat
@@ -33,7 +32,7 @@ data class Events(
         day = (getDateTime().formatTo("dd").toIntOrNull()?:26) - 25
     }
 
-    private fun getDateTime(): Date =
+    fun getDateTime(): Date =
         SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
             .apply{ timeZone = TimeZone.getTimeZone("UTC") }
             .parse(datetime.substringBefore('+'))!!

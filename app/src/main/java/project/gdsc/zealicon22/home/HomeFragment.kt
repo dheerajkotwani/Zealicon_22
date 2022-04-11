@@ -5,17 +5,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.scaleMatrix
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import project.gdsc.zealicon22.DetailActivity
 import project.gdsc.zealicon22.MainViewModel
 import project.gdsc.zealicon22.R
 import project.gdsc.zealicon22.databinding.FragmentHomeBinding
-import project.gdsc.zealicon22.dayWiseEvent.DayWiseEventsFragment
 import project.gdsc.zealicon22.models.ResultHandler
+import project.gdsc.zealicon22.utils.Loading
 import timber.log.Timber
 
 /**
@@ -31,6 +33,12 @@ class HomeFragment : Fragment() {
 
     private val viewModel: MainViewModel by activityViewModels()
 
+    private val eventsAdapter: UpcomingEventsAdapter by lazy {
+        UpcomingEventsAdapter { _ ->
+//            TODO Open Detailed Event page
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,23 +53,47 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setExploreEvents()
         setClickListener()
+        setUpcomingEvents()
         if (!viewModel.subscribed)
             subscribeUI()
     }
 
+    private fun setUpcomingEvents() {
+        binding.upcomingEventsRecycler.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = eventsAdapter
+        }
+    }
+
     private fun subscribeUI() {
+
         viewModel.subscribed = true
+
+        val loading = object : Loading(requireContext()) {
+            override val backAction: () -> Unit
+                get() = {
+                    dismiss()
+                    activity?.finish()
+                }
+        }
+        loading.create()
+
         viewModel.events.observe(viewLifecycleOwner) {
-            when(it) {
+            when (it) {
                 is ResultHandler.Loading -> {
-//                    TODO()
-                    Timber.d("RequestingRightNow")
+                    loading.show()
                 }
                 is ResultHandler.Success -> {
-                    Timber.d("SuccessRequest: ${it.result}")
+                    loading.dismissWithAnim()
+                    eventsAdapter.setList(it.result)
                 }
                 is ResultHandler.Failure -> {
-                    Timber.e("FailureRequest: ${it.message}")
+                    Toast.makeText(
+                        requireContext(),
+                        "Oops! Something went wrong.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    loading.dismissWithAnim()
                 }
             }
         }
@@ -72,28 +104,28 @@ class HomeFragment : Fragment() {
             root.rotation = -5f
             image.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.comic1, null))
             day.text = getString(R.string.day_one)
-            scaleMatrix(sx = 0.8f, sy=0.8f)
+            scaleMatrix(sx = 0.8f, sy = 0.8f)
             card.setOnClickListener { navigateToDetailActivity(1) }
         }
         binding.dayTwo.apply {
             root.rotation = 1f
             image.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.comic2, null))
             day.text = getString(R.string.day_two)
-            scaleMatrix(sx = 0.8f, sy=0.8f)
+            scaleMatrix(sx = 0.8f, sy = 0.8f)
             card.setOnClickListener { navigateToDetailActivity(2) }
         }
         binding.dayThree.apply {
             root.rotation = 4f
             image.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.comic3, null))
             day.text = getString(R.string.day_three)
-            scaleMatrix(sx = 0.8f, sy=0.8f)
+            scaleMatrix(sx = 0.8f, sy = 0.8f)
             card.setOnClickListener { navigateToDetailActivity(3) }
         }
         binding.dayFour.apply {
             root.rotation = -4f
             image.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.comic4, null))
             day.text = getString(R.string.day_four)
-            scaleMatrix(sx = 0.8f, sy=0.8f)
+            scaleMatrix(sx = 0.8f, sy = 0.8f)
             card.setOnClickListener { navigateToDetailActivity(4) }
         }
     }
