@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Zealicon22">
         <activity
             android:name=".SignupActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".DetailActivity"
             android:exported="false" />

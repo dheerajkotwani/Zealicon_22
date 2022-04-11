@@ -2,6 +2,7 @@ package project.gdsc.zealicon22.signup
 
 import android.app.Activity
 import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.text.InputFilter
@@ -10,9 +11,11 @@ import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.google.gson.Gson
 import com.razorpay.Checkout
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
@@ -21,6 +24,7 @@ import project.gdsc.zealicon22.RegisterViewModel
 import project.gdsc.zealicon22.SignupActivity
 import project.gdsc.zealicon22.databinding.FragmentSignupBinding
 import project.gdsc.zealicon22.databinding.ItemAvatarBinding
+import project.gdsc.zealicon22.di.AppModule
 import project.gdsc.zealicon22.models.PaymentReceipt
 import project.gdsc.zealicon22.models.PaymentResponse
 import project.gdsc.zealicon22.models.PaymentSuccess
@@ -95,6 +99,7 @@ class SignupFragment : Fragment() {
                 }
                 is ResultHandler.Failure -> {
                     Timber.e("FailureRequest: ${it.message}")
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -107,10 +112,16 @@ class SignupFragment : Fragment() {
                 }
                 is ResultHandler.Success -> {
                     Timber.d("SuccessRequest: ${it.result}")
+                    val sp = AppModule.provideSharedPreferences(requireContext())
+                    sp.edit().putString("USER_DATA", Gson().toJson(it.result)).apply()
+
+                    Timber.d("SuccessRequest SharedPref: ${sp.getString("USER_DATA", "")}")
+
                     //open ZealId screen after successful registration
                 }
                 is ResultHandler.Failure -> {
                     Timber.e("FailureRequest kk: ${it.message}")
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                 }
             }
         }
