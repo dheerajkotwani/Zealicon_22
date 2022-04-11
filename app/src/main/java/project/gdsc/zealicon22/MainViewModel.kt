@@ -4,8 +4,7 @@ import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import project.gdsc.zealicon22.models.Events
-import project.gdsc.zealicon22.models.ResultHandler
+import project.gdsc.zealicon22.models.*
 import timber.log.Timber
 import java.util.*
 import javax.inject.Inject
