@@ -160,4 +160,9 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.subscribed = false
+    }
+
 }
