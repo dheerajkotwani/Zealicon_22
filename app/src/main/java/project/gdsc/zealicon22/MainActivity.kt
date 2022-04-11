@@ -7,14 +7,12 @@ import androidx.core.content.ContextCompat
 import dagger.hilt.android.AndroidEntryPoint
 import nl.psdcompany.duonavigationdrawer.views.DuoMenuView
 import project.gdsc.zealicon22.about.AboutFragment
-import project.gdsc.zealicon22.search_events.SearchEventsFragment
 import project.gdsc.zealicon22.databinding.ActivityMainBinding
 import project.gdsc.zealicon22.home.HomeFragment
 import project.gdsc.zealicon22.myevents.MyEventsFragment
 import project.gdsc.zealicon22.reach.ReachFragment
+import project.gdsc.zealicon22.search_events.SearchEventsFragment
 import project.gdsc.zealicon22.signup.RegisterFragment
-import project.gdsc.zealicon22.signup.SignupFragment
-import project.gdsc.zealicon22.signup.ZealIdFragment
 import project.gdsc.zealicon22.teams.TeamsFragment
 
 /**
@@ -48,13 +46,16 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
                 when (it.itemId) {
 
                     R.id.home_screen -> {
-                        supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, HomeFragment()).commit()
+                        supportFragmentManager.beginTransaction()
+                            .replace(binding.mainFrame.id, HomeFragment()).commit()
                     }
                     R.id.search_screen -> {
-                        supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, SearchEventsFragment()).commit()
+                        supportFragmentManager.beginTransaction()
+                            .replace(binding.mainFrame.id, SearchEventsFragment()).commit()
                     }
                     R.id.my_events_screen -> {
-                        supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, MyEventsFragment()).commit()
+                        supportFragmentManager.beginTransaction()
+                            .replace(binding.mainFrame.id, MyEventsFragment()).commit()
                     }
                 }
                 return@setOnItemSelectedListener true
@@ -72,7 +73,8 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
 
     private fun setSelectedPageData() {
         duoAdapter.setViewSelected(0, true)
-        supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, HomeFragment()).commit()
+        supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, HomeFragment())
+            .commit()
     }
 
     private fun handleMenu() {
@@ -108,31 +110,36 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
                 // TODO handle case for home screen
                 binding.bottomNavBar.visibility = View.VISIBLE
                 binding.pageTitle.text = getString(R.string.title_discover)
-                supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, HomeFragment()).commit()
+                supportFragmentManager.beginTransaction()
+                    .replace(binding.mainFrame.id, HomeFragment()).commit()
             }
             1 -> {
                 // TODO handle case for reach us
                 binding.bottomNavBar.visibility = View.GONE
                 binding.pageTitle.text = getString(R.string.reach)
-                supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, ReachFragment()).commit()
+                supportFragmentManager.beginTransaction()
+                    .replace(binding.mainFrame.id, ReachFragment()).commit()
             }
             2 -> {
                 // TODO handle case for team
                 binding.bottomNavBar.visibility = View.GONE
                 binding.pageTitle.text = getString(R.string.team)
-                supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, TeamsFragment()).commit()
+                supportFragmentManager.beginTransaction()
+                    .replace(binding.mainFrame.id, TeamsFragment()).commit()
             }
             3 -> {
                 // handle case for about
                 binding.bottomNavBar.visibility = View.GONE
                 binding.pageTitle.text = getString(R.string.about)
-                supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, AboutFragment()).commit()
+                supportFragmentManager.beginTransaction()
+                    .replace(binding.mainFrame.id, AboutFragment()).commit()
             }
             4 -> {
                 // navigate to SignupFragment
                 binding.bottomNavBar.visibility = View.GONE
                 binding.pageTitle.text = ""
-                supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, RegisterFragment()).commit()
+                supportFragmentManager.beginTransaction()
+                    .replace(binding.mainFrame.id, RegisterFragment()).commit()
             }
         }
 
