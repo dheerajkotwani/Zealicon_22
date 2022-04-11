@@ -38,7 +38,7 @@
             android:background="@drawable/search_background"
             android:drawableStart="@drawable/ic_search"
             android:drawablePadding="10dp"
-            android:fontFamily="@font/webcomic"
+            android:fontFamily="@font/cartoonist_hand"
             android:hint="@string/enter_your_search_term"
             android:paddingStart="15dp"
             android:textColor="@color/black"

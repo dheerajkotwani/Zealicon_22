@@ -57,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/no_events"
-        android:fontFamily="@font/webcomic"
+        android:fontFamily="@font/cartoonist_hand"
         android:textSize="18sp"
         android:visibility="invisible"
         app:layout_constraintTop_toBottomOf="@id/my_events"

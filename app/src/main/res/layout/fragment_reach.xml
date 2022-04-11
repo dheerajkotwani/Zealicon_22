@@ -3,12 +3,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ReachFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ReachFragment"
+    android:background="@color/black">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_map"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                app:cardCornerRadius="20dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginHorizontal="18dp">
+
+                <ImageView
+                    android:id="@+id/college_map"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/college_map"
+                    android:contentDescription="college_mag" />
+
+            </androidx.cardview.widget.CardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:layout_marginTop="20dp"
+                android:alpha="0.25"
+                android:background="@drawable/dotted_divider"/>
+
+            <include
+                layout="@layout/reach_card_layout"/>
+
+            <include
+                layout="@layout/reach_card_layout"/>
+
+            <include
+                layout="@layout/reach_card_layout"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="40dp"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </FrameLayout>
