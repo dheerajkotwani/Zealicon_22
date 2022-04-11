@@ -1,5 +1,6 @@
 package project.gdsc.zealicon22.search_events
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,6 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
+import project.gdsc.zealicon22.DetailActivity
 import project.gdsc.zealicon22.MainViewModel
 import project.gdsc.zealicon22.databinding.FragmentSearchEventsBinding
 import project.gdsc.zealicon22.utils.*
@@ -70,6 +73,13 @@ class SearchEventsFragment : Fragment() {
         binding.searchRecycler.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = searchEventsAdapter
+        }
+
+        searchEventsAdapter?.onItemClick = {
+            val intent = Intent(requireActivity(), DetailActivity::class.java)
+            intent.putExtra("EVENT_DETAIL", Gson().toJson(it).toString())
+            intent.putExtra("fragment_to_show", "event_detail")
+            startActivity(intent)
         }
     }
 

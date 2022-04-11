@@ -3,8 +3,11 @@ package project.gdsc.zealicon22
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.content.ContextCompat
+import com.google.gson.Gson
 import project.gdsc.zealicon22.databinding.ActivityDetailBinding
 import project.gdsc.zealicon22.dayWiseEvent.DayWiseEventsFragment
+import project.gdsc.zealicon22.models.Events
+import timber.log.Timber
 
 class DetailActivity : AppCompatActivity() {
 
@@ -30,9 +33,14 @@ class DetailActivity : AppCompatActivity() {
                 supportFragmentManager.beginTransaction().replace(binding.detailFrame.id, DayWiseEventsFragment()).commit()
             }
             "event_detail" -> {
-                supportFragmentManager.beginTransaction().replace(binding.detailFrame.id, EventDetailsFragment()).commit()
+                val events = Gson().fromJson(intent.getStringExtra("EVENT_DETAIL"), Events::class.java)
+                Timber.d("Events $events")
+                if (events != null) {
+                    val frag = EventDetailsFragment.newInstance(intent.getStringExtra("EVENT_DETAIL"))
+                    supportFragmentManager.beginTransaction()
+                        .replace(binding.detailFrame.id, frag).commit()
+                }
             }
         }
-
     }
 }
