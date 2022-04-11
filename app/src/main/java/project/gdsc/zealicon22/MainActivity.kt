@@ -1,5 +1,7 @@
 package project.gdsc.zealicon22
 
+import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -21,7 +23,7 @@ import project.gdsc.zealicon22.teams.TeamsFragment
  * @author Dheeraj Kotwani on 23/02/22.
  */
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
+class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener{
 
     private lateinit var duoAdapter: DuoMenuAdapter
     private lateinit var binding: ActivityMainBinding

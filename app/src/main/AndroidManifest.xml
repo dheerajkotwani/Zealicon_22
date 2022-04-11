@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Zealicon22">
         <activity
-            android:name=".signup.SignupActivity"
+            android:name=".SignupActivity"
             android:exported="false" />
         <activity
             android:name=".DetailActivity"
@@ -32,7 +32,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.Zealicon22.NoActionBar"></activity>
+            android:theme="@style/Theme.Zealicon22.NoActionBar"/>
 
         <meta-data
             android:name="preloaded_fonts"

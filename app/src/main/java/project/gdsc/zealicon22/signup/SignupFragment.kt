@@ -1,5 +1,8 @@
 package project.gdsc.zealicon22.signup
 
+import android.app.Activity
+import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.text.InputFilter
@@ -8,21 +11,37 @@ import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import com.google.gson.Gson
+import com.razorpay.Checkout
+import dagger.hilt.android.AndroidEntryPoint
+import org.json.JSONObject
 import project.gdsc.zealicon22.R
+import project.gdsc.zealicon22.RegisterViewModel
+import project.gdsc.zealicon22.SignupActivity
 import project.gdsc.zealicon22.databinding.FragmentSignupBinding
 import project.gdsc.zealicon22.databinding.ItemAvatarBinding
+import project.gdsc.zealicon22.di.AppModule
+import project.gdsc.zealicon22.models.PaymentReceipt
+import project.gdsc.zealicon22.models.PaymentResponse
+import project.gdsc.zealicon22.models.PaymentSuccess
+import project.gdsc.zealicon22.models.ResultHandler
 import project.gdsc.zealicon22.utils.animateOnClick
 import project.gdsc.zealicon22.utils.animateToRemoveErrorMessage
 import project.gdsc.zealicon22.utils.animateToShowErrorMessage
+import timber.log.Timber
 
 
+@AndroidEntryPoint
 class SignupFragment : Fragment() {
 
     private var _binding: FragmentSignupBinding? = null
-
     private val binding get() = _binding!!
+
+    private val viewModel: RegisterViewModel by activityViewModels()
 
 
     private val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
@@ -34,6 +53,7 @@ class SignupFragment : Fragment() {
     private var emailError: Boolean = false
     private var phoneError: Boolean = false
     private var admNumberError: Boolean = false
+    private lateinit var paymentResponse: PaymentResponse
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,8 +68,10 @@ class SignupFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupButton()
+        setUpObserver()
         setupEditTexts()
         setupAvatars()
+        Checkout.preload(activity?.applicationContext)
     }
 
     private fun setupButton() {
@@ -57,18 +79,63 @@ class SignupFragment : Fragment() {
         binding.btSignup.apply {
             setOnClickListener {
                 animateOnClick(it)
-                signup()
+                handleSignUp()
             }
         }
 
     }
 
-    private fun signup() {
+    private fun setUpObserver() {
+        viewModel.orderId.observe(viewLifecycleOwner) {
+            when (it) {
+                is ResultHandler.Loading -> {
+                    Timber.d("RequestingRightNow")
+                }
+                is ResultHandler.Success -> {
+                    Timber.d("SuccessRequest: ${it.result}")
+                    paymentResponse = it.result
+                    initiatePayment(it.result)
+
+                }
+                is ResultHandler.Failure -> {
+                    Timber.e("FailureRequest: ${it.message}")
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        viewModel.submitReceipt.observe(viewLifecycleOwner){
+
+            when (it) {
+                is ResultHandler.Loading -> {
+                    Timber.d("RequestingRightNow")
+                }
+                is ResultHandler.Success -> {
+                    Timber.d("SuccessRequest: ${it.result}")
+                    val sp = AppModule.provideSharedPreferences(requireContext())
+                    sp.edit().putString("USER_DATA", Gson().toJson(it.result)).apply()
+
+                    Timber.d("SuccessRequest SharedPref: ${sp.getString("USER_DATA", "")}")
+
+                    //open ZealId screen after successful registration
+                }
+                is ResultHandler.Failure -> {
+                    Timber.e("FailureRequest kk: ${it.message}")
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun getOrderId() {
+        viewModel.getOrderId()
+    }
+
+    private fun handleSignUp() {
 
         if (haveInputErrors()) return
 
-        // TODO handle signup case
-
+        getOrderId()
     }
 
     private fun haveInputErrors(): Boolean {
@@ -81,7 +148,7 @@ class SignupFragment : Fragment() {
         }
 
         val email = binding.etEmail.input.text.toString()
-        if (!email.matches(emailPattern.toRegex())){
+        if (!email.matches(emailPattern.toRegex())) {
             emailError = true
             disableSignupButton()
             animateToShowErrorMessage(binding.etEmail.errorCard)
@@ -224,4 +291,54 @@ class SignupFragment : Fragment() {
         selectedAvatarPosition = avatarPosition
     }
 
+    private fun initiatePayment(result: PaymentResponse) {
+
+        val activity: Activity = requireActivity()
+        val name = "Zealicon 2K22"
+        val description = "you are just way far to enjoy your comics"
+        var email = binding.etEmail.input.text.toString()
+        var contact = binding.etPhone.input.text.toString()
+        val key = result.key_id!!
+        val orderId = result.order_id!!
+
+        val checkout = Checkout()
+        checkout.setKeyID(key)
+        checkout.setImage(R.drawable.logo)
+
+        val amount = 300
+        val finalAmount = (amount.toFloat() * 100).toString()
+
+        try {
+            val options = JSONObject()
+            options.put("name", name)
+            options.put("description", description)
+            options.put("theme.color", resources.getColor(R.color.red, null))
+            options.put("order_id", orderId)
+            options.put("currency", "INR")
+            options.put("amount", finalAmount)
+            val prefill = JSONObject()
+            prefill.put("email", email)
+            prefill.put("contact", contact)
+
+            options.put("prefill", prefill)
+            checkout.open(activity, options)
+        } catch (e: Exception) {
+            Timber.e(e)
+        }
+
+    }
+
+    fun getReceiptData(): PaymentReceipt {
+        return PaymentReceipt(
+            "",
+            "",
+            "",
+            paymentResponse.server_order_id!!,
+            binding.etAdmNumber.input.text.toString(),
+            "JSSATE",
+            binding.etPhone.input.text.toString(),
+            binding.etName.input.text.toString(),
+            binding.etEmail.input.text.toString()
+        )
+    }
 }
