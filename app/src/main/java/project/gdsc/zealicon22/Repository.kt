@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import project.gdsc.zealicon22.database.EventsDao
 import project.gdsc.zealicon22.models.Events
+import project.gdsc.zealicon22.models.PaymentReceipt
 import project.gdsc.zealicon22.models.ResultHandler
 import project.gdsc.zealicon22.network.NetworkService
 import javax.inject.Inject
@@ -48,6 +49,18 @@ class Repository @Inject constructor(
             emit(ResultHandler.Success(api.getEvents().body()!!))
         }.getOrElse { emit(ResultHandler.Failure(it)) }
     }.flowOn(Dispatchers.IO)
+
+    suspend fun getOrderId(phone: String) = flow {
+        runCatching {
+            emit(ResultHandler.Success(api.getOrderId(phone).body()!!))
+        }.getOrElse { emit(ResultHandler.Failure(it)) }
+    }.flowOn(Dispatchers.IO)
+
+    suspend fun submitReceipt(paymentReceipt: PaymentReceipt) = flow {
+        runCatching {
+            emit(ResultHandler.Success(api.submitReceipt(paymentReceipt).body()!!))
+        }.getOrElse { emit(ResultHandler.Failure(it)) }
+    }.flowOn((Dispatchers.IO))
 
     private suspend fun saveEvents(list: List<Events>) {
         dao.saveEvents(list)

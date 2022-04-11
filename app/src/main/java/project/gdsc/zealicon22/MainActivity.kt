@@ -1,16 +1,16 @@
 package project.gdsc.zealicon22
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import dagger.hilt.android.AndroidEntryPoint
 import nl.psdcompany.duonavigationdrawer.views.DuoMenuView
-import project.gdsc.zealicon22.search_events.SearchEventsFragment
 import project.gdsc.zealicon22.databinding.ActivityMainBinding
-import project.gdsc.zealicon22.dayWiseEvent.DayWiseEventsFragment
 import project.gdsc.zealicon22.home.HomeFragment
 import project.gdsc.zealicon22.myevents.MyEventsFragment
+import project.gdsc.zealicon22.search_events.SearchEventsFragment
 import project.gdsc.zealicon22.signup.SignupFragment
 import project.gdsc.zealicon22.teams.TeamsFragment
 
@@ -18,7 +18,7 @@ import project.gdsc.zealicon22.teams.TeamsFragment
  * @author Dheeraj Kotwani on 23/02/22.
  */
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
+class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener{
 
     private lateinit var duoAdapter: DuoMenuAdapter
     private lateinit var binding: ActivityMainBinding
@@ -119,7 +119,7 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
             }
             4 -> {
                 // TODO added code to navigate to SignupFragment (remove on testing)
-                supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, SignupFragment()).commit()
+                startActivity(Intent(applicationContext, SignupActivity::class.java))
             }
         }
 
