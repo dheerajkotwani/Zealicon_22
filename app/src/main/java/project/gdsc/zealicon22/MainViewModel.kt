@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import project.gdsc.zealicon22.models.*
 import timber.log.Timber
+import java.util.*
 import javax.inject.Inject
 
 /**
@@ -32,7 +33,14 @@ class MainViewModel @Inject constructor(private val repo: Repository) :
     * }
     * */
 
-    /*private*/ val mQuery = MutableLiveData<String?>(null)
+    val upcomingEvents: LiveData<ResultHandler<List<Events>>> = Transformations.map(events) {
+        if (it is ResultHandler.Success)
+            ResultHandler.Success(it.result.filter { i -> i.getDateTime() > Date() })
+        else it
+    }
+
+    private val mQuery = MutableLiveData<String?>(null)
+    private val mCategory = MutableLiveData<String?>(null)
 
     val searchedEvents: LiveData<List<Events>> = mQuery.combineWith(events) { q, it ->
             if (it is ResultHandler.Success && !q.isNullOrBlank())
@@ -40,6 +48,10 @@ class MainViewModel @Inject constructor(private val repo: Repository) :
                     i.name.contains(q, true)
                 }
             else listOf()
+    }.combineWith(mCategory) { e, c ->
+        if (c.isNullOrBlank())
+            e.orEmpty()
+        else e?.filter { i -> i.category == c }.orEmpty()
     }
 
     private val mDay = MutableLiveData<Int?>(null)
@@ -49,7 +61,7 @@ class MainViewModel @Inject constructor(private val repo: Repository) :
         else listOf()
     }
 
-    fun <T, K, R> LiveData<T>.combineWith(
+    private fun <T, K, R> LiveData<T>.combineWith(
         liveData: LiveData<K>,
         block: (T?, K?) -> R
     ): LiveData<R> {
@@ -83,6 +95,13 @@ class MainViewModel @Inject constructor(private val repo: Repository) :
 
     fun selectDay(day : Int){
         mDay.value = day
+    }
+
+    fun selectCategory(category: String?) {
+        if (category.isNullOrBlank())
+            mCategory.value = null
+        else
+            mCategory.value = category
     }
 
 }

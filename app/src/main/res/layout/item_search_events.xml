@@ -29,7 +29,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
             android:layout_toEndOf="@+id/search_image"
-            android:fontFamily="@font/webcomic"
+            android:fontFamily="@font/cartoonist_hand"
             android:textColor="@color/white"
             android:textSize="24sp"
             tools:text="Ethnic Walk" />
@@ -41,7 +41,7 @@
             android:layout_below="@+id/event_title"
             android:layout_alignStart="@+id/event_title"
             android:layout_marginTop="8dp"
-            android:fontFamily="@font/webcomic"
+            android:fontFamily="@font/cartoonist_hand"
             android:textColor="@color/white"
             tools:text="27th April . Dance" />
 

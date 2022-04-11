@@ -32,19 +32,66 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <include
+                android:id="@+id/search_bar"
                 layout="@layout/custom_search_bar_layout"
-                android:id="@+id/search_bar"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/search_events" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/category_root"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="14dp"
+                app:cardCornerRadius="8dp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@+id/search_bar"
+                app:layout_constraintTop_toBottomOf="@+id/search_bar"
+                app:strokeColor="@color/white"
+                app:strokeWidth="1dp">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/black"
+                    android:orientation="horizontal"
+                    android:paddingVertical="3dp"
+                    android:paddingHorizontal="6dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/category_chip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/black"
+                        android:fontFamily="@font/roboto_condensed_regular"
+                        android:textColor="@color/white"
+                        android:textSize="14dp"
+                        tools:text="Machevoltz" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/cancel_category"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:background="@color/black"
+                        android:src="@drawable/ic_cancel"
+                        app:tint="@color/white" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            </com.google.android.material.card.MaterialCardView>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/search_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="32dp"
                 android:layout_marginStart="28dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/category_root"
                 tools:itemCount="1"
-                tools:listitem="@layout/item_search_events"
-                app:layout_constraintTop_toBottomOf="@id/search_bar"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                tools:listitem="@layout/item_search_events" />
 
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -67,8 +114,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="26dp"
                 android:layout_marginTop="16dp"
-                android:paddingBottom="120dp"
                 android:clipToPadding="false"
+                android:paddingBottom="120dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/categories"

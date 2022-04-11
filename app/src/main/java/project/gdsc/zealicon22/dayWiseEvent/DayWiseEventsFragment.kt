@@ -9,8 +9,8 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.scaleMatrix
 import androidx.recyclerview.widget.LinearLayoutManager
 import project.gdsc.zealicon22.R
-import project.gdsc.zealicon22.search_events.SearchEventsAdapter
 import project.gdsc.zealicon22.databinding.FragmentDayWiseEventsBinding
+import project.gdsc.zealicon22.search_events.SearchEventsAdapter
 
 /**
  * @author Anuraj Jain on 07/04/22.

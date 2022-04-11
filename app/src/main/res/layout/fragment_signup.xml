@@ -67,6 +67,7 @@
         android:layout_width="100dp"
         android:layout_height="4dp"
         android:background="@color/white"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_adm_number"
         android:layout_marginTop="40dp"/>
@@ -75,10 +76,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/select_avatar"
-        android:fontFamily="@font/webcomic"
+        android:fontFamily="@font/cartoonist_hand"
         android:textColor="@color/white"
         android:layout_marginStart="16dp"
         android:textSize="18sp"
+        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@id/just_some_line"
         app:layout_constraintTop_toTopOf="@id/just_some_line"
         app:layout_constraintBottom_toBottomOf="@id/just_some_line"/>
@@ -86,6 +88,7 @@
     <LinearLayout
         android:id="@+id/avatar_linear_layout"
         android:layout_width="0dp"
+        android:visibility="gone"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -162,11 +165,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/giants"
-                android:textSize="34sp"
+                android:textSize="30sp"
                 android:text="@string/sign_up"
+                android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:gravity="center"
-                android:paddingVertical="12dp"/>
+                android:paddingVertical="16dp"/>
 
         </com.google.android.material.card.MaterialCardView>
 
