@@ -9,9 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import project.gdsc.zealicon22.EventDetailsFragment
 import project.gdsc.zealicon22.MainViewModel
-import project.gdsc.zealicon22.R
 import project.gdsc.zealicon22.databinding.FragmentSearchEventsBinding
 import project.gdsc.zealicon22.utils.*
 import project.gdsc.zealicon22.utils.COLORALO
@@ -51,20 +49,45 @@ class SearchEventsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         observer()
+        handleSearchEventsCategoryAdapter()
+        handleSearchEventsAdapter()
+        handleCategories()
+        handleSearch()
 
+    }
+
+    private fun handleSearchEventsCategoryAdapter() {
         val categoryList = listOf(PLAY_IT_ON, COLORALO, MECHAVOLTZ, ROBOTILES, Z_WARS, CODERZ)
         searchEventsCategoryAdapter = SearchEventsCategoryAdapter(categoryList)
         binding.categoriesRecycler.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = searchEventsCategoryAdapter
         }
+    }
 
+    private fun handleSearchEventsAdapter() {
         searchEventsAdapter = SearchEventsAdapter()
         binding.searchRecycler.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = searchEventsAdapter
         }
+    }
 
+    private fun handleCategories() {
+        searchEventsCategoryAdapter?.onItemClick = {
+            Timber.d("categories $it")
+            binding.categoryRoot.visibility = View.VISIBLE
+            binding.categoryChip.text = it
+            viewModel.selectCategory(it)
+        }
+
+        binding.cancelCategory.setOnClickListener {
+            binding.categoryRoot.visibility = View.GONE
+            viewModel.selectCategory(null)
+        }
+    }
+
+    private fun handleSearch() {
         binding.searchBar.search.addTextChangedListener(object : TextWatcher{
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
@@ -73,8 +96,7 @@ class SearchEventsFragment : Fragment() {
             override fun afterTextChanged(p0: Editable?) {
                 viewModel.searchEvents(p0)
             }
-        })
-    }
+        })    }
 
     private fun observer() {
         viewModel.searchedEvents.observe(viewLifecycleOwner){
