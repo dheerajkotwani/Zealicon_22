@@ -10,11 +10,19 @@ data class TeamDetails(
 
 data class TeamsModal(
     val core: ArrayList<TeamsModalItem>,
-    val management: ArrayList<TeamsModalItem>
+    val management: ArrayList<TeamsModalItem>,
+    val technical: ArrayList<TeamsModalItem>,
 )
 
 data class TeamsModalItem(
     val image: String,
     val name: String,
     val position: String,
+    val contactType: ContactType,
+    val contact: String
 )
+
+enum class ContactType {
+    EMAIL,
+    MOBILE
+}

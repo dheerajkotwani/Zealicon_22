@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ReachFragment"
+    tools:context=".reach.ReachFragment"
     android:background="@color/black">
 
     <androidx.core.widget.NestedScrollView
@@ -41,14 +41,19 @@
                 android:alpha="0.25"
                 android:background="@drawable/dotted_divider"/>
 
-            <include
-                layout="@layout/reach_card_layout"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_reach"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+<!--            <include-->
+<!--                layout="@layout/reach_card_layout"/>-->
 
-            <include
-                layout="@layout/reach_card_layout"/>
+<!--            <include-->
+<!--                layout="@layout/reach_card_layout"/>-->
 
-            <include
-                layout="@layout/reach_card_layout"/>
+<!--            <include-->
+<!--                layout="@layout/reach_card_layout"/>-->
 
             <View
                 android:layout_width="match_parent"
