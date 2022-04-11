@@ -13,6 +13,7 @@ import project.gdsc.zealicon22.home.HomeFragment
 import project.gdsc.zealicon22.myevents.MyEventsFragment
 import project.gdsc.zealicon22.reach.ReachFragment
 import project.gdsc.zealicon22.signup.SignupFragment
+import project.gdsc.zealicon22.signup.ZealIdFragment
 import project.gdsc.zealicon22.teams.TeamsFragment
 
 /**
@@ -130,7 +131,7 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
                 // navigate to SignupFragment
                 binding.bottomNavBar.visibility = View.GONE
                 binding.pageTitle.text = ""
-                supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, SignupFragment()).commit()
+                supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, ZealIdFragment()).commit()
             }
         }
 
