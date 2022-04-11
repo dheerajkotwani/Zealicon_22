@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/example_event"
                 android:textColor="@color/white"
-                android:fontFamily="@font/webcomic"
+                android:fontFamily="@font/cartoonist_hand"
                 android:layout_marginHorizontal="24dp"
                 android:layout_marginVertical="16dp"
                 android:textSize="36sp"
@@ -61,7 +61,7 @@
                 android:textColor="@color/white"
                 android:text="@string/example_date"
                 android:layout_marginHorizontal="24dp"
-                android:fontFamily="@font/webcomic"
+                android:fontFamily="@font/cartoonist_hand"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/event_name"/>
 
@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:text="@string/example_society"
-                android:fontFamily="@font/webcomic"
+                android:fontFamily="@font/cartoonist_hand"
                 android:layout_marginVertical="16dp"
                 android:layout_marginHorizontal="24dp"
                 app:layout_constraintBottom_toBottomOf="parent"

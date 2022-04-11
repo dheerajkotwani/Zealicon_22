@@ -106,16 +106,19 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
             0 -> {
                 // TODO handle case for home screen
                 binding.bottomNavBar.visibility = View.VISIBLE
+                binding.pageTitle.text = getString(R.string.title_discover)
                 supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, HomeFragment()).commit()
             }
             1 -> {
                 // TODO handle case for reach us
                 binding.bottomNavBar.visibility = View.GONE
+                binding.pageTitle.text = getString(R.string.reach)
                 supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, ReachFragment()).commit()
             }
             2 -> {
                 // TODO handle case for team
                 binding.bottomNavBar.visibility = View.GONE
+                binding.pageTitle.text = getString(R.string.team)
                 supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, TeamsFragment()).commit()
             }
             3 -> {
