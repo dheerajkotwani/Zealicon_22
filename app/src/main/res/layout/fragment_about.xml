@@ -22,12 +22,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="30dp"
                 android:fontFamily="@font/giants"
                 android:text="@string/zealicon_2022"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
-                android:textSize="36sp"
+                android:textSize="36dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,14 +35,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="28dp"
-                android:layout_marginTop="35dp"
-                android:fontFamily="@font/webcomic"
+                android:layout_marginTop="28dp"
+                android:fontFamily="@font/cartoonist_hand"
                 android:textColor="@color/white"
-                android:textSize="18sp"
+                android:textSize="18dp"
+                android:text="@string/zealicon_about"
                 app:layout_constraintTop_toBottomOf="@+id/text" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <ImageView
+        android:id="@+id/image_logo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:alpha="0.2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/logo"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -44,6 +44,7 @@
 
 
             <TextView
+                android:id="@+id/page_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="56dp"
@@ -52,6 +53,7 @@
                 android:gravity="center"
                 android:fontFamily="@font/giants"
                 android:textSize="24dp"
+                android:textAllCaps="true"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
