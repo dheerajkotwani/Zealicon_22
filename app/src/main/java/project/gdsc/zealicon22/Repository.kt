@@ -62,15 +62,7 @@ class Repository @Inject constructor(
         runCatching {
             Timber.d("PR $paymentReceipt")
             emit(ResultHandler.Success(api.submitReceipt(
-                paymentReceipt.razorpay_payment_id!!,
-                paymentReceipt.razorpay_order_id!!,
-                paymentReceipt.razorpay_signature!!,
-                paymentReceipt.server_order_id,
-                paymentReceipt.admission_no!!,
-                paymentReceipt.college!!,
-                paymentReceipt.contact_no,
-                paymentReceipt.fullname,
-                paymentReceipt.email
+                paymentReceipt
             ).body()!!))
         }.getOrElse { emit(ResultHandler.Failure(it)) }
     }.flowOn((Dispatchers.IO))

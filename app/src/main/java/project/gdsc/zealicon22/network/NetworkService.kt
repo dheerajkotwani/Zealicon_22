@@ -20,17 +20,8 @@ interface NetworkService {
     @GET("/payment")
     suspend fun getOrderId(): Response<PaymentResponse>
 
-    @Multipart
     @POST("/payment/")
     suspend fun submitReceipt(
-        @Part("razorpay_payment_id") razorpay_payment_id: String,
-        @Part("razorpay_order_id") razorpay_order_id: String,
-        @Part("razorpay_signature") razorpay_signature: String,
-        @Part("server_order_id") server_order_id: String,
-        @Part("admission_no") admission_no: String,
-        @Part("college") college: String,
-        @Part("contact_no") contact_no: String,
-        @Part("fullname") fullname: String,
-        @Part("email") email: String
+        @Body paymentReceipt: PaymentReceipt
     ): Response<PaymentSuccess>
 }
