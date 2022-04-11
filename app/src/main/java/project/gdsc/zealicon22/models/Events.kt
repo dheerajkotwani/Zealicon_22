@@ -39,7 +39,7 @@ data class Events(
             .apply{ timeZone = TimeZone.getTimeZone("UTC") }
             .parse(datetime.substringBefore('+'))!!
 
-    private fun Date.formatTo(
+    fun Date.formatTo(
         dateFormat: String,
         timeZone: TimeZone = TimeZone.getDefault()
     ): String {
