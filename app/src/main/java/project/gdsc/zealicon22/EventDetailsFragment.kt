@@ -6,15 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
+import com.google.gson.Gson
 import project.gdsc.zealicon22.databinding.FragmentEventDetailsBinding
 import project.gdsc.zealicon22.databinding.ItemEventDetailUnitBinding
+import project.gdsc.zealicon22.models.Events
+import timber.log.Timber
+
 
 class EventDetailsFragment : Fragment() {
 
     private var _binding: FragmentEventDetailsBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var event: TestEvent
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,55 +29,34 @@ class EventDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        getEventData()
         showEventData()
-
-    }
-
-    private fun getEventData() {
-
-        event = TestEvent(
-            getString(R.string.example_event_name),
-            getString(R.string.example_event_info),
-            getString(R.string.example_event_category),
-            getString(R.string.example_society),
-            getString(R.string.date_27),
-            getString(R.string.example_event_location),
-            getString(R.string.example_event_time),
-            getString(R.string.example_event_phone),
-            getString(R.string.example_event_rules),
-            getString(R.string.example_event_prize),
-            getString(R.string.example_event_contact)
-        )
-
     }
 
     private fun showEventData() {
-
-        binding.eventName.text = event.eventName
-        binding.eventCategory.text = event.eventCategory
-        binding.eventSociety.text = event.eventSociety
+        val events = Gson().fromJson((arguments?.getString(EVENT_DETAILS)), Events::class.java)
+        binding.eventName.text = events.name
+        binding.eventCategory.text = events.category
+        binding.eventSociety.text = events.society
         binding.eventCalendar.apply {
             setIcon(this, R.drawable.ic_calendar)
-            eventUnitInfo.text = event.eventDate
+            eventUnitInfo.text = events.datetime
         }
         binding.eventLocation.apply {
             setIcon(this, R.drawable.ic_location)
-            eventUnitInfo.text = event.eventLocation
+            eventUnitInfo.text = events.datetime
         }
         binding.eventClock.apply {
             setIcon(this, R.drawable.ic_clock)
-            eventUnitInfo.text = event.eventTime
+            eventUnitInfo.text = events.duration
         }
         binding.eventPhone.apply {
             setIcon(this, R.drawable.ic_phone)
-            eventUnitInfo.text = event.eventPersonPhone
+            eventUnitInfo.text = events.contact?.contact_no
         }
-        binding.eventInfo.text = event.eventDescription
-        binding.eventRules.text = event.eventRules
-        binding.eventPrize.text = event.eventPrizes
-        binding.eventContact.text = event.eventContact
+        binding.eventInfo.text = events.description
+        binding.eventRules.text = events.rules
+        binding.eventPrize.text = events.prizes
+        binding.eventContact.text = "${events.contact?.fullname} : ${events.contact?.contact_no}"
 
     }
 
@@ -88,19 +70,14 @@ class EventDetailsFragment : Fragment() {
         )
     }
 
-    // TODO (remove) This is for testing only
-    data class TestEvent(
-        val eventName: String,
-        val eventDescription: String,
-        val eventCategory: String,
-        val eventSociety: String,
-        val eventDate: String,
-        val eventLocation: String,
-        val eventTime: String,
-        val eventPersonPhone: String,
-        val eventRules: String,
-        val eventPrizes: String,
-        val eventContact: String
-    )
-
+    companion object {
+        const val EVENT_DETAILS = "EVENT_DETAILS"
+        fun newInstance(events: String?): EventDetailsFragment {
+            return EventDetailsFragment().apply {
+                arguments = Bundle().apply {
+                    putString(EVENT_DETAILS, events)
+                }
+            }
+        }
+    }
 }

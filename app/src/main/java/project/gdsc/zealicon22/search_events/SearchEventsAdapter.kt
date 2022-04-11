@@ -22,12 +22,15 @@ class SearchEventsAdapter() : RecyclerView.Adapter<SearchEventsAdapter.VH>() {
         notifyDataSetChanged()
     }
 
+    var onItemClick: ((Events) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH = VH(
         ItemSearchEventsBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun onBindViewHolder(holder: VH, position: Int) {
         val comic = list[position]
         holder.itemView.setOnClickListener{
+            onItemClick?.invoke(comic)
         }
         holder.onBind(comic)
     }
