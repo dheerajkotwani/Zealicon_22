@@ -4,14 +4,18 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import nl.psdcompany.duonavigationdrawer.views.DuoMenuView
 import project.gdsc.zealicon22.about.AboutFragment
 import project.gdsc.zealicon22.search_events.SearchEventsFragment
 import project.gdsc.zealicon22.databinding.ActivityMainBinding
+import project.gdsc.zealicon22.di.AppModule
 import project.gdsc.zealicon22.home.HomeFragment
+import project.gdsc.zealicon22.models.PaymentSuccess
 import project.gdsc.zealicon22.myevents.MyEventsFragment
 import project.gdsc.zealicon22.reach.ReachFragment
 import project.gdsc.zealicon22.signup.RegisterFragment
@@ -73,8 +77,20 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener{
     }
 
     private fun setSelectedPageData() {
-        duoAdapter.setViewSelected(0, true)
-        supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, HomeFragment()).commit()
+        val sf = AppModule.provideSharedPreferences(this)
+        if (sf.contains("USER_DATA")) {
+            duoAdapter.setViewSelected(0, true)
+            val sp = AppModule.provideSharedPreferences(this)
+            val userData = sp.getString("USER_DATA", "")
+            val paymentSuccess = Gson().fromJson<PaymentSuccess>(userData, PaymentSuccess::class.java)
+            Toast.makeText(this, "Welcome, ${paymentSuccess.fullname}", Toast.LENGTH_SHORT).show()
+            supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, HomeFragment()).commit()
+        }
+        else {
+            duoAdapter.setViewSelected(4, true)
+            binding.bottomNavBar.visibility = View.GONE
+            supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, RegisterFragment()).commit()
+        }
     }
 
     private fun handleMenu() {
@@ -88,7 +104,6 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener{
         duoAdapter = DuoMenuAdapter(menuOptions)
         binding.duoMenuView.adapter = duoAdapter
         binding.duoMenuView.setOnMenuClickListener(this)
-        duoAdapter.setViewSelected(0, true)
 
     }
 
@@ -110,6 +125,7 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener{
                 // TODO handle case for home screen
                 binding.bottomNavBar.visibility = View.VISIBLE
                 binding.pageTitle.text = getString(R.string.title_discover)
+                binding.bottomNavBar.selectedItemId = R.id.home_screen
                 supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, HomeFragment()).commit()
             }
             1 -> {
