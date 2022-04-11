@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import project.gdsc.zealicon22.R
+import project.gdsc.zealicon22.SignupActivity
 import project.gdsc.zealicon22.databinding.FragmentRegisterBinding
 import project.gdsc.zealicon22.databinding.FragmentSecondBinding
 
