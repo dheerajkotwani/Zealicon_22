@@ -2,6 +2,7 @@ package project.gdsc.zealicon22
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import dagger.hilt.android.AndroidEntryPoint
@@ -103,22 +104,27 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
         when (position) {
             0 -> {
                 // TODO handle case for home screen
+                binding.bottomNavBar.visibility = View.VISIBLE
                 supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, HomeFragment()).commit()
             }
             1 -> {
                 // TODO handle case for reach us
+                binding.bottomNavBar.visibility = View.INVISIBLE
                 supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, ReachFragment()).commit()
             }
             2 -> {
                 // TODO handle case for team
+                binding.bottomNavBar.visibility = View.INVISIBLE
                 supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, TeamsFragment()).commit()
             }
             3 -> {
                 // TODO handle case for about
+                binding.bottomNavBar.visibility = View.INVISIBLE
                 binding.mainConstraintLayout.setBackgroundColor(Color.YELLOW)
             }
             4 -> {
                 // TODO added code to navigate to SignupFragment (remove on testing)
+                binding.bottomNavBar.visibility = View.INVISIBLE
                 supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, SignupFragment()).commit()
             }
         }
