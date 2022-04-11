@@ -30,8 +30,7 @@ class Repository @Inject constructor(
 
         if (sp.getBoolean(DATA_STORED, false))
             dao.getAllEvents().collect { res ->
-                if (!res.isNullOrEmpty())
-                    emit(ResultHandler.Success(res))
+                emit(ResultHandler.Success(res))
             }
         else fetchDataFromNetwork().collect {
             if (it is ResultHandler.Success) {

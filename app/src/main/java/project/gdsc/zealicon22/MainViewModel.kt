@@ -7,6 +7,7 @@ import kotlinx.coroutines.launch
 import project.gdsc.zealicon22.models.Events
 import project.gdsc.zealicon22.models.ResultHandler
 import timber.log.Timber
+import java.util.*
 import javax.inject.Inject
 
 /**
@@ -33,16 +34,21 @@ class MainViewModel @Inject constructor(private val repo: Repository) :
     * }
     * */
 
-    /*private*/ val mQuery = MutableLiveData<String?>(null)
+    val upcomingEvents: LiveData<ResultHandler<List<Events>>> = Transformations.map(events) {
+        if (it is ResultHandler.Success)
+            ResultHandler.Success(it.result.filter { i -> i.getDateTime() > Date() })
+        else it
+    }
 
+    private val mQuery = MutableLiveData<String?>(null)
     private val mCategory = MutableLiveData<String?>(null)
 
     val searchedEvents: LiveData<List<Events>> = mQuery.combineWith(events) { q, it ->
-        if (it is ResultHandler.Success && !q.isNullOrBlank())
-            it.result.filter { i ->
-                i.name.contains(q, true)
-            }
-        else listOf()
+            if (it is ResultHandler.Success && !q.isNullOrBlank())
+                it.result.filter { i ->
+                    i.name.contains(q, true)
+                }
+            else listOf()
     }.combineWith(mCategory) { e, c ->
         if (c.isNullOrBlank())
             e.orEmpty()
@@ -50,13 +56,13 @@ class MainViewModel @Inject constructor(private val repo: Repository) :
     }
 
     private val mDay = MutableLiveData<Int?>(null)
-    val selectedDay: LiveData<List<Events>> = mDay.combineWith(events) { day, events ->
+    val selectedDay : LiveData<List<Events>> = mDay.combineWith(events){day, events ->
         if (events is ResultHandler.Success)
             events.result.filter { it.day == day }
         else listOf()
     }
 
-    fun <T, K, R> LiveData<T>.combineWith(
+    private fun <T, K, R> LiveData<T>.combineWith(
         liveData: LiveData<K>,
         block: (T?, K?) -> R
     ): LiveData<R> {
@@ -88,7 +94,7 @@ class MainViewModel @Inject constructor(private val repo: Repository) :
             mQuery.value = query.toString()
     }
 
-    fun selectDay(day: Int) {
+    fun selectDay(day : Int){
         mDay.value = day
     }
 
