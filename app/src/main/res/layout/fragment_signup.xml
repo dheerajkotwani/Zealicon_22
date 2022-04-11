@@ -75,7 +75,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/select_avatar"
-        android:fontFamily="@font/webcomic"
+        android:fontFamily="@font/cartoonist_hand"
         android:textColor="@color/white"
         android:layout_marginStart="16dp"
         android:textSize="18sp"

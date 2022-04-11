@@ -1,24 +1,27 @@
 package project.gdsc.zealicon22
 
-import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import dagger.hilt.android.AndroidEntryPoint
 import nl.psdcompany.duonavigationdrawer.views.DuoMenuView
+import project.gdsc.zealicon22.about.AboutFragment
+import project.gdsc.zealicon22.search_events.SearchEventsFragment
 import project.gdsc.zealicon22.databinding.ActivityMainBinding
 import project.gdsc.zealicon22.home.HomeFragment
 import project.gdsc.zealicon22.myevents.MyEventsFragment
-import project.gdsc.zealicon22.search_events.SearchEventsFragment
+import project.gdsc.zealicon22.reach.ReachFragment
+import project.gdsc.zealicon22.signup.RegisterFragment
 import project.gdsc.zealicon22.signup.SignupFragment
+import project.gdsc.zealicon22.signup.ZealIdFragment
 import project.gdsc.zealicon22.teams.TeamsFragment
 
 /**
  * @author Dheeraj Kotwani on 23/02/22.
  */
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener{
+class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
 
     private lateinit var duoAdapter: DuoMenuAdapter
     private lateinit var binding: ActivityMainBinding
@@ -103,23 +106,33 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener{
         when (position) {
             0 -> {
                 // TODO handle case for home screen
+                binding.bottomNavBar.visibility = View.VISIBLE
+                binding.pageTitle.text = getString(R.string.title_discover)
                 supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, HomeFragment()).commit()
             }
             1 -> {
                 // TODO handle case for reach us
+                binding.bottomNavBar.visibility = View.GONE
+                binding.pageTitle.text = getString(R.string.reach)
                 supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, ReachFragment()).commit()
             }
             2 -> {
                 // TODO handle case for team
+                binding.bottomNavBar.visibility = View.GONE
+                binding.pageTitle.text = getString(R.string.team)
                 supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, TeamsFragment()).commit()
             }
             3 -> {
-                // TODO handle case for about
-                binding.mainConstraintLayout.setBackgroundColor(Color.YELLOW)
+                // handle case for about
+                binding.bottomNavBar.visibility = View.GONE
+                binding.pageTitle.text = getString(R.string.about)
+                supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, AboutFragment()).commit()
             }
             4 -> {
-                // TODO added code to navigate to SignupFragment (remove on testing)
-                startActivity(Intent(applicationContext, SignupActivity::class.java))
+                // navigate to SignupFragment
+                binding.bottomNavBar.visibility = View.GONE
+                binding.pageTitle.text = ""
+                supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, RegisterFragment()).commit()
             }
         }
 
