@@ -11,6 +11,7 @@ import androidx.core.graphics.scaleMatrix
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import project.gdsc.zealicon22.DetailActivity
 import project.gdsc.zealicon22.MainViewModel
@@ -18,7 +19,6 @@ import project.gdsc.zealicon22.R
 import project.gdsc.zealicon22.databinding.FragmentHomeBinding
 import project.gdsc.zealicon22.models.ResultHandler
 import project.gdsc.zealicon22.utils.Loading
-import timber.log.Timber
 
 /**
  * Created by Nakul
@@ -34,8 +34,11 @@ class HomeFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
 
     private val eventsAdapter: UpcomingEventsAdapter by lazy {
-        UpcomingEventsAdapter { _ ->
-//            TODO Open Detailed Event page
+        UpcomingEventsAdapter {
+            startActivity(Intent(requireContext(), DetailActivity::class.java).apply {
+                putExtra("EVENT_DETAIL", Gson().toJson(it).toString())
+                putExtra("fragment_to_show","event_detail")
+            })
         }
     }
 
@@ -78,7 +81,7 @@ class HomeFragment : Fragment() {
         }
         loading.create()
 
-        viewModel.events.observe(viewLifecycleOwner) {
+        viewModel.upcomingEvents.observe(viewLifecycleOwner) {
             when (it) {
                 is ResultHandler.Loading -> {
                     loading.show()

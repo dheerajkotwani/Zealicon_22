@@ -1,5 +1,7 @@
 package project.gdsc.zealicon22.models
 
+import android.annotation.SuppressLint
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.text.SimpleDateFormat
@@ -19,8 +21,8 @@ data class Events(
     val society: String,
     val category: String,
     val prizes: String,
-    val contact: String,
-    val contact_no: String?,
+    @Embedded
+    val contact: Contact?,
     val is_active: Boolean,
     val rules: String,
     @PrimaryKey(autoGenerate = true)
@@ -46,3 +48,8 @@ data class Events(
         return formatter.format(this)
     }
 }
+
+data class Contact(
+    val fullname : String,
+    val contact_no : String
+)

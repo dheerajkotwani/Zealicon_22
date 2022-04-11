@@ -17,8 +17,9 @@ class SearchEventsCategoryAdapter(private val categoryList: List<String>) : Recy
         ItemCategoriesBinding.inflate(LayoutInflater.from(parent.context),parent, false)
     )
 
+    var onItemClick: ((String) -> Unit)? = null
 
-    override fun onBindViewHolder(holder: SearchEventsCategoryAdapter.VH, position: Int) {
+    override fun onBindViewHolder(holder: VH, position: Int) {
         holder.binding.day.text = categoryList[position]
 
         if (position == 1 || position == 4){
@@ -28,6 +29,10 @@ class SearchEventsCategoryAdapter(private val categoryList: List<String>) : Recy
         }
         holder.binding.root.scaleX = 0.9f
         holder.binding.root.scaleY = 0.9f
+
+        holder.itemView.setOnClickListener{
+            onItemClick?.invoke(categoryList[position])
+        }
 
     }
 
