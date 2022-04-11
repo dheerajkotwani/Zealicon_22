@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".signup.ZealIdFragment"
+    android:background="@drawable/app_background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_hey_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/giants"
+            android:text="Hey, Dheeraj"
+            android:textAllCaps="true"
+            android:textSize="36sp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="@color/white"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="36dp">
+
+            <View
+                android:layout_width="40dp"
+                android:layout_height="10dp"
+                android:layout_gravity="center"
+                android:background="@drawable/line"/>
+
+            <TextView
+                android:id="@+id/text_your_zeal_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cartoonist_hand"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:text="This is your Zeal ID:"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintTop_toBottomOf="@id/text_post"
+                app:layout_constraintStart_toEndOf="@id/image_card"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/text_zeal_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/giants"
+            android:textColor="@color/white"
+            android:textSize="26dp"
+            android:text="Zeal-0000"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="16dp"
+            android:textAllCaps="true"
+            android:background="@drawable/zeal_id_bg"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="36dp">
+
+            <View
+                android:layout_width="40dp"
+                android:layout_height="10dp"
+                android:layout_gravity="center"
+                android:background="@drawable/line"/>
+
+            <TextView
+                android:id="@+id/text_collect_coupons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cartoonist_hand"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:text="Collect your coupons from the registration desk:"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintTop_toBottomOf="@id/text_post"
+                app:layout_constraintStart_toEndOf="@id/image_card"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:id="@+id/coupon_glude"
+            android:src="@drawable/coupon_glude"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:id="@+id/coupon_wow"
+            android:src="@drawable/coupon_wow"/>
+
+    </LinearLayout>
+
+
+</androidx.core.widget.NestedScrollView>
