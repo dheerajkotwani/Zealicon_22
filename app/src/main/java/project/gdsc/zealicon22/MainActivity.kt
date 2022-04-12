@@ -1,5 +1,6 @@
 package project.gdsc.zealicon22
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -17,6 +18,8 @@ import project.gdsc.zealicon22.myevents.MyEventsFragment
 import project.gdsc.zealicon22.reach.ReachFragment
 import project.gdsc.zealicon22.search_events.SearchEventsFragment
 import project.gdsc.zealicon22.signup.RegisterFragment
+import project.gdsc.zealicon22.signup.SignupFragment
+import project.gdsc.zealicon22.signup.ZealIdFragment
 import project.gdsc.zealicon22.teams.TeamsFragment
 
 /**
@@ -35,10 +38,32 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
         setContentView(binding.root)
 
         window.statusBarColor = ContextCompat.getColor(this, R.color.black)
+
+        handleLoginUserInfo()
         handleMenu()
         setupBottomNav()
         setSelectedPageData()
         setupClickListener()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        handleLoginUserInfo()
+    }
+
+    private fun handleLoginUserInfo() {
+        val sp = AppModule.provideSharedPreferences(this)
+        val userInfo = Gson().fromJson(sp.getString("USER_DATA", ""), PaymentSuccess::class.java)
+
+        if (sp.contains("USER_DATA") && userInfo.zeal_id != null) {
+            binding.avatar.root.visibility = View.VISIBLE
+            binding.avatar.root.setOnClickListener {
+                startActivity(Intent(this, SignupActivity::class.java))
+            }
+        }
+        else {
+            binding.avatar.root.visibility = View.GONE
+        }
     }
 
     private fun setupBottomNav() {
@@ -154,8 +179,19 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
                 // navigate to SignupFragment
                 binding.bottomNavBar.visibility = View.GONE
                 binding.pageTitle.text = ""
-                supportFragmentManager.beginTransaction()
-                    .replace(binding.mainFrame.id, RegisterFragment()).commit()
+                val sp = AppModule.provideSharedPreferences(this)
+                val userInfo = Gson().fromJson(sp.getString("USER_DATA", ""), PaymentSuccess::class.java)
+
+                if (sp.contains("USER_DATA") && userInfo.zeal_id != null) {
+                    supportFragmentManager.beginTransaction().replace(
+                        binding.mainFrame.id, ZealIdFragment()
+                    ).commit()
+                }
+                else {
+                    supportFragmentManager.beginTransaction()
+                        .replace(binding.mainFrame.id, RegisterFragment()).commit()
+                }
+
             }
         }
 

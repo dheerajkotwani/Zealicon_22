@@ -7,15 +7,20 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
+import com.google.gson.Gson
 import com.razorpay.PaymentData
 import com.razorpay.PaymentResultWithDataListener
 import dagger.hilt.android.AndroidEntryPoint
 import project.gdsc.zealicon22.databinding.ActivitySignupBinding
+import project.gdsc.zealicon22.di.AppModule
 import project.gdsc.zealicon22.interfaces.UpdateFragmentListener
 import project.gdsc.zealicon22.models.PaymentReceipt
+import project.gdsc.zealicon22.models.PaymentSuccess
 import project.gdsc.zealicon22.models.ResultHandler
 import project.gdsc.zealicon22.signup.SignupFragment
+import project.gdsc.zealicon22.signup.ZealIdFragment
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -28,11 +33,23 @@ class SignupActivity : AppCompatActivity(), PaymentResultWithDataListener, Updat
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportFragmentManager.beginTransaction().replace(
-            binding.signupFrame.id, SignupFragment(
-                this
-            )
-        ).commit()
+
+        val sp = AppModule.provideSharedPreferences(this)
+        val userInfo = Gson().fromJson(sp.getString("USER_DATA", ""), PaymentSuccess::class.java)
+
+        if (sp.contains("USER_DATA") && userInfo.zeal_id != null) {
+            supportFragmentManager.beginTransaction().replace(
+                binding.signupFrame.id, ZealIdFragment()
+            ).commit()
+        }
+        else {
+            supportFragmentManager.beginTransaction().replace(
+                binding.signupFrame.id, SignupFragment(
+                    this
+                )
+            ).commit()
+        }
+
         binding.backBtn.setOnClickListener { onBackPressed() }
 
     }
