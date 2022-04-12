@@ -41,4 +41,11 @@ class RegisterViewModel @Inject constructor(private val repo: Repository) :
             mSubmitReceipt.postValue(it)
         }
     }
+
+    fun findZealId(q: String) = viewModelScope.launch {
+        mSubmitReceipt.postValue(ResultHandler.Loading)
+        repo.findZealId(q).collect {
+            mSubmitReceipt.postValue(it)
+        }
+    }
 }

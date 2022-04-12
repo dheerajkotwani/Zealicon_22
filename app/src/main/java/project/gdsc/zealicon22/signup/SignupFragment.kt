@@ -117,6 +117,7 @@ class SignupFragment(
                     Timber.d("SuccessRequest: ${it.result}")
                     val sp = AppModule.provideSharedPreferences(requireContext())
                     sp.edit().putString("USER_DATA", Gson().toJson(it.result)).apply()
+                    sp.edit().putString("ZEAL_ID", it.result.zeal_id).apply()
 
                     Timber.d("SuccessRequest SharedPref: ${sp.getString("USER_DATA", "")}")
                     updateFragmentListener.updateFragment(ZealIdFragment())

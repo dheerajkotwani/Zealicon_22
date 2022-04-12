@@ -91,7 +91,20 @@
             android:src="@drawable/ic_bt_register_now"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:visibility="invisible"
+            android:visibility="gone"
+            android:id="@+id/registerButton"
+            app:layout_constraintTop_toBottomOf="@id/view_above_image"
+            app:layout_constraintBottom_toTopOf="@id/view_below_image"/>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_bt_register_now"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="gone"
+            android:indeterminateTint="@color/red"
+            android:id="@+id/loading"
             app:layout_constraintTop_toBottomOf="@id/view_above_image"
             app:layout_constraintBottom_toTopOf="@id/view_below_image"/>
 

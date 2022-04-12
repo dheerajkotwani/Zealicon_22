@@ -1,10 +1,7 @@
 package project.gdsc.zealicon22.network
 
 import okhttp3.RequestBody
-import project.gdsc.zealicon22.models.Events
-import project.gdsc.zealicon22.models.PaymentResponse
-import project.gdsc.zealicon22.models.PaymentReceipt
-import project.gdsc.zealicon22.models.PaymentSuccess
+import project.gdsc.zealicon22.models.*
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -24,4 +21,10 @@ interface NetworkService {
     suspend fun submitReceipt(
         @Body paymentReceipt: PaymentReceipt
     ): Response<PaymentSuccess>
+
+    @POST("/events/registration/")
+    suspend fun registerForEvent(@Body registerBody: RegisterBody): Response<Any>
+
+    @GET("/accounts/users/")
+    suspend fun findZealId(@Query("query") q: String): Response<PaymentSuccess>
 }
