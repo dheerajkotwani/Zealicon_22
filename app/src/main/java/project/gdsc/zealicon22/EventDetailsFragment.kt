@@ -17,9 +17,10 @@ import project.gdsc.zealicon22.databinding.FragmentEventDetailsBinding
 import project.gdsc.zealicon22.databinding.ItemEventDetailUnitBinding
 import project.gdsc.zealicon22.models.Events
 import project.gdsc.zealicon22.models.ResultHandler
-import project.gdsc.zealicon22.models.formatTo
 import timber.log.Timber
 import javax.inject.Inject
+import project.gdsc.zealicon22.utils.formatTo
+import project.gdsc.zealicon22.utils.getDateTime
 
 @AndroidEntryPoint
 class EventDetailsFragment : Fragment() {
@@ -52,7 +53,7 @@ class EventDetailsFragment : Fragment() {
         binding.eventSociety.text = events.society
         binding.eventCalendar.apply {
             setIcon(this, R.drawable.ic_calendar)
-            eventUnitInfo.text = events.getDateTime().formatTo("d MMM , YYYY")
+            eventUnitInfo.text = getDateTime(events.datetime).formatTo("d MMM , YYYY")
         }
         binding.eventLocation.apply {
             setIcon(this, R.drawable.ic_location)
@@ -60,7 +61,7 @@ class EventDetailsFragment : Fragment() {
         }
         binding.eventClock.apply {
             setIcon(this, R.drawable.ic_clock)
-            eventUnitInfo.text = events.getDateTime().formatTo("HH:mm") + " HOURS"
+            eventUnitInfo.text = getDateTime(events.datetime).formatTo("HH:mm") + " HOURS"
         }
         binding.eventPhone.apply {
             setIcon(this, R.drawable.ic_phone)

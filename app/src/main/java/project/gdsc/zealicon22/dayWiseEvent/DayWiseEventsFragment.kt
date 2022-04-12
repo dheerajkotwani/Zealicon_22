@@ -78,7 +78,7 @@ class DayWiseEventsFragment : Fragment() {
     private fun setData(list: List<Events>) {
         var dayCount : String? = null
         day = viewModel.mDay.value
-        val categories = getNoOfCategories(list)
+        val categories = getCategories(list)
         when(day){
             1 -> {
                 dayCount = getString(R.string.day_one)
@@ -96,11 +96,19 @@ class DayWiseEventsFragment : Fragment() {
                     scaleMatrix(sx = 0.8f, sy = 0.8f)
                 }
             }
-            else -> {
+            3 -> {
                 dayCount = getString(R.string.day_three)
                 binding.dayOne.apply {
                     image.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.comic3, null))
                     day.text = getString(R.string.day_three)
+                    scaleMatrix(sx = 0.8f, sy = 0.8f)
+                }
+            }
+            else -> {
+                dayCount = getString(R.string.day_four)
+                binding.dayOne.apply {
+                    image.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.comic4, null))
+                    day.text = getString(R.string.day_four)
                     scaleMatrix(sx = 0.8f, sy = 0.8f)
                 }
             }
@@ -109,10 +117,10 @@ class DayWiseEventsFragment : Fragment() {
         if (!list.isNullOrEmpty()) {
             binding.eventDate.text = getDateTime(list[0].datetime).formatTo("dd MMM yyyy")
         }
-        binding.comicCounts.text = "${list.size} COMICS • $categories CATEGORIES"
+        binding.comicCounts.text = "${list.size} COMICS • ${categories.size} CATEGORIES"
     }
 
-    private fun getNoOfCategories(list: List<Events>): Int {
+    private fun getCategories(list: List<Events>): ArrayList<String> {
         val categories : ArrayList<String> = arrayListOf()
         for (event in list){
             if (categories.contains(event.category))
@@ -120,7 +128,7 @@ class DayWiseEventsFragment : Fragment() {
             else
                 categories.add(event.category)
         }
-        return categories.size
+        return categories
     }
 
 
