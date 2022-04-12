@@ -83,4 +83,20 @@ class Repository @Inject constructor(
             emit(ResultHandler.Success(api.registerForEvent(body).body()!!))
         }.getOrElse { emit(ResultHandler.Failure(it)) }
     }.flowOn(Dispatchers.IO)
+
+    suspend fun validateUser(
+        admission_no: String,
+        email: String,
+        fullname: String,
+        contact_no: String,
+        college: String
+    ) = flow {
+        runCatching {
+            api.validateUser(admission_no, email, fullname, contact_no, college)
+                emit(ResultHandler.Success(api.validateUser(admission_no, email, fullname, contact_no, college).body()!!))
+        }.getOrElse {
+            emit(ResultHandler.Failure(it))
+        }
+    }.flowOn(Dispatchers.IO)
+
 }

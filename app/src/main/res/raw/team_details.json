@@ -3,41 +3,168 @@
     {
       "management": [
         {
-          "name": "Dheeraj Kotwani",
-          "position": "Android Developer",
-          "image": "url"
+          "name": "Dr. Mamatha T G",
+          "position": "Principal",
+          "image": "https://jssaten.ac.in//assets/images/governance/HOD.png"
         },
         {
-          "name": "Karan Verma",
-          "position": "Android Developer",
-          "image": "url"
+          "name": "Dr. Prashant Chauhan",
+          "position": "Convener",
+          "image": "https://officialjssatenpc.com/about/images/prashant.jpeg"
         }
       ],
       "core": [
         {
-          "name": "Dheeraj Kotwani",
-          "position": "Android Developer",
-          "image": "url"
+          "name": "Prajwal S S",
+          "position": "Fest Secretary",
+          "image": "https://firebasestorage.googleapis.com/v0/b/zealicon22-3b1b9.appspot.com/o/prajwal.png?alt=media&token=1704b594-fe35-4844-abae-ef7b3fe90832"
         },
         {
-          "name": "Karan Verma",
-          "position": "Android Developer",
-          "image": "url"
+          "name": "Nitin",
+          "position": "Co-Fest Secretary",
+          "image": "https://firebasestorage.googleapis.com/v0/b/zealicon22-3b1b9.appspot.com/o/nitin.png?alt=media&token=cd48638a-3e20-41f5-8061-273ed0ce7eab"
+        },
+        {
+          "name": "Dheeraj Kotwani",
+          "position": "Technical Head",
+          "image": "https://firebasestorage.googleapis.com/v0/b/zealicon22-3b1b9.appspot.com/o/dheeraj.png?alt=media&token=73ea09c8-4696-4984-bb4a-25114fceaaf4"
+        },
+        {
+          "name": "Varun",
+          "position": "Resources Head",
+          "image": "https://firebasestorage.googleapis.com/v0/b/zealicon22-3b1b9.appspot.com/o/varun.png?alt=media&token=6a6aec60-b5cb-4955-80cb-ca52eccb8996"
+        },
+        {
+          "name": "Prateek",
+          "position": "Security Head",
+          "image": "https://firebasestorage.googleapis.com/v0/b/zealicon22-3b1b9.appspot.com/o/prateek.png?alt=media&token=fffd8804-7d73-4dfe-ac6b-2a4fc7363c09"
+        },
+        {
+          "name": "Abhay Pandey",
+          "position": "Co-Security Head",
+          "image": "https://firebasestorage.googleapis.com/v0/b/zealicon22-3b1b9.appspot.com/o/abhaypandey.png?alt=media&token=6252a7fe-8355-4a11-968f-0ecb2a9b2203"
+        },
+        {
+          "name": "Utkarsh Panwar",
+          "position": "Management Head",
+          "image": "https://firebasestorage.googleapis.com/v0/b/zealicon22-3b1b9.appspot.com/o/utkarsh.png?alt=media&token=123d297b-dba3-4d5a-bdf7-a9e76692d5b1"
+        },
+        {
+          "name": "Ayushmaan Tripathi",
+          "position": "Management Head",
+          "image": "https://firebasestorage.googleapis.com/v0/b/zealicon22-3b1b9.appspot.com/o/ayushmaan.png?alt=media&token=737a1622-c60c-4c15-a8d7-cc99a4f01ba3"
+        },
+        {
+          "name": "Divisha",
+          "position": "Creative Head",
+          "image": "https://firebasestorage.googleapis.com/v0/b/zealicon22-3b1b9.appspot.com/o/divisha.png?alt=media&token=c06c5cea-8874-4270-8484-d14412edffb0"
+        },
+        {
+          "name": "Devansh Agarwal",
+          "position": "Cultural Head",
+          "image": "https://firebasestorage.googleapis.com/v0/b/zealicon22-3b1b9.appspot.com/o/devansh.png?alt=media&token=ac4d6d89-ff61-4be9-aa24-23982c8260f8"
+        },
+        {
+          "name": "Shashank Rathor",
+          "position": "Marketing Head",
+          "image": "https://firebasestorage.googleapis.com/v0/b/zealicon22-3b1b9.appspot.com/o/shashank.png?alt=media&token=0f981072-915c-4bde-a28f-071a3671f5ee"
+        },
+        {
+          "name": "Hemant",
+          "position": "Photography Head",
+          "image": "https://firebasestorage.googleapis.com/v0/b/zealicon22-3b1b9.appspot.com/o/hemant.png?alt=media&token=46bf4745-8660-4625-811e-4e1d11511a57"
+        },
+        {
+          "name": "Prince",
+          "position": "Merchandise Head",
+          "image": "https://firebasestorage.googleapis.com/v0/b/zealicon22-3b1b9.appspot.com/o/prince.png?alt=media&token=2d83005e-85e8-4307-b947-f1642794f54e"
+        },
+        {
+          "name": "Aditya",
+          "position": "Merchandise Head",
+          "image": "https://firebasestorage.googleapis.com/v0/b/zealicon22-3b1b9.appspot.com/o/aditya.png?alt=media&token=9f1d439e-8804-42ac-b663-3234220dbe8f"
+        },
+        {
+          "name": "Ajitesh Tripathi",
+          "position": "Artist Head",
+          "image": "https://firebasestorage.googleapis.com/v0/b/zealicon22-3b1b9.appspot.com/o/ajitesh.png?alt=media&token=755d36e0-c110-49f0-9dfc-a6064ffd946c"
+        },
+        {
+          "name": "Abhay Singh Bhadauria",
+          "position": "Finanace Head",
+          "image": "https://firebasestorage.googleapis.com/v0/b/zealicon22-3b1b9.appspot.com/o/abhaysingh.png?alt=media&token=75608d90-6ff1-4dc4-ae77-d814b2c01282"
+        },
+        {
+          "name": "Priyanshu Singh",
+          "position": "Production Head",
+          "image": "https://firebasestorage.googleapis.com/v0/b/zealicon22-3b1b9.appspot.com/o/priyanshu.png?alt=media&token=6f179863-43d8-4e8f-a2fd-48f8d04da429"
+        },
+        {
+          "name": "Ananya Singh",
+          "position": "Sponsorship Head",
+          "image": "https://firebasestorage.googleapis.com/v0/b/zealicon22-3b1b9.appspot.com/o/ananya.png?alt=media&token=dda2807e-5989-4a93-93fb-9eeb72118482"
+        },
+        {
+          "name": "Arjit Singh",
+          "position": "Sponsorship Head",
+          "image": "https://firebasestorage.googleapis.com/v0/b/zealicon22-3b1b9.appspot.com/o/arjit.png?alt=media&token=2652e135-c3b2-463d-a520-95b4e69ebdbc"
+        }
+      ],
+      "technical": [
+        {
+          "name": "Nakul Sharma",
+          "position": "App Developer",
+          "image": "https://res.cloudinary.com/de4by5q8o/image/upload/v1629571201/nakul_tdqcwd.jpg"
         },
         {
           "name": "Anuraj Jain",
-          "position": "Android Developer",
-          "image": "url"
+          "position": "App Developer",
+          "image": "https://res.cloudinary.com/de4by5q8o/image/upload/v1628885686/anuraj_uia5qm.jpg"
         },
         {
-          "name": "Nakul Sharma",
-          "position": "Android Developer",
-          "image": "url"
+          "name": "Karan Verma",
+          "position": "App Developer",
+          "image": "https://res.cloudinary.com/de4by5q8o/image/upload/v1628879480/karan_e9xa0v.jpg"
         },
         {
           "name": "Dhruv Baliyan",
-          "position": "Android Developer",
-          "image": "url"
+          "position": "App Developer",
+          "image": "https://res.cloudinary.com/dsc-jss/image/upload/v1617891853/Me_-_Dhruv_Baliyan_ouqxbp.jpg"
+        },
+        {
+          "name": "Ojuswi Rastogi",
+          "position": "Backend Developer",
+          "image": "https://hackncs.com/img/team/ojus.jpg"
+        },
+        {
+          "name": "Paarth Agarwal",
+          "position": "Web Developer",
+          "image": "https://hackncs.com/img/team/paarth.jpg"
+        },
+        {
+          "name": "Ayush Kumar",
+          "position": "Web Developer",
+          "image": "https://hackncs.com/img/team/ayush.jpg"
+        },
+        {
+          "name": "Anurag Srivastava",
+          "position": "Web Developer",
+          "image": "https://hackncs.com/img/team/anurag.png"
+        },
+        {
+          "name": "Shubhransh",
+          "position": "Designer",
+          "image": "https://res.cloudinary.com/de4by5q8o/image/upload/v1628878134/shubhransh_imbfzd.png"
+        },
+        {
+          "name": "Shrey Jain",
+          "position": "Web Developer",
+          "image": "https://hackncs.com/img/team/shrey.jpg"
+        },
+        {
+          "name": "Vaibhav Shukla",
+          "position": "Designer",
+          "image": "https://hackncs.com/img/team/vaibhav.jpg"
         }
       ]
     }

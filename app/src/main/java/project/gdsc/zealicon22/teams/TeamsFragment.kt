@@ -20,8 +20,10 @@ class TeamsFragment : Fragment() {
     private var _binding: FragmentTeamsBinding? = null
     private val binding get() = _binding!!
 
-    private var managementTeamAdapter : ManagementTeamAdapter?= null
-    private var coreTeamAdapter : CoreTeamAdapter?= null
+//    private var managementTeamAdapter : ManagementTeamAdapter?= null
+    private var managementTeamAdapter : TeamAdapter?= null
+    private var coreTeamAdapter : TeamAdapter?= null
+    private var techTeamAdapter : TeamAdapter?= null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,16 +40,22 @@ class TeamsFragment : Fragment() {
         val team = resources.openRawResource(R.raw.team_details).bufferedReader().use { it.readText() }
         val teamList : TeamDetails = Gson().fromJson(team, TeamDetails::class.java)
 
-        managementTeamAdapter = ManagementTeamAdapter(teamList.teamsModal.management)
+        managementTeamAdapter = TeamAdapter(teamList.teamsModal.management)
         binding.managementRecycler.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
             adapter = managementTeamAdapter
         }
 
-        coreTeamAdapter = CoreTeamAdapter(teamList.teamsModal.core)
+        coreTeamAdapter = TeamAdapter(teamList.teamsModal.core)
         binding.coreTeamRecycler.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
             adapter = coreTeamAdapter
+        }
+
+        techTeamAdapter = TeamAdapter(teamList.teamsModal.technical)
+        binding.techTeamRecycler.apply {
+            layoutManager = GridLayoutManager(requireContext(), 2)
+            adapter = techTeamAdapter
         }
 
     }

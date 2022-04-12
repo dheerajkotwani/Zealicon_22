@@ -27,4 +27,13 @@ interface NetworkService {
 
     @GET("/accounts/users/")
     suspend fun findZealId(@Query("query") q: String): Response<PaymentSuccess>
+
+    @GET("/accounts/validate_user_details")
+    suspend fun validateUser(
+        @Query("admission_no") admission_no: String,
+        @Query("email") email: String,
+        @Query("fullname") fullname: String,
+        @Query("contact_no") contact_no: String,
+        @Query("college") college: String,
+    ): Response<ValidateResponse>
 }

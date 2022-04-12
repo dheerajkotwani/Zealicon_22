@@ -38,6 +38,9 @@ class FindZealIdDialog(context: Context,
 
 
     private fun setListener() {
+
+//        viewModel.
+
         viewModel.submitReceipt.observe(viewLifecycleOwner){
 
             when (it) {
@@ -49,8 +52,10 @@ class FindZealIdDialog(context: Context,
                     val sp = AppModule.provideSharedPreferences(context)
 
                     if (it.result.zeal_id != null) {
-                        sp.edit().putString("USER_DATA", Gson().toJson(it.result)).apply()
-                        sp.edit().putString("ZEAL_ID", it.result.zeal_id).apply()
+                        sp.edit()
+                            .putString("USER_DATA", Gson().toJson(it.result))
+                            .putString("ZEAL_ID", it.result.zeal_id)
+                            .apply()
 
                         Timber.d("SuccessRequest SharedPref: ${sp.getString("USER_DATA", "")}")
                         dismiss()
@@ -68,7 +73,7 @@ class FindZealIdDialog(context: Context,
                     //open ZealId screen after successful registration
                 }
                 is ResultHandler.Failure -> {
-                    Timber.e("FailureRequest kk: ${it.message}")
+                    Timber.e("FailureRequest: ${it.message}")
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 }
             }
@@ -81,7 +86,7 @@ class FindZealIdDialog(context: Context,
                 Toast.makeText(context, "Enter something to proceed", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            viewModel.findZealId(binding.input.text.toString())
+            viewModel.findZealId(binding.input.text.toString().capitalize())
         }
     }
 }
