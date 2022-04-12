@@ -25,6 +25,7 @@ import project.gdsc.zealicon22.SignupActivity
 import project.gdsc.zealicon22.databinding.FragmentSignupBinding
 import project.gdsc.zealicon22.databinding.ItemAvatarBinding
 import project.gdsc.zealicon22.di.AppModule
+import project.gdsc.zealicon22.interfaces.UpdateFragmentListener
 import project.gdsc.zealicon22.models.PaymentReceipt
 import project.gdsc.zealicon22.models.PaymentResponse
 import project.gdsc.zealicon22.models.PaymentSuccess
@@ -36,7 +37,9 @@ import timber.log.Timber
 
 
 @AndroidEntryPoint
-class SignupFragment : Fragment() {
+class SignupFragment(
+    val updateFragmentListener: UpdateFragmentListener
+) : Fragment() {
 
     private var _binding: FragmentSignupBinding? = null
     private val binding get() = _binding!!
@@ -117,7 +120,7 @@ class SignupFragment : Fragment() {
                     sp.edit().putString("ZEAL_ID", it.result.zeal_id).apply()
 
                     Timber.d("SuccessRequest SharedPref: ${sp.getString("USER_DATA", "")}")
-
+                    updateFragmentListener.updateFragment(ZealIdFragment())
                     //open ZealId screen after successful registration
                 }
                 is ResultHandler.Failure -> {

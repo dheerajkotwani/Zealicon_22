@@ -5,9 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.gson.Gson
 import project.gdsc.zealicon22.R
 import project.gdsc.zealicon22.databinding.FragmentReachBinding
 import project.gdsc.zealicon22.databinding.FragmentZealIdBinding
+import project.gdsc.zealicon22.di.AppModule
+import project.gdsc.zealicon22.models.PaymentSuccess
 
 class ZealIdFragment : Fragment() {
 
@@ -26,7 +29,13 @@ class ZealIdFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val sp = AppModule.provideSharedPreferences(requireContext())
+        val userData = sp.getString("USER_DATA", "")
 
+        val paymentSuccess = Gson().fromJson<PaymentSuccess>(userData, PaymentSuccess::class.java)
+
+        binding.textZealId.text = paymentSuccess.zeal_id
+        binding.textHeyUser.text = "Hey, ${paymentSuccess.fullname}"
 
     }
 
