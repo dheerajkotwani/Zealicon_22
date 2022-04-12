@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
             }
         }
         else {
-            binding.avatar.root.visibility = View.GONE
+            binding.avatar.root.visibility = View.INVISIBLE
         }
     }
 
