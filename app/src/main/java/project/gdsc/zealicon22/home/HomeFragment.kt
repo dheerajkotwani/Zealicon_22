@@ -17,6 +17,7 @@ import project.gdsc.zealicon22.DetailActivity
 import project.gdsc.zealicon22.MainViewModel
 import project.gdsc.zealicon22.R
 import project.gdsc.zealicon22.databinding.FragmentHomeBinding
+import project.gdsc.zealicon22.dayWiseEvent.DayWiseEventsFragment
 import project.gdsc.zealicon22.models.ResultHandler
 import project.gdsc.zealicon22.utils.Loading
 import timber.log.Timber
@@ -106,51 +107,45 @@ class HomeFragment : Fragment() {
             image.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.comic1, null))
             day.text = getString(R.string.day_one)
             scaleMatrix(sx = 0.8f, sy = 0.8f)
-            card.setOnClickListener { navigateToDetailActivity(1) }
         }
         binding.dayTwo.apply {
             root.rotation = 1f
             image.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.comic2, null))
             day.text = getString(R.string.day_two)
             scaleMatrix(sx = 0.8f, sy = 0.8f)
-            card.setOnClickListener { navigateToDetailActivity(2) }
         }
         binding.dayThree.apply {
             root.rotation = 4f
             image.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.comic3, null))
             day.text = getString(R.string.day_three)
             scaleMatrix(sx = 0.8f, sy = 0.8f)
-            card.setOnClickListener { navigateToDetailActivity(3) }
         }
         binding.dayFour.apply {
             root.rotation = -4f
             image.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.comic4, null))
             day.text = getString(R.string.day_four)
             scaleMatrix(sx = 0.8f, sy = 0.8f)
-            card.setOnClickListener { navigateToDetailActivity(4) }
         }
-    }
-
-    private fun navigateToDetailActivity(day: Int) {
-
-        val intent = Intent(requireActivity(), DetailActivity::class.java).apply {
-            putExtra("fragment_to_show", "event_day")
-            putExtra("day_num", day)
-        }
-        startActivity(intent)
-
     }
 
     private fun setClickListener() {
         binding.dayOne.root.setOnClickListener {
             viewModel.selectDay(1)
+            navigateToEventWiseFragment()
         }
         binding.dayTwo.root.setOnClickListener {
             viewModel.selectDay(2)
+            navigateToEventWiseFragment()
         }
         binding.dayThree.root.setOnClickListener {
             viewModel.selectDay(3)
+            navigateToEventWiseFragment()
         }
+    }
+
+    private fun navigateToEventWiseFragment() {
+        activity?.supportFragmentManager?.popBackStack()
+        activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.mainFrame, DayWiseEventsFragment())?.addToBackStack("Home")?.commit()
     }
 
     override fun onDestroyView() {

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@drawable/app_background"
+    android:fillViewport="true"
     tools:context=".dayWiseEvent.DayWiseEventsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,12 +16,13 @@
         <include
             android:id="@+id/day_one"
             layout="@layout/item_event_day"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="36dp"
+            android:layout_width="140dp"
+            android:layout_height="160dp"
+            android:layout_marginStart="12dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
-            app:layout_constraintDimensionRatio="5:6"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toEndOf="@id/day_count"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -50,7 +52,19 @@
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="@id/day_count"
             app:layout_constraintTop_toBottomOf="@id/day_count"
-            tools:text="26 Apr, 2o22" />
+            tools:text="26 Apr, 2022" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/eventType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/cartoonist_hand"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@id/day_count"
+            app:layout_constraintTop_toBottomOf="@id/eventDate"
+            tools:text="Mechavoltz " />
 
         <LinearLayout
             android:id="@+id/partition"

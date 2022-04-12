@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/black"
+    android:background="@drawable/app_background"
     tools:context=".myevents.MyEventsFragment">
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -59,7 +59,7 @@
         android:text="@string/no_events"
         android:fontFamily="@font/cartoonist_hand"
         android:textSize="18sp"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintTop_toBottomOf="@id/my_events"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
