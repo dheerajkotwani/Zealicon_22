@@ -72,7 +72,6 @@ class RegisterFragment(
     override fun onResume() {
         super.onResume()
         val sp = AppModule.provideSharedPreferences(requireContext())
-
         val userInfo = Gson().fromJson<PaymentSuccess>(sp.getString("USER_DATA", ""), PaymentSuccess::class.java)
         if (userInfo !=  null && userInfo.zeal_id != null) {
             childFragmentManager.beginTransaction().add(ZealIdFragment(), "ZealIdFragment").commit()
