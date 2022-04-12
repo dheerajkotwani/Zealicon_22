@@ -125,7 +125,7 @@
                 <include
                     android:id="@+id/event_calendar"
                     layout="@layout/item_event_detail_unit"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="28dp"
                     android:layout_weight="1"/>
@@ -133,7 +133,7 @@
                 <include
                     android:id="@+id/event_location"
                     layout="@layout/item_event_detail_unit"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"/>
             </androidx.appcompat.widget.LinearLayoutCompat>
@@ -146,7 +146,7 @@
                 <include
                     android:id="@+id/event_clock"
                     layout="@layout/item_event_detail_unit"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="28dp"
                     android:layout_weight="1"/>
@@ -154,7 +154,7 @@
                 <include
                     android:id="@+id/event_phone"
                     layout="@layout/item_event_detail_unit"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"/>
             </androidx.appcompat.widget.LinearLayoutCompat>
@@ -193,6 +193,7 @@
             android:text="@string/example_event_info"
             android:fontFamily="@font/cartoonist_hand"
             android:lineSpacingExtra="2dp"
+            android:textSize="16sp"
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -263,7 +264,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/prize_img"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="12dp"
             android:fontFamily="@font/cartoonist_hand"
             android:lineSpacingExtra="2dp"
             android:textColor="@color/white"
@@ -300,11 +301,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/contact_img"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="12dp"
             android:fontFamily="@font/cartoonist_hand"
             android:lineSpacingExtra="12dp"
-            android:textColor="@color/white"
             android:textSize="16dp"
+            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginHorizontal="28dp"/>
