@@ -7,7 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import project.gdsc.zealicon22.R
+import project.gdsc.zealicon22.RegisterViewModel
+import project.gdsc.zealicon22.SignupActivity
 import project.gdsc.zealicon22.databinding.FragmentRegisterBinding
 import project.gdsc.zealicon22.databinding.FragmentSecondBinding
 
@@ -18,6 +21,9 @@ class RegisterFragment : Fragment() {
 
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel by activityViewModels<RegisterViewModel>()
+    private val dialog =  FindZealIdDialog(requireContext(), viewModel).apply { create() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,7 +49,7 @@ class RegisterFragment : Fragment() {
         }
 
         binding.cardSearch.root.setOnClickListener {
-
+            dialog.show()
         }
 
     }

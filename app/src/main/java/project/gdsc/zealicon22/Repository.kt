@@ -10,6 +10,7 @@ import okhttp3.RequestBody
 import project.gdsc.zealicon22.database.EventsDao
 import project.gdsc.zealicon22.models.Events
 import project.gdsc.zealicon22.models.PaymentReceipt
+import project.gdsc.zealicon22.models.RegisterBody
 import project.gdsc.zealicon22.models.ResultHandler
 import project.gdsc.zealicon22.network.NetworkService
 import timber.log.Timber
@@ -67,13 +68,19 @@ class Repository @Inject constructor(
         }.getOrElse { emit(ResultHandler.Failure(it)) }
     }.flowOn((Dispatchers.IO))
 
+    suspend fun findZealId(q: String) = flow {
+        runCatching {
+            emit(ResultHandler.Success(api.findZealId(q).body()!!))
+        }.getOrElse { emit(ResultHandler.Failure(it)) }
+    }.flowOn((Dispatchers.IO))
+
     private suspend fun saveEvents(list: List<Events>) {
         dao.saveEvents(list)
     }
 
-    suspend fun registerForEvent() = flow {
+    suspend fun registerForEvent(body: RegisterBody) = flow {
         runCatching {
-            emit(ResultHandler.Success(api.getEvents().body()!!))
+            emit(ResultHandler.Success(api.registerForEvent(body).body()!!))
         }.getOrElse { emit(ResultHandler.Failure(it)) }
     }.flowOn(Dispatchers.IO)
 }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -13,6 +14,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import project.gdsc.zealicon22.databinding.FragmentEventDetailsBinding
 import project.gdsc.zealicon22.databinding.ItemEventDetailUnitBinding
 import project.gdsc.zealicon22.models.Events
+import project.gdsc.zealicon22.models.ResultHandler
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -23,7 +26,7 @@ class EventDetailsFragment : Fragment() {
 
     @Inject lateinit var sp: SharedPreferences
 
-    private val viewModel by activityViewModels<MainViewModel>()
+    private val viewModel by activityViewModels<EventViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -74,7 +77,28 @@ class EventDetailsFragment : Fragment() {
             binding.registerButton.apply {
                 visibility = View.VISIBLE
                 setOnClickListener {
+                    viewModel.registerForEvent(events.id.toString())
+                }
+            }
+        }
 
+        viewModel.registration.observe(viewLifecycleOwner) {
+            when(it) {
+                is ResultHandler.Loading -> {
+                    binding.registerButton.visibility = View.GONE
+                    binding.loading.visibility = View.VISIBLE
+                }
+                is ResultHandler.Failure -> {
+                    binding.registerButton.visibility = View.VISIBLE
+                    binding.loading.visibility = View.GONE
+                    Toast.makeText(requireContext(), "Oops! Something went wrong.", Toast.LENGTH_SHORT).show()
+                    Timber.e("RequestFailure: ${it.message}")
+                }
+                is ResultHandler.Success -> {
+                    binding.registerButton.visibility = View.GONE
+                    binding.loading.visibility = View.GONE
+                    Toast.makeText(requireContext(), "Registered successfully!", Toast.LENGTH_SHORT).show()
+                    sp.edit().putBoolean("EventId:${events.id}",true).apply()
                 }
             }
         }
