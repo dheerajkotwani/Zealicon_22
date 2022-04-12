@@ -9,6 +9,10 @@ import kotlinx.coroutines.launch
 import project.gdsc.zealicon22.models.Events
 import project.gdsc.zealicon22.models.RegisterBody
 import project.gdsc.zealicon22.models.ResultHandler
+import project.gdsc.zealicon22.utils.formatTo
+import project.gdsc.zealicon22.utils.getDateTime
+import timber.log.Timber
+import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
@@ -37,7 +41,7 @@ class MainViewModel @Inject constructor(private val repo: Repository) : ViewMode
 
     val upcomingEvents: LiveData<ResultHandler<List<Events>>> = Transformations.map(events) {
         if (it is ResultHandler.Success)
-            ResultHandler.Success(it.result.filter { i -> i.getDateTime() > Date() })
+            ResultHandler.Success(it.result.filter { i -> getDateTime(i.datetime) > Date() })
         else it
     }
 
@@ -56,10 +60,12 @@ class MainViewModel @Inject constructor(private val repo: Repository) : ViewMode
         else e?.filter { i -> i.category == c }.orEmpty()
     }
 
-    private val mDay = MutableLiveData<Int?>(null)
+    val mDay = MutableLiveData<Int?>(null)
     val selectedDay: LiveData<List<Events>> = mDay.combineWith(events) { day, events ->
         if (events is ResultHandler.Success)
-            events.result.filter { it.day == day }
+            events.result.filter {
+                val d = (getDateTime(it.datetime).formatTo("dd").toIntOrNull()?:26) - 25
+                d == day }
         else listOf()
     }
 
