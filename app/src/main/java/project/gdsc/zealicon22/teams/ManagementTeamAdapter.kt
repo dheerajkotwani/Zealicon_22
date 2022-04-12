@@ -22,7 +22,7 @@ class ManagementTeamAdapter(private val teamList: ArrayList<TeamsModalItem>) :
     override fun onBindViewHolder(holder: VH, position: Int) {
         holder.binding.name.text = teamList[position].name
         holder.binding.position.text = teamList[position].position
-        Glide.with(holder.itemView).load(teamList[position].image).into(holder.binding.image)
+//        Glide.with(holder.itemView).load(teamList[position].image).into(holder.binding.image)
     }
 
     override fun getItemCount(): Int = teamList.size

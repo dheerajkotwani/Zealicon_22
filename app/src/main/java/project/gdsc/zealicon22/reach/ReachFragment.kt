@@ -42,8 +42,8 @@ class ReachFragment : Fragment() {
 
         val teamDetails: ArrayList<TeamsModalItem> = ArrayList()
         teamDetails.add(TeamsModalItem("https://officialjssatenpc.com/about/images/prashant.jpeg", "Dr. Prashant Chauhan", "Festival Convener", ContactType.EMAIL, "zealicon@jssaten.ac.in"))
-        teamDetails.add(TeamsModalItem("https://zealicon.in/static/media/team-1.403e5d999395f2bd9db7.png", "Prajwal Shirur", "Fest Secretary", ContactType.MOBILE, "9667935559"))
-        teamDetails.add(TeamsModalItem("https://zealicon.in/static/media/team-8.6b4bb7fa963565d8c36b.png", "Nitin Patel", "Co-Fest Secretary", ContactType.MOBILE, "9005458865"))
+        teamDetails.add(TeamsModalItem("https://firebasestorage.googleapis.com/v0/b/zealicon22-3b1b9.appspot.com/o/prajwal.png?alt=media&token=1704b594-fe35-4844-abae-ef7b3fe90832", "Prajwal Shirur", "Fest Secretary", ContactType.MOBILE, "9667935559"))
+        teamDetails.add(TeamsModalItem("https://firebasestorage.googleapis.com/v0/b/zealicon22-3b1b9.appspot.com/o/nitin.png?alt=media&token=cd48638a-3e20-41f5-8061-273ed0ce7eab", "Nitin Patel", "Co-Fest Secretary", ContactType.MOBILE, "9005458865"))
 
         val adapter = ReachRVAdapter(teamDetails)
         binding.rvReach.adapter = adapter
