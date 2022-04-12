@@ -79,6 +79,7 @@ class SignupFragment(
 
     private fun setupButton() {
 
+        binding.etAdmNumber.input.isAllCaps = true
         binding.btSignup.apply {
             setOnClickListener {
                 animateOnClick(it)
@@ -89,6 +90,21 @@ class SignupFragment(
     }
 
     private fun setUpObserver() {
+
+        viewModel.validUser.observe(viewLifecycleOwner) {
+            when (it) {
+                is ResultHandler.Loading -> {
+                    Timber.d("RequestingRightNow")
+                }
+                is ResultHandler.Success -> {
+                    getOrderId()
+                }
+                is ResultHandler.Failure -> {
+                    Toast.makeText(requireContext(), "Some user data already present", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
         viewModel.orderId.observe(viewLifecycleOwner) {
             when (it) {
                 is ResultHandler.Loading -> {
@@ -139,8 +155,20 @@ class SignupFragment(
 
         if (haveInputErrors()) return
 
-        getOrderId()
+//        getOrderId()
+        validateUserData()
     }
+
+    private fun validateUserData() {
+        viewModel.validateUserData(
+            binding.etAdmNumber.input.text.toString().capitalize(),
+            binding.etEmail.input.text.toString(),
+            binding.etName.input.text.toString(),
+            binding.etPhone.input.text.toString(),
+            "JSSATE",
+        )
+    }
+
 
     private fun haveInputErrors(): Boolean {
         val name = binding.etName.input.text.toString()
@@ -338,7 +366,7 @@ class SignupFragment(
             "",
             "",
             paymentResponse.server_order_id!!,
-            binding.etAdmNumber.input.text.toString(),
+            binding.etAdmNumber.input.text.toString().capitalize(),
             "JSSATE",
             binding.etPhone.input.text.toString(),
             binding.etName.input.text.toString(),

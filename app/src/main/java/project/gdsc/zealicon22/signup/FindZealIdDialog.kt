@@ -38,6 +38,9 @@ class FindZealIdDialog(context: Context,
 
 
     private fun setListener() {
+
+//        viewModel.
+
         viewModel.submitReceipt.observe(viewLifecycleOwner){
 
             when (it) {
@@ -83,7 +86,7 @@ class FindZealIdDialog(context: Context,
                 Toast.makeText(context, "Enter something to proceed", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            viewModel.findZealId(binding.input.text.toString())
+            viewModel.findZealId(binding.input.text.toString().capitalize())
         }
     }
 }

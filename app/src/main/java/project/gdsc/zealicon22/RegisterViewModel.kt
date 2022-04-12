@@ -12,6 +12,7 @@ import project.gdsc.zealicon22.models.PaymentResponse
 import project.gdsc.zealicon22.models.PaymentSuccess
 import project.gdsc.zealicon22.models.ResultHandler
 import javax.inject.Inject
+import project.gdsc.zealicon22.models.ValidateResponse
 
 /**
  * Created by Anuraj Jain
@@ -27,6 +28,9 @@ class RegisterViewModel @Inject constructor(private val repo: Repository) :
 
     private val mSubmitReceipt  = MutableLiveData<ResultHandler<PaymentSuccess>>()
     val submitReceipt: LiveData<ResultHandler<PaymentSuccess>> = mSubmitReceipt
+
+    private val mValidUser  = MutableLiveData<ResultHandler<ValidateResponse>>()
+    val validUser: LiveData<ResultHandler<ValidateResponse>> = mValidUser
 
     fun getOrderId() = viewModelScope.launch {
         mOrderId.postValue(ResultHandler.Loading)
@@ -46,6 +50,21 @@ class RegisterViewModel @Inject constructor(private val repo: Repository) :
         mSubmitReceipt.postValue(ResultHandler.Loading)
         repo.findZealId(q).collect {
             mSubmitReceipt.postValue(it)
+        }
+    }
+
+    fun validateUserData(
+        admission_no: String,
+        email: String,
+        fullname: String,
+        contact_no: String,
+        college: String
+    ) = viewModelScope.launch {
+        mValidUser.postValue(ResultHandler.Loading)
+        repo.validateUser(
+            admission_no, email, fullname, contact_no, college
+        ).collect {
+            mValidUser.postValue(it)
         }
     }
 }
