@@ -17,6 +17,7 @@ data class Events(
     val name: String,
     val description: String,
     val datetime: String,
+    val venue: String,
     val duration: String,
     val society: String,
     val category: String,
@@ -39,14 +40,15 @@ data class Events(
             .apply{ timeZone = TimeZone.getTimeZone("UTC") }
             .parse(datetime.substringBefore('+'))!!
 
-    fun Date.formatTo(
-        dateFormat: String,
-        timeZone: TimeZone = TimeZone.getDefault()
-    ): String {
-        val formatter = SimpleDateFormat(dateFormat, Locale.getDefault())
-        formatter.timeZone = timeZone
-        return formatter.format(this)
-    }
+}
+
+fun Date.formatTo(
+    dateFormat: String,
+    timeZone: TimeZone = TimeZone.getDefault()
+): String {
+    val formatter = SimpleDateFormat(dateFormat, Locale.getDefault())
+    formatter.timeZone = timeZone
+    return formatter.format(this)
 }
 
 data class Contact(
