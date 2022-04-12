@@ -47,16 +47,22 @@ class FindZealIdDialog(context: Context,
                 is ResultHandler.Success -> {
                     Timber.d("SuccessRequest: ${it.result}")
                     val sp = AppModule.provideSharedPreferences(context)
-                    sp.edit().putString("USER_DATA", Gson().toJson(it.result)).apply()
-                    sp.edit().putString("ZEAL_ID", it.result.zeal_id).apply()
 
-                    Timber.d("SuccessRequest SharedPref: ${sp.getString("USER_DATA", "")}")
+                    if (it.result.zeal_id != null) {
+                        sp.edit().putString("USER_DATA", Gson().toJson(it.result)).apply()
+                        sp.edit().putString("ZEAL_ID", it.result.zeal_id).apply()
 
-                    if (it.result.zeal_id == null) {
-                        Toast.makeText(context, "Registration data not found for user.", Toast.LENGTH_SHORT).show()
+                        Timber.d("SuccessRequest SharedPref: ${sp.getString("USER_DATA", "")}")
+                        dismiss()
+
                     }
                     else {
-                        dismiss()
+                        sp.edit().remove("USER_DATA").remove("ZEAL_ID").apply()
+                        Toast.makeText(
+                            context,
+                            "Registration data not found for user.",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
 
                     //open ZealId screen after successful registration

@@ -39,7 +39,7 @@ class HomeFragment : Fragment() {
         UpcomingEventsAdapter {
             startActivity(Intent(requireContext(), DetailActivity::class.java).apply {
                 putExtra("EVENT_DETAIL", Gson().toJson(it).toString())
-                putExtra("fragment_to_show","event_detail")
+                putExtra("fragment_to_show", "event_detail")
             })
         }
     }
@@ -59,8 +59,7 @@ class HomeFragment : Fragment() {
         setExploreEvents()
         setClickListener()
         setUpcomingEvents()
-        if (!viewModel.subscribed)
-            subscribeUI()
+        subscribeUI()
     }
 
     private fun setUpcomingEvents() {
@@ -71,8 +70,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun subscribeUI() {
-
-        viewModel.subscribed = true
 
         val loading = object : Loading(requireContext()) {
             override val backAction: () -> Unit
