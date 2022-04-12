@@ -82,7 +82,7 @@ class FindZealIdDialog(context: Context,
 
     private fun setUI() {
         binding.findButton.setOnClickListener {
-            if (binding.input.text.isNullOrBlank()){
+            if (binding.input.text.isNullOrBlank()) {
                 Toast.makeText(context, "Enter something to proceed", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }

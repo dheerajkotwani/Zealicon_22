@@ -40,7 +40,7 @@ class SearchEventsAdapter() : RecyclerView.Adapter<SearchEventsAdapter.VH>() {
     class VH(val binding: ItemSearchEventsBinding) : RecyclerView.ViewHolder(binding.root){
         fun onBind(comic: Events, position: Int){
             binding.eventTitle.text = comic.name
-            binding.eventDateCategory.text = "${comic.day}"
+            binding.eventDateCategory.text = "${comic.category}"
         }
     }
 }

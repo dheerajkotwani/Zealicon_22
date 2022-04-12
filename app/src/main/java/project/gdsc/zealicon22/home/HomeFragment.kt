@@ -99,6 +99,8 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+
+        viewModel.getEvents()
     }
 
     private fun setExploreEvents() {
