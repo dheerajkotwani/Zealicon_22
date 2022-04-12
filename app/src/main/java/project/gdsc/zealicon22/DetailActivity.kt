@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.content.ContextCompat
 import com.google.gson.Gson
+import dagger.hilt.android.AndroidEntryPoint
 import project.gdsc.zealicon22.databinding.ActivityDetailBinding
 import project.gdsc.zealicon22.dayWiseEvent.DayWiseEventsFragment
 import project.gdsc.zealicon22.models.Events
 import timber.log.Timber
 
+@AndroidEntryPoint
 class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding

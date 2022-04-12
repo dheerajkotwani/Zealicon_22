@@ -1,11 +1,14 @@
 package project.gdsc.zealicon22
 
+import android.content.SharedPreferences
 import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
-import project.gdsc.zealicon22.models.*
-import timber.log.Timber
+import project.gdsc.zealicon22.models.Events
+import project.gdsc.zealicon22.models.RegisterBody
+import project.gdsc.zealicon22.models.ResultHandler
 import java.util.*
 import javax.inject.Inject
 
@@ -15,8 +18,7 @@ import javax.inject.Inject
  * @Updated: Karan Verma on 09/04/22
  */
 @HiltViewModel
-class MainViewModel @Inject constructor(private val repo: Repository) :
-    ViewModel() {
+class MainViewModel @Inject constructor(private val repo: Repository) : ViewModel() {
 
     var subscribed = false
 
@@ -43,11 +45,11 @@ class MainViewModel @Inject constructor(private val repo: Repository) :
     private val mCategory = MutableLiveData<String?>(null)
 
     val searchedEvents: LiveData<List<Events>> = mQuery.combineWith(events) { q, it ->
-            if (it is ResultHandler.Success && !q.isNullOrBlank())
-                it.result.filter { i ->
-                    i.name.contains(q, true)
-                }
-            else listOf()
+        if (it is ResultHandler.Success && !q.isNullOrBlank())
+            it.result.filter { i ->
+                i.name.contains(q, true)
+            }
+        else listOf()
     }.combineWith(mCategory) { e, c ->
         if (c.isNullOrBlank())
             e.orEmpty()
@@ -55,7 +57,7 @@ class MainViewModel @Inject constructor(private val repo: Repository) :
     }
 
     private val mDay = MutableLiveData<Int?>(null)
-    val selectedDay : LiveData<List<Events>> = mDay.combineWith(events){day, events ->
+    val selectedDay: LiveData<List<Events>> = mDay.combineWith(events) { day, events ->
         if (events is ResultHandler.Success)
             events.result.filter { it.day == day }
         else listOf()
@@ -93,7 +95,7 @@ class MainViewModel @Inject constructor(private val repo: Repository) :
             mQuery.value = query.toString()
     }
 
-    fun selectDay(day : Int){
+    fun selectDay(day: Int) {
         mDay.value = day
     }
 

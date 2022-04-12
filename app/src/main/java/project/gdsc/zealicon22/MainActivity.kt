@@ -1,19 +1,22 @@
 package project.gdsc.zealicon22
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import nl.psdcompany.duonavigationdrawer.views.DuoMenuView
 import project.gdsc.zealicon22.about.AboutFragment
-import project.gdsc.zealicon22.search_events.SearchEventsFragment
 import project.gdsc.zealicon22.databinding.ActivityMainBinding
+import project.gdsc.zealicon22.di.AppModule
 import project.gdsc.zealicon22.home.HomeFragment
+import project.gdsc.zealicon22.models.PaymentSuccess
 import project.gdsc.zealicon22.myevents.MyEventsFragment
 import project.gdsc.zealicon22.reach.ReachFragment
+import project.gdsc.zealicon22.search_events.SearchEventsFragment
 import project.gdsc.zealicon22.signup.RegisterFragment
 import project.gdsc.zealicon22.signup.SignupFragment
 import project.gdsc.zealicon22.signup.ZealIdFragment
@@ -23,7 +26,7 @@ import project.gdsc.zealicon22.teams.TeamsFragment
  * @author Dheeraj Kotwani on 23/02/22.
  */
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener{
+class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
 
     private lateinit var duoAdapter: DuoMenuAdapter
     private lateinit var binding: ActivityMainBinding
@@ -35,10 +38,32 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener{
         setContentView(binding.root)
 
         window.statusBarColor = ContextCompat.getColor(this, R.color.black)
+
+        handleLoginUserInfo()
         handleMenu()
         setupBottomNav()
         setSelectedPageData()
         setupClickListener()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        handleLoginUserInfo()
+    }
+
+    private fun handleLoginUserInfo() {
+        val sp = AppModule.provideSharedPreferences(this)
+        val userInfo = Gson().fromJson(sp.getString("USER_DATA", ""), PaymentSuccess::class.java)
+
+        if (sp.contains("USER_DATA") && userInfo.zeal_id != null) {
+            binding.avatar.root.visibility = View.VISIBLE
+            binding.avatar.root.setOnClickListener {
+                startActivity(Intent(this, SignupActivity::class.java))
+            }
+        }
+        else {
+            binding.avatar.root.visibility = View.GONE
+        }
     }
 
     private fun setupBottomNav() {
@@ -50,13 +75,16 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener{
                 when (it.itemId) {
 
                     R.id.home_screen -> {
-                        supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, HomeFragment()).commit()
+                        supportFragmentManager.beginTransaction()
+                            .replace(binding.mainFrame.id, HomeFragment()).commit()
                     }
                     R.id.search_screen -> {
-                        supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, SearchEventsFragment()).commit()
+                        supportFragmentManager.beginTransaction()
+                            .replace(binding.mainFrame.id, SearchEventsFragment()).commit()
                     }
                     R.id.my_events_screen -> {
-                        supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, MyEventsFragment()).commit()
+                        supportFragmentManager.beginTransaction()
+                            .replace(binding.mainFrame.id, MyEventsFragment()).commit()
                     }
                 }
                 return@setOnItemSelectedListener true
@@ -73,8 +101,21 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener{
     }
 
     private fun setSelectedPageData() {
-        duoAdapter.setViewSelected(0, true)
-        supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, HomeFragment()).commit()
+        val sf = AppModule.provideSharedPreferences(this)
+        if (sf.contains("USER_DATA")) {
+            duoAdapter.setViewSelected(0, true)
+            val sp = AppModule.provideSharedPreferences(this)
+            val userData = sp.getString("USER_DATA", "")
+            val paymentSuccess = Gson().fromJson<PaymentSuccess>(userData, PaymentSuccess::class.java)
+            Toast.makeText(this, "Welcome, ${paymentSuccess.fullname}", Toast.LENGTH_SHORT).show()
+            supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, HomeFragment())
+            .commit()
+        }
+        else {
+            duoAdapter.setViewSelected(4, true)
+            binding.bottomNavBar.visibility = View.GONE
+            supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, RegisterFragment()).commit()
+        }
     }
 
     private fun handleMenu() {
@@ -88,7 +129,6 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener{
         duoAdapter = DuoMenuAdapter(menuOptions)
         binding.duoMenuView.adapter = duoAdapter
         binding.duoMenuView.setOnMenuClickListener(this)
-        duoAdapter.setViewSelected(0, true)
 
     }
 
@@ -110,31 +150,48 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener{
                 // TODO handle case for home screen
                 binding.bottomNavBar.visibility = View.VISIBLE
                 binding.pageTitle.text = getString(R.string.title_discover)
-                supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, HomeFragment()).commit()
+                binding.bottomNavBar.selectedItemId = R.id.home_screen
+                supportFragmentManager.beginTransaction()
+                    .replace(binding.mainFrame.id, HomeFragment()).commit()
             }
             1 -> {
                 // TODO handle case for reach us
                 binding.bottomNavBar.visibility = View.GONE
                 binding.pageTitle.text = getString(R.string.reach)
-                supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, ReachFragment()).commit()
+                supportFragmentManager.beginTransaction()
+                    .replace(binding.mainFrame.id, ReachFragment()).commit()
             }
             2 -> {
                 // TODO handle case for team
                 binding.bottomNavBar.visibility = View.GONE
                 binding.pageTitle.text = getString(R.string.team)
-                supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, TeamsFragment()).commit()
+                supportFragmentManager.beginTransaction()
+                    .replace(binding.mainFrame.id, TeamsFragment()).commit()
             }
             3 -> {
                 // handle case for about
                 binding.bottomNavBar.visibility = View.GONE
                 binding.pageTitle.text = getString(R.string.about)
-                supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, AboutFragment()).commit()
+                supportFragmentManager.beginTransaction()
+                    .replace(binding.mainFrame.id, AboutFragment()).commit()
             }
             4 -> {
                 // navigate to SignupFragment
                 binding.bottomNavBar.visibility = View.GONE
                 binding.pageTitle.text = ""
-                supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, RegisterFragment()).commit()
+                val sp = AppModule.provideSharedPreferences(this)
+                val userInfo = Gson().fromJson(sp.getString("USER_DATA", ""), PaymentSuccess::class.java)
+
+                if (sp.contains("USER_DATA") && userInfo.zeal_id != null) {
+                    supportFragmentManager.beginTransaction().replace(
+                        binding.mainFrame.id, ZealIdFragment()
+                    ).commit()
+                }
+                else {
+                    supportFragmentManager.beginTransaction()
+                        .replace(binding.mainFrame.id, RegisterFragment()).commit()
+                }
+
             }
         }
 

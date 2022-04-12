@@ -1,23 +1,32 @@
 package project.gdsc.zealicon22
 
+import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.google.gson.Gson
+import dagger.hilt.android.AndroidEntryPoint
 import project.gdsc.zealicon22.databinding.FragmentEventDetailsBinding
 import project.gdsc.zealicon22.databinding.ItemEventDetailUnitBinding
 import project.gdsc.zealicon22.models.Events
+import project.gdsc.zealicon22.models.ResultHandler
 import timber.log.Timber
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class EventDetailsFragment : Fragment() {
 
     private var _binding: FragmentEventDetailsBinding? = null
     private val binding get() = _binding!!
 
+    @Inject lateinit var sp: SharedPreferences
+
+    private val viewModel by activityViewModels<EventViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,13 +60,48 @@ class EventDetailsFragment : Fragment() {
         }
         binding.eventPhone.apply {
             setIcon(this, R.drawable.ic_phone)
-            eventUnitInfo.text = events.contact?.contact_no
+            eventUnitInfo.text = events.contact?.userdetails?.contact_no
         }
         binding.eventInfo.text = events.description
         binding.eventRules.text = events.rules
         binding.eventPrize.text = events.prizes
-        binding.eventContact.text = "${events.contact?.fullname} : ${events.contact?.contact_no}"
+        binding.eventContact.text = "${events.contact?.first_name} ${events.contact?.last_name} : ${events.contact?.userdetails?.contact_no}"
 
+        handleEventRegistration(events)
+    }
+
+    private fun handleEventRegistration(events: Events) {
+        if (sp.getBoolean("EventId:${events.id}", false))
+            binding.registerButton.visibility = View.GONE
+        else {
+            binding.registerButton.apply {
+                visibility = View.VISIBLE
+                setOnClickListener {
+                    viewModel.registerForEvent(events.id.toString())
+                }
+            }
+        }
+
+        viewModel.registration.observe(viewLifecycleOwner) {
+            when(it) {
+                is ResultHandler.Loading -> {
+                    binding.registerButton.visibility = View.GONE
+                    binding.loading.visibility = View.VISIBLE
+                }
+                is ResultHandler.Failure -> {
+                    binding.registerButton.visibility = View.VISIBLE
+                    binding.loading.visibility = View.GONE
+                    Toast.makeText(requireContext(), "Oops! Something went wrong.", Toast.LENGTH_SHORT).show()
+                    Timber.e("RequestFailure: ${it.message}")
+                }
+                is ResultHandler.Success -> {
+                    binding.registerButton.visibility = View.GONE
+                    binding.loading.visibility = View.GONE
+                    Toast.makeText(requireContext(), "Registered successfully!", Toast.LENGTH_SHORT).show()
+                    sp.edit().putBoolean("EventId:${events.id}",true).apply()
+                }
+            }
+        }
     }
 
     private fun setIcon(item: ItemEventDetailUnitBinding, drawableId: Int) {
