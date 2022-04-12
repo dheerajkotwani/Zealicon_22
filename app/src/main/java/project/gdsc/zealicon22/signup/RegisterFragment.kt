@@ -61,8 +61,7 @@ class RegisterFragment(
 
             dialog.setOnDismissListener {
                 val userInfo = Gson().fromJson<PaymentSuccess>(sp.getString("USER_DATA", ""), PaymentSuccess::class.java)
-
-                if (userInfo.zeal_id != null) {
+                if (userInfo !=  null && userInfo.zeal_id != null) {
                     startActivity(Intent(requireContext(), SignupActivity::class.java))
                 }
             }
@@ -73,9 +72,10 @@ class RegisterFragment(
     override fun onResume() {
         super.onResume()
         val sp = AppModule.provideSharedPreferences(requireContext())
+
         val userInfo = Gson().fromJson<PaymentSuccess>(sp.getString("USER_DATA", ""), PaymentSuccess::class.java)
-        if (userInfo.zeal_id != null) {
-            startActivity(Intent(requireContext(), SignupActivity::class.java))
+        if (userInfo !=  null && userInfo.zeal_id != null) {
+            childFragmentManager.beginTransaction().add(ZealIdFragment(), "ZealIdFragment").commit()
         }
     }
 

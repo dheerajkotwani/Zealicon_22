@@ -60,12 +60,12 @@ class EventDetailsFragment : Fragment() {
         }
         binding.eventPhone.apply {
             setIcon(this, R.drawable.ic_phone)
-            eventUnitInfo.text = events.contact?.contact_no
+            eventUnitInfo.text = events.contact?.userdetails?.contact_no
         }
         binding.eventInfo.text = events.description
         binding.eventRules.text = events.rules
         binding.eventPrize.text = events.prizes
-        binding.eventContact.text = "${events.contact?.fullname} : ${events.contact?.contact_no}"
+        binding.eventContact.text = "${events.contact?.first_name} ${events.contact?.last_name} : ${events.contact?.userdetails?.contact_no}"
 
         handleEventRegistration(events)
     }

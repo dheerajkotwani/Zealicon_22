@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     app:cardCornerRadius="18dp"
     app:strokeColor="@color/white"
     android:layout_marginBottom="10dp"
@@ -34,7 +35,7 @@
             android:background="@drawable/bg_yellow"
             android:fontFamily="@font/badaboom"
             android:gravity="center"
-            android:paddingHorizontal="4dp"
+            android:paddingHorizontal="46dp"
             android:textColor="@color/black"
             android:textSize="36sp" />
 

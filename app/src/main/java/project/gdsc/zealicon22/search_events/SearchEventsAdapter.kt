@@ -32,13 +32,13 @@ class SearchEventsAdapter() : RecyclerView.Adapter<SearchEventsAdapter.VH>() {
         holder.itemView.setOnClickListener{
             onItemClick?.invoke(comic)
         }
-        holder.onBind(comic)
+        holder.onBind(comic, position)
     }
 
     override fun getItemCount(): Int = list.size
 
     class VH(val binding: ItemSearchEventsBinding) : RecyclerView.ViewHolder(binding.root){
-        fun onBind(comic: Events){
+        fun onBind(comic: Events, position: Int){
             binding.eventTitle.text = comic.name
             binding.eventDateCategory.text = "${comic.day}"
         }

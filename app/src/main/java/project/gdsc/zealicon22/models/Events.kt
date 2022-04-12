@@ -50,6 +50,12 @@ data class Events(
 }
 
 data class Contact(
-    val fullname : String,
-    val contact_no : String
+    val first_name : String,
+    val last_name : String,
+    @Embedded
+    val userdetails : UserDetails?
+)
+
+data class UserDetails (
+    val contact_no: String
 )
