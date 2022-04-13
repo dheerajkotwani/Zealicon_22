@@ -20,7 +20,6 @@ import project.gdsc.zealicon22.databinding.FragmentHomeBinding
 import project.gdsc.zealicon22.dayWiseEvent.DayWiseEventsFragment
 import project.gdsc.zealicon22.models.ResultHandler
 import project.gdsc.zealicon22.utils.Loading
-import timber.log.Timber
 
 /**
  * Created by Nakul
@@ -142,11 +141,16 @@ class HomeFragment : Fragment() {
             viewModel.selectDay(3)
             navigateToEventWiseFragment()
         }
+        binding.dayFour.root.setOnClickListener {
+            viewModel.selectDay(null)
+            navigateToEventWiseFragment()
+        }
     }
 
     private fun navigateToEventWiseFragment() {
         activity?.supportFragmentManager?.popBackStack()
-        activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.mainFrame, DayWiseEventsFragment())?.addToBackStack("Home")?.commit()
+        activity?.supportFragmentManager?.beginTransaction()
+            ?.replace(R.id.mainFrame, DayWiseEventsFragment())?.addToBackStack("Home")?.commit()
     }
 
     override fun onDestroyView() {

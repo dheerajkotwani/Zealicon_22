@@ -11,6 +11,7 @@ import project.gdsc.zealicon22.models.PaymentReceipt
 import project.gdsc.zealicon22.models.RegisterBody
 import project.gdsc.zealicon22.models.ResultHandler
 import project.gdsc.zealicon22.network.NetworkService
+import project.gdsc.zealicon22.utils.getDateTime
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -62,7 +63,7 @@ class Repository @Inject constructor(
 
     private suspend fun fetchDataFromNetwork() = flow {
         runCatching {
-            emit(ResultHandler.Success(api.getEvents().body()!!))
+            emit(ResultHandler.Success(api.getEvents().body()!!.sortedBy { getDateTime(it.datetime) }))
         }.getOrElse { emit(ResultHandler.Failure(it)) }
     }.flowOn(Dispatchers.IO)
 

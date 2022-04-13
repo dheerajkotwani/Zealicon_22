@@ -42,6 +42,8 @@ class DayWiseEventsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        
+        binding.eventDate.visibility =if(viewModel.mDay.value == null) View.INVISIBLE else View.VISIBLE
 
         binding.dayOne.apply {
             root.rotation = -5f

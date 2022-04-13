@@ -5,13 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/app_background"
-    android:fillViewport="true"
     tools:context=".dayWiseEvent.DayWiseEventsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="40dp">
+        android:layout_height="wrap_content"
+        android:paddingBottom="160dp">
 
         <include
             android:id="@+id/day_one"
@@ -105,10 +104,11 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/comicsRv"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginStart="28dp"
             tools:itemCount="2"
+            app:layout_constraintBottom_toBottomOf="parent"
             tools:listitem="@layout/item_search_events"
             app:layout_constraintTop_toBottomOf="@id/partition"
             app:layout_constraintEnd_toEndOf="parent"/>
