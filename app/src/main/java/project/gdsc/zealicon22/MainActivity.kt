@@ -173,6 +173,7 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener, Updat
             }
             1 -> {
                 // TODO handle case for reach us
+                supportFragmentManager.popBackStack()
                 binding.bottomNavBar.visibility = View.GONE
                 binding.pageTitle.text = getString(R.string.reach)
                 supportFragmentManager.beginTransaction()
@@ -219,6 +220,9 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener, Updat
     override fun onBackPressed() {
         val frag = supportFragmentManager.findFragmentById(R.id.mainFrame)
         if (frag !is HomeFragment && frag !is RegisterFragment){
+            binding.bottomNavBar.visibility = View.VISIBLE
+            binding.pageTitle.text = getString(R.string.title_discover)
+            binding.bottomNavBar.selectedItemId = R.id.home_screen
             supportFragmentManager.beginTransaction()
                 .replace(binding.mainFrame.id, HomeFragment()).commit()
         }
