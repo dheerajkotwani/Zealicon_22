@@ -148,7 +148,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun navigateToEventWiseFragment() {
-        activity?.supportFragmentManager?.popBackStack()
         activity?.supportFragmentManager?.beginTransaction()
             ?.replace(R.id.mainFrame, DayWiseEventsFragment())?.addToBackStack("Home")?.commit()
     }
