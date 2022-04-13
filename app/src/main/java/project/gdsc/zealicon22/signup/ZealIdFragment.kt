@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.gson.Gson
+import project.gdsc.zealicon22.MainActivity
 import project.gdsc.zealicon22.R
 import project.gdsc.zealicon22.databinding.FragmentReachBinding
 import project.gdsc.zealicon22.databinding.FragmentZealIdBinding
@@ -36,6 +37,8 @@ class ZealIdFragment : Fragment() {
 
         binding.textZealId.text = paymentSuccess.zeal_id
         binding.textHeyUser.text = "Hey, ${paymentSuccess.fullname}"
+
+        MainActivity.justRegistered = true
 
     }
 

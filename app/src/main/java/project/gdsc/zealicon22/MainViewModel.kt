@@ -35,7 +35,7 @@ class MainViewModel @Inject constructor(
     private val mMyEvents = MutableLiveData<ResultHandler<List<MyEvents>>>()
     val myEvents: LiveData<ResultHandler<List<MyEvents>>> = mMyEvents
 
-    /*
+/*
     * Use transformations on events to get your selective data. Example for
     * getting day 1 events is shown below:
     * val dayOneEvents: LiveData<ResultHandler<List<Events>>> = Transformations.map(events) {
@@ -43,7 +43,8 @@ class MainViewModel @Inject constructor(
     *       ResultHandler.Success(it.result.filter { i-> i.day == 1 })
     *   else it
     * }
-    * */
+    *
+*/
 
     val upcomingEvents: LiveData<ResultHandler<List<Events>>> = Transformations.map(events) {
         if (it is ResultHandler.Success) {

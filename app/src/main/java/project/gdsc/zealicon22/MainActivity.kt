@@ -1,6 +1,7 @@
 package project.gdsc.zealicon22
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -11,7 +12,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import nl.psdcompany.duonavigationdrawer.views.DuoMenuView
 import project.gdsc.zealicon22.about.AboutFragment
 import project.gdsc.zealicon22.databinding.ActivityMainBinding
-import project.gdsc.zealicon22.di.AppModule
 import project.gdsc.zealicon22.home.HomeFragment
 import project.gdsc.zealicon22.models.PaymentSuccess
 import project.gdsc.zealicon22.my_events.MyEventsFragment
@@ -20,6 +20,7 @@ import project.gdsc.zealicon22.search_events.SearchEventsFragment
 import project.gdsc.zealicon22.signup.RegisterFragment
 import project.gdsc.zealicon22.signup.ZealIdFragment
 import project.gdsc.zealicon22.teams.TeamsFragment
+import javax.inject.Inject
 
 /**
  * @author Dheeraj Kotwani on 23/02/22.
@@ -27,8 +28,15 @@ import project.gdsc.zealicon22.teams.TeamsFragment
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
 
+    companion object {
+        var justRegistered = false
+    }
+
     private lateinit var duoAdapter: DuoMenuAdapter
     private lateinit var binding: ActivityMainBinding
+
+    @Inject
+    lateinit var sp: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,10 +56,11 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
     override fun onResume() {
         super.onResume()
         handleLoginUserInfo()
+        if (justRegistered)
+            handleMenu()
     }
 
     private fun handleLoginUserInfo() {
-        val sp = AppModule.provideSharedPreferences(this)
         val userInfo = Gson().fromJson(sp.getString("USER_DATA", ""), PaymentSuccess::class.java)
 
         if (sp.contains("USER_DATA") && userInfo.zeal_id != null) {
@@ -59,8 +68,7 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
             binding.avatar.root.setOnClickListener {
                 startActivity(Intent(this, SignupActivity::class.java))
             }
-        }
-        else {
+        } else {
             binding.avatar.root.visibility = View.INVISIBLE
         }
     }
@@ -100,20 +108,19 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
     }
 
     private fun setSelectedPageData() {
-        val sf = AppModule.provideSharedPreferences(this)
-        if (sf.contains("USER_DATA")) {
+        if (sp.contains("USER_DATA")) {
             duoAdapter.setViewSelected(0, true)
-            val sp = AppModule.provideSharedPreferences(this)
             val userData = sp.getString("USER_DATA", "")
-            val paymentSuccess = Gson().fromJson<PaymentSuccess>(userData, PaymentSuccess::class.java)
+            val paymentSuccess =
+                Gson().fromJson<PaymentSuccess>(userData, PaymentSuccess::class.java)
             Toast.makeText(this, "Welcome, ${paymentSuccess.fullname}", Toast.LENGTH_SHORT).show()
             supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, HomeFragment())
-            .commit()
-        }
-        else {
+                .commit()
+        } else {
             duoAdapter.setViewSelected(4, true)
             binding.bottomNavBar.visibility = View.GONE
-            supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, RegisterFragment()).commit()
+            supportFragmentManager.beginTransaction()
+                .replace(binding.mainFrame.id, RegisterFragment()).commit()
         }
     }
 
@@ -123,10 +130,18 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
         menuOptions.add(getString(R.string.reach))
         menuOptions.add(getString(R.string.team))
         menuOptions.add(getString(R.string.about))
-        menuOptions.add(getString(R.string.sign_up)) // TODO remove after testing
+        if (sp.getString("ZEAL_ID", null).isNullOrBlank())
+            menuOptions.add(getString(R.string.sign_up)) // TODO remove after testing
 
         duoAdapter = DuoMenuAdapter(menuOptions)
         binding.duoMenuView.adapter = duoAdapter
+        if (justRegistered) {
+            duoAdapter.setViewSelected(0, true)
+            supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, HomeFragment())
+                .commit()
+            justRegistered = false
+        }
+        duoAdapter.notifyDataSetChanged()
         binding.duoMenuView.setOnMenuClickListener(this)
 
     }
@@ -178,15 +193,14 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
                 // navigate to SignupFragment
                 binding.bottomNavBar.visibility = View.GONE
                 binding.pageTitle.text = ""
-                val sp = AppModule.provideSharedPreferences(this)
-                val userInfo = Gson().fromJson(sp.getString("USER_DATA", ""), PaymentSuccess::class.java)
+                val userInfo =
+                    Gson().fromJson(sp.getString("USER_DATA", ""), PaymentSuccess::class.java)
 
                 if (sp.contains("USER_DATA") && userInfo.zeal_id != null) {
                     supportFragmentManager.beginTransaction().replace(
                         binding.mainFrame.id, ZealIdFragment()
                     ).commit()
-                }
-                else {
+                } else {
                     supportFragmentManager.beginTransaction()
                         .replace(binding.mainFrame.id, RegisterFragment()).commit()
                 }
