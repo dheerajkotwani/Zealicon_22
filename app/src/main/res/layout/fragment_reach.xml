@@ -30,6 +30,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/college_map"
+                    android:scaleType="centerCrop"
                     android:contentDescription="college_mag" />
 
             </androidx.cardview.widget.CardView>

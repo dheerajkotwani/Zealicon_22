@@ -9,7 +9,7 @@ import project.gdsc.zealicon22.models.Events
 /**
  * @author Dheeraj Kotwani on 03/04/22.
  */
-@Database(entities = [Events::class], version = 1)
+@Database(entities = [Events::class], version = 2)
 abstract class RoomDB : RoomDatabase() {
 
     abstract fun getEventsDao(): EventsDao

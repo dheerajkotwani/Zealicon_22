@@ -46,8 +46,16 @@ class MainViewModel @Inject constructor(
     * */
 
     val upcomingEvents: LiveData<ResultHandler<List<Events>>> = Transformations.map(events) {
-        if (it is ResultHandler.Success)
-            ResultHandler.Success(it.result.filter { i -> getDateTime(i.datetime) > Date() }.sortedBy { i-> getDateTime(i.datetime) }.subList(0,5))
+        if (it is ResultHandler.Success) {
+            val result = it.result.filter { i -> getDateTime(i.datetime) > Date() }
+                .sortedBy { i -> getDateTime(i.datetime) }
+            if (result.size >= 5) {
+                ResultHandler.Success(result.subList(0, 5))
+            }
+            else {
+                ResultHandler.Success(result)
+            }
+        }
         else it
     }
 
