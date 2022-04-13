@@ -40,6 +40,8 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener, Updat
     @Inject
     lateinit var sp: SharedPreferences
 
+    private var lastSelected = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -112,6 +114,7 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener, Updat
     private fun setSelectedPageData() {
         if (sp.contains("USER_DATA")) {
             duoAdapter.setViewSelected(0, true)
+            lastSelected = 0
             val userData = sp.getString("USER_DATA", "")
             val paymentSuccess =
                 Gson().fromJson<PaymentSuccess>(userData, PaymentSuccess::class.java)
@@ -120,6 +123,8 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener, Updat
                 .commit()
         } else {
             duoAdapter.setViewSelected(4, true)
+            lastSelected = 4
+            binding.pageTitle.text = ""
             binding.bottomNavBar.visibility = View.GONE
             supportFragmentManager.beginTransaction()
                 .replace(binding.mainFrame.id, RegisterFragment()).commit()
@@ -133,19 +138,19 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener, Updat
         menuOptions.add(getString(R.string.team))
         menuOptions.add(getString(R.string.about))
         if (sp.getString("ZEAL_ID", null).isNullOrBlank())
-            menuOptions.add(getString(R.string.sign_up)) // TODO remove after testing
+            menuOptions.add(getString(R.string.sign_up))
 
         duoAdapter = DuoMenuAdapter(menuOptions)
         binding.duoMenuView.adapter = duoAdapter
         if (justRegistered) {
-            duoAdapter.setViewSelected(0, true)
             supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, HomeFragment())
                 .commit()
+            lastSelected = 0
             justRegistered = false
         }
-        duoAdapter.notifyDataSetChanged()
-        binding.duoMenuView.setOnMenuClickListener(this)
 
+        binding.duoMenuView.setOnMenuClickListener(this)
+        onOptionClicked(lastSelected, null)
     }
 
     override fun onFooterClicked() {
