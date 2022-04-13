@@ -11,6 +11,8 @@ import project.gdsc.zealicon22.databinding.ItemEventCardBinding
 import project.gdsc.zealicon22.interfaces.ConstraintInstructions
 import project.gdsc.zealicon22.models.Events
 import project.gdsc.zealicon22.utils.animateOnClick
+import project.gdsc.zealicon22.utils.formatTo
+import project.gdsc.zealicon22.utils.getDateTime
 import project.gdsc.zealicon22.utils.updateConstraints
 
 /**
@@ -37,6 +39,8 @@ class UpcomingEventsAdapter(val onEventClick: (event: Events) -> Unit): Recycler
         with(holder) {
 
             binding.eventName.text = list[position].name
+            binding.eventDate.text = getDateTime(list[position].datetime).formatTo("d MMMM , YYYY")
+            binding.eventSociety.text = list[position].society
             if (position % 2 == 0) { 
                 val constraintInstructions: List<ConstraintInstructions> = listOf(
                     ConstraintInstructions.DisconnectConstraint(

@@ -87,7 +87,7 @@ class MainViewModel @Inject constructor(private val repo: Repository) : ViewMode
         getEvents()
     }
 
-    fun getEvents() = viewModelScope.launch {
+    private fun getEvents() = viewModelScope.launch {
         mEvents.postValue(ResultHandler.Loading)
         repo.getEvents().collect {
             mEvents.postValue(it)
