@@ -7,12 +7,14 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import nl.psdcompany.duonavigationdrawer.views.DuoMenuView
 import project.gdsc.zealicon22.about.AboutFragment
 import project.gdsc.zealicon22.databinding.ActivityMainBinding
 import project.gdsc.zealicon22.home.HomeFragment
+import project.gdsc.zealicon22.interfaces.UpdateFragmentListener
 import project.gdsc.zealicon22.models.PaymentSuccess
 import project.gdsc.zealicon22.my_events.MyEventsFragment
 import project.gdsc.zealicon22.reach.ReachFragment
@@ -26,7 +28,7 @@ import javax.inject.Inject
  * @author Dheeraj Kotwani on 23/02/22.
  */
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
+class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener, UpdateFragmentListener {
 
     companion object {
         var justRegistered = false
@@ -162,6 +164,7 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
         when (position) {
             0 -> {
                 // TODO handle case for home screen
+                supportFragmentManager.popBackStack()
                 binding.bottomNavBar.visibility = View.VISIBLE
                 binding.pageTitle.text = getString(R.string.title_discover)
                 binding.bottomNavBar.selectedItemId = R.id.home_screen
@@ -170,13 +173,15 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
             }
             1 -> {
                 // TODO handle case for reach us
+                supportFragmentManager.popBackStack()
                 binding.bottomNavBar.visibility = View.GONE
                 binding.pageTitle.text = getString(R.string.reach)
                 supportFragmentManager.beginTransaction()
-                    .replace(binding.mainFrame.id, ReachFragment()).commit()
+                    .replace(binding.mainFrame.id, ReachFragment(this)).commit()
             }
             2 -> {
                 // TODO handle case for team
+                supportFragmentManager.popBackStack()
                 binding.bottomNavBar.visibility = View.GONE
                 binding.pageTitle.text = getString(R.string.team)
                 supportFragmentManager.beginTransaction()
@@ -184,6 +189,7 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
             }
             3 -> {
                 // handle case for about
+                supportFragmentManager.popBackStack()
                 binding.bottomNavBar.visibility = View.GONE
                 binding.pageTitle.text = getString(R.string.about)
                 supportFragmentManager.beginTransaction()
@@ -191,6 +197,7 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
             }
             4 -> {
                 // navigate to SignupFragment
+                supportFragmentManager.popBackStack()
                 binding.bottomNavBar.visibility = View.GONE
                 binding.pageTitle.text = ""
                 val userInfo =
@@ -208,6 +215,22 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
             }
         }
 
+    }
+
+    override fun onBackPressed() {
+        val frag = supportFragmentManager.findFragmentById(R.id.mainFrame)
+        if (frag !is HomeFragment && frag !is RegisterFragment){
+            binding.bottomNavBar.visibility = View.VISIBLE
+            binding.pageTitle.text = getString(R.string.title_discover)
+            binding.bottomNavBar.selectedItemId = R.id.home_screen
+            supportFragmentManager.beginTransaction()
+                .replace(binding.mainFrame.id, HomeFragment()).commit()
+        }
+        else super.onBackPressed()
+    }
+
+    override fun updateFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction().replace(binding.mainFrame.id, fragment).commit()
     }
 
 }
