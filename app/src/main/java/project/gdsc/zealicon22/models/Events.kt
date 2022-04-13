@@ -51,3 +51,7 @@ data class Contact(
 data class UserDetails (
     val contact_no: String
 )
+
+data class MyEvents(
+    val event : Events
+)
