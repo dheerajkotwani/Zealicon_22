@@ -370,7 +370,7 @@ class SignupFragment(
             "JSSATE",
             binding.etPhone.input.text.toString(),
             binding.etName.input.text.toString(),
-            binding.etEmail.input.text.toString().toUpperCase()
+            binding.etEmail.input.text.toString()
         )
     }
 }

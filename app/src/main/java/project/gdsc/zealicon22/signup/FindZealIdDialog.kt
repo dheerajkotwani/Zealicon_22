@@ -90,7 +90,7 @@ class FindZealIdDialog(context: Context,
                 Toast.makeText(context, "Enter something to proceed", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            viewModel.findZealId(binding.input.text.toString().toUpperCase())
+            viewModel.findZealId(binding.input.text.toString())
         }
     }
 }
