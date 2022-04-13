@@ -74,7 +74,11 @@ class FindZealIdDialog(context: Context,
                 }
                 is ResultHandler.Failure -> {
                     Timber.e("FailureRequest: ${it.message}")
-                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context,
+                        "Registration data not found for user.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
@@ -86,7 +90,7 @@ class FindZealIdDialog(context: Context,
                 Toast.makeText(context, "Enter something to proceed", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            viewModel.findZealId(binding.input.text.toString().capitalize())
+            viewModel.findZealId(binding.input.text.toString().toUpperCase())
         }
     }
 }
