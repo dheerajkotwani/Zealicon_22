@@ -5,8 +5,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import project.gdsc.zealicon22.database.EventsDao
 import project.gdsc.zealicon22.models.Events
 import project.gdsc.zealicon22.models.PaymentReceipt
@@ -30,20 +28,21 @@ class Repository @Inject constructor(
         const val DATA_STORED = "DATA_STORED"
     }
 
-    private var fetched = true
+    private var fetched = false
 
     suspend fun getEvents() = flow {
 
         emit(ResultHandler.Success(dao.getAllEvents()))
 
-        fetchDataFromNetwork().takeIf { !fetched }?.collect {
-            if (it is ResultHandler.Success) {
-                emit(it)
-                eraseEvents()
-                saveEvents(it.result)
-                sp.edit().putBoolean(DATA_STORED, true).apply()
+        if (!fetched)
+            fetchDataFromNetwork().collect {
+                if (it is ResultHandler.Success) {
+                    emit(it)
+                    eraseEvents()
+                    saveEvents(it.result)
+                    sp.edit().putBoolean(DATA_STORED, true).apply()
+                }
             }
-        }
 
     }.flowOn(Dispatchers.IO)
 
@@ -62,9 +61,13 @@ class Repository @Inject constructor(
     suspend fun submitReceipt(paymentReceipt: PaymentReceipt) = flow {
         runCatching {
             Timber.d("PR $paymentReceipt")
-            emit(ResultHandler.Success(api.submitReceipt(
-                paymentReceipt
-            ).body()!!))
+            emit(
+                ResultHandler.Success(
+                    api.submitReceipt(
+                        paymentReceipt
+                    ).body()!!
+                )
+            )
         }.getOrElse { emit(ResultHandler.Failure(it)) }
     }.flowOn((Dispatchers.IO))
 
@@ -97,7 +100,17 @@ class Repository @Inject constructor(
     ) = flow {
         runCatching {
             api.validateUser(admission_no, email, fullname, contact_no, college)
-                emit(ResultHandler.Success(api.validateUser(admission_no, email, fullname, contact_no, college).body()!!))
+            emit(
+                ResultHandler.Success(
+                    api.validateUser(
+                        admission_no,
+                        email,
+                        fullname,
+                        contact_no,
+                        college
+                    ).body()!!
+                )
+            )
         }.getOrElse {
             emit(ResultHandler.Failure(it))
         }
