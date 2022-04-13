@@ -5,8 +5,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import project.gdsc.zealicon22.database.EventsDao
 import project.gdsc.zealicon22.models.Events
 import project.gdsc.zealicon22.models.PaymentReceipt
@@ -28,6 +26,7 @@ class Repository @Inject constructor(
 
     companion object {
         const val DATA_STORED = "DATA_STORED"
+        const val MY_DATA_STORED = "MY_DATA_STORED"
     }
 
     private var fetched = true
@@ -47,9 +46,30 @@ class Repository @Inject constructor(
 
     }.flowOn(Dispatchers.IO)
 
+    suspend fun getMyEvents(zealId: String) = flow {
+        emit(ResultHandler.Loading)
+        fetchMyEventsFromNetwork(zealId).collect {
+            if (it is ResultHandler.Success) {
+                it.result.forEach { e ->
+                    sp.edit().putBoolean("EventId:${e.event.id}", true).apply()
+                }
+                emit(it)
+            } else emit(it)
+        }
+
+    }.flowOn(Dispatchers.IO)
+
     private suspend fun fetchDataFromNetwork() = flow {
         runCatching {
             emit(ResultHandler.Success(api.getEvents().body()!!))
+        }.getOrElse { emit(ResultHandler.Failure(it)) }
+    }.flowOn(Dispatchers.IO)
+
+    private suspend fun fetchMyEventsFromNetwork(zealId: String) = flow {
+        runCatching {
+            Timber.d("Zeal $zealId")
+            Timber.d("Zeal ${api.getMyEvents(zealId).body()!!}")
+            emit(ResultHandler.Success(api.getMyEvents(zealId).body()!!))
         }.getOrElse { emit(ResultHandler.Failure(it)) }
     }.flowOn(Dispatchers.IO)
 

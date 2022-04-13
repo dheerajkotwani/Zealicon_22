@@ -14,11 +14,10 @@ import project.gdsc.zealicon22.databinding.ActivityMainBinding
 import project.gdsc.zealicon22.di.AppModule
 import project.gdsc.zealicon22.home.HomeFragment
 import project.gdsc.zealicon22.models.PaymentSuccess
-import project.gdsc.zealicon22.myevents.MyEventsFragment
+import project.gdsc.zealicon22.my_events.MyEventsFragment
 import project.gdsc.zealicon22.reach.ReachFragment
 import project.gdsc.zealicon22.search_events.SearchEventsFragment
 import project.gdsc.zealicon22.signup.RegisterFragment
-import project.gdsc.zealicon22.signup.SignupFragment
 import project.gdsc.zealicon22.signup.ZealIdFragment
 import project.gdsc.zealicon22.teams.TeamsFragment
 

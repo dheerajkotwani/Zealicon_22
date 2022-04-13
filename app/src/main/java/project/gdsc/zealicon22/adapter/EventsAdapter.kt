@@ -10,20 +10,28 @@ import androidx.recyclerview.widget.RecyclerView
 import project.gdsc.zealicon22.R
 import project.gdsc.zealicon22.databinding.ItemEventCardBinding
 import project.gdsc.zealicon22.interfaces.ConstraintInstructions
+import project.gdsc.zealicon22.models.Events
+import project.gdsc.zealicon22.models.MyEvents
 import project.gdsc.zealicon22.utils.animateOnClick
+import project.gdsc.zealicon22.utils.formatTo
+import project.gdsc.zealicon22.utils.getDateTime
 import project.gdsc.zealicon22.utils.updateConstraints
 
-
+/**
+ * @Updated: Karan Verma on 13/04/22
+ */
 class EventsAdapter(
-    private val events: ArrayList<String>,
     private val context: Context,
-    private val onEventCardClick: (event: String) -> Unit
+    private val onEventCardClick: (event: Events) -> Unit
 ) : RecyclerView.Adapter<EventsAdapter.EventViewHolder>() {
 
     private val ROTATION_CONST = 2f
 
-    class EventViewHolder(item: View) : RecyclerView.ViewHolder(item) {
-        val binding = ItemEventCardBinding.bind(item)
+    private var events: ArrayList<MyEvents> = arrayListOf()
+
+    fun setList(events: ArrayList<MyEvents>){
+        this.events = events
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(
@@ -44,7 +52,10 @@ class EventsAdapter(
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
         with(holder) {
 
-            binding.eventName.text = events[position]
+            binding.eventName.text = events[position].event.name
+            binding.eventDate.text = getDateTime(events[position].event.datetime).formatTo("dd MMM yyyy")
+            binding.eventSociety.text = events[position].event.society
+
             if (position % 2 == 0) { // even item case (shifts info towards right)
 
                 // This code disconnects and connects constraints
@@ -130,7 +141,7 @@ class EventsAdapter(
             }
             binding.eventConstraint.setOnClickListener {
                 animateOnClick(it)
-                onEventCardClick(events[position])
+                onEventCardClick(events[position].event)
             }
         }
     }
@@ -146,5 +157,9 @@ class EventsAdapter(
     }
 
     override fun getItemCount() = events.size
+
+    class EventViewHolder(item: View) : RecyclerView.ViewHolder(item) {
+        val binding = ItemEventCardBinding.bind(item)
+    }
 
 }
