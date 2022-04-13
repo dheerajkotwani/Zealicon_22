@@ -17,10 +17,10 @@ import project.gdsc.zealicon22.databinding.FragmentEventDetailsBinding
 import project.gdsc.zealicon22.databinding.ItemEventDetailUnitBinding
 import project.gdsc.zealicon22.models.Events
 import project.gdsc.zealicon22.models.ResultHandler
-import timber.log.Timber
-import javax.inject.Inject
 import project.gdsc.zealicon22.utils.formatTo
 import project.gdsc.zealicon22.utils.getDateTime
+import timber.log.Timber
+import javax.inject.Inject
 
 /**
  * @Updated: Karan Verma on 12/04/22
@@ -92,7 +92,7 @@ class EventDetailsFragment : Fragment() {
     }
 
     private fun handleEventRegistration(events: Events) {
-        if (sp.getBoolean("EventId:${events.id}", false))
+        if (sp.getBoolean("EventId:${events.id}", false) || sp.getString("ZEAL_ID", "").isNullOrBlank())
             binding.registerButton.visibility = View.GONE
         else {
             binding.registerButton.apply {

@@ -47,7 +47,7 @@ class MainViewModel @Inject constructor(
 
     val upcomingEvents: LiveData<ResultHandler<List<Events>>> = Transformations.map(events) {
         if (it is ResultHandler.Success)
-            ResultHandler.Success(it.result.filter { i -> getDateTime(i.datetime) > Date() })
+            ResultHandler.Success(it.result.filter { i -> getDateTime(i.datetime) > Date() }.sortedBy { i-> getDateTime(i.datetime) }.subList(0,5))
         else it
     }
 
@@ -70,8 +70,10 @@ class MainViewModel @Inject constructor(
     val selectedDay: LiveData<List<Events>> = mDay.combineWith(events) { day, events ->
         if (events is ResultHandler.Success)
             events.result.filter {
-                val d = (getDateTime(it.datetime).formatTo("dd").toIntOrNull() ?: 26) - 25
-                d == day
+                if (day!=null) {
+                    val d = (getDateTime(it.datetime).formatTo("dd").toIntOrNull() ?: 26) - 25
+                    d == day
+                } else true
             }
         else listOf()
     }
@@ -125,7 +127,7 @@ class MainViewModel @Inject constructor(
             mQuery.value = query.toString()
     }
 
-    fun selectDay(day: Int) {
+    fun selectDay(day: Int?) {
         mDay.value = day
     }
 
