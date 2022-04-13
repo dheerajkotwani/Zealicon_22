@@ -38,6 +38,8 @@
             android:background="@drawable/search_background"
             android:drawableStart="@drawable/ic_search"
             android:drawablePadding="10dp"
+            android:maxLines="1"
+            android:imeOptions="actionSearch"
             android:drawableTint="@color/black"
             android:fontFamily="@font/cartoonist_hand"
             android:hint="@string/enter_your_search_term"

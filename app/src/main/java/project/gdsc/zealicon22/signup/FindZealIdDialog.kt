@@ -3,11 +3,13 @@ package project.gdsc.zealicon22.signup
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.LifecycleOwner
 import com.google.gson.Gson
+import project.gdsc.zealicon22.R
 import project.gdsc.zealicon22.RegisterViewModel
 import project.gdsc.zealicon22.databinding.DialogFindIdBinding
 import project.gdsc.zealicon22.di.AppModule
@@ -45,12 +47,14 @@ class FindZealIdDialog(context: Context,
 
             when (it) {
                 is ResultHandler.Loading -> {
-                    Timber.d("RequestingRightNow")
+                    binding.loading.visibility = View.VISIBLE
+                    binding.btnText.text = ""
                 }
                 is ResultHandler.Success -> {
+                    binding.loading.visibility = View.GONE
+                    binding.btnText.text = context.resources.getString(R.string.find_zeal_id)
                     Timber.d("SuccessRequest: ${it.result}")
                     val sp = AppModule.provideSharedPreferences(context)
-
                     if (it.result.zeal_id != null) {
                         sp.edit()
                             .putString("USER_DATA", Gson().toJson(it.result))
@@ -73,6 +77,8 @@ class FindZealIdDialog(context: Context,
                     //open ZealId screen after successful registration
                 }
                 is ResultHandler.Failure -> {
+                    binding.loading.visibility = View.GONE
+                    binding.btnText.text = context.resources.getString(R.string.find_zeal_id)
                     Timber.e("FailureRequest: ${it.message}")
                     Toast.makeText(
                         context,

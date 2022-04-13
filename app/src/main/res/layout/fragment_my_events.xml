@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/app_background"
     tools:context=".my_events.MyEventsFragment">
 
@@ -15,55 +15,68 @@
         android:layout_marginTop="40dp"
         android:fontFamily="@font/giants"
         android:text="@string/my_events"
-        android:textSize="36sp"
         android:textColor="@color/white"
+        android:textSize="36sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/red"
+        android:src="@drawable/ic_bt_register_now"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/my_events_recycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical"
         android:layout_marginTop="4dp"
-        android:paddingBottom="120dp"
         android:clipToPadding="false"
-        tools:listitem="@layout/item_event_card"
-        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="vertical"
+        android:paddingBottom="120dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/my_events"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        tools:listitem="@layout/item_event_card" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/AAAAAAAAAAAAAAAAAAAAAAAA"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/AAAAAAAAAAAAAAAAAAAAAAAA"
-        android:maxLines="1"
-        android:textColor="@color/white"
+        android:layout_marginBottom="24dp"
+        android:alpha=".1"
         android:fontFamily="@font/badaboom"
         android:letterSpacing=".2"
+        android:maxLines="1"
         android:rotation="-8"
-        android:alpha=".1"
+        android:text="@string/AAAAAAAAAAAAAAAAAAAAAAAA"
+        android:textColor="@color/white"
+        android:textSize="38sp"
         android:visibility="invisible"
-        android:layout_marginBottom="24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/no_events_text"
-        android:textSize="38sp"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/no_events_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/no_events"
         android:fontFamily="@font/cartoonist_hand"
+        android:text="@string/no_events"
+        android:textColor="@color/yellow"
         android:textSize="18sp"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/my_events"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:textColor="@color/yellow"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/my_events" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

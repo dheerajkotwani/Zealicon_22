@@ -61,14 +61,17 @@ class MyEventsFragment : Fragment() {
         viewModel.myEvents.observe(viewLifecycleOwner){
             when (it) {
                 is ResultHandler.Loading -> {
+                    binding.loading.visibility = View.VISIBLE
                 }
                 is ResultHandler.Success -> {
+                    binding.loading.visibility = View.GONE
                     if (!it.result.isNullOrEmpty()){
                         binding.noEventsText.visibility = View.GONE
                         eventsAdapter?.setList(it.result as ArrayList<MyEvents>)
                     } else binding.noEventsText.visibility = View.VISIBLE
                 }
                 is ResultHandler.Failure -> {
+                    binding.loading.visibility = View.GONE
                     binding.noEventsText.visibility = View.GONE
                     Toast.makeText(
                         requireContext(),
