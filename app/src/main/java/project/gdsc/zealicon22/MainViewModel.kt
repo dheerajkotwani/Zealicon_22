@@ -4,10 +4,10 @@ import android.content.SharedPreferences
 import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 import project.gdsc.zealicon22.models.Events
-import project.gdsc.zealicon22.models.RegisterBody
+import project.gdsc.zealicon22.models.MyEvents
 import project.gdsc.zealicon22.models.ResultHandler
 import project.gdsc.zealicon22.utils.formatTo
 import project.gdsc.zealicon22.utils.getDateTime
@@ -22,12 +22,18 @@ import javax.inject.Inject
  * @Updated: Karan Verma on 09/04/22
  */
 @HiltViewModel
-class MainViewModel @Inject constructor(private val repo: Repository) : ViewModel() {
+class MainViewModel @Inject constructor(
+    private val repo: Repository,
+    private val sp: SharedPreferences
+) : ViewModel() {
 
     var subscribed = false
 
     private val mEvents = MutableLiveData<ResultHandler<List<Events>>>()
     val events: LiveData<ResultHandler<List<Events>>> = mEvents
+
+    private val mMyEvents = MutableLiveData<ResultHandler<List<MyEvents>>>()
+    val myEvents: LiveData<ResultHandler<List<MyEvents>>> = mMyEvents
 
     /*
     * Use transformations on events to get your selective data. Example for
@@ -64,8 +70,9 @@ class MainViewModel @Inject constructor(private val repo: Repository) : ViewMode
     val selectedDay: LiveData<List<Events>> = mDay.combineWith(events) { day, events ->
         if (events is ResultHandler.Success)
             events.result.filter {
-                val d = (getDateTime(it.datetime).formatTo("dd").toIntOrNull()?:26) - 25
-                d == day }
+                val d = (getDateTime(it.datetime).formatTo("dd").toIntOrNull() ?: 26) - 25
+                d == day
+            }
         else listOf()
     }
 
@@ -91,6 +98,23 @@ class MainViewModel @Inject constructor(private val repo: Repository) : ViewMode
         mEvents.postValue(ResultHandler.Loading)
         repo.getEvents().collect {
             mEvents.postValue(it)
+        }
+    }
+
+    fun getMyEvents() = viewModelScope.launch {
+        mMyEvents.postValue(ResultHandler.Loading)
+        val zealId = sp.getString("ZEAL_ID", "")
+        if (zealId.isNullOrBlank())
+            mMyEvents.postValue(ResultHandler.Failure(Throwable("Zeal Id not found")))
+        else if (sp.getBoolean(Repository.MY_DATA_STORED, false)) {
+            if (events.value is ResultHandler.Success) {
+                mMyEvents.postValue(ResultHandler.Success(
+                    (events.value as ResultHandler.Success<List<Events>>).result.filter { i ->
+                    sp.getBoolean("EventId:${i.id}", false)
+                }.map { MyEvents(it) }))
+            }
+        } else repo.getMyEvents(zealId).collect {
+            mMyEvents.postValue(it)
         }
     }
 

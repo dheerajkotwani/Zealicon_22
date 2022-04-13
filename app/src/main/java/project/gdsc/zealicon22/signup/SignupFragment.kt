@@ -161,8 +161,8 @@ class SignupFragment(
 
     private fun validateUserData() {
         viewModel.validateUserData(
-            binding.etAdmNumber.input.text.toString().capitalize(),
-            binding.etEmail.input.text.toString(),
+            binding.etAdmNumber.input.text.toString().toUpperCase(),
+            binding.etEmail.input.text.toString().toUpperCase(),
             binding.etName.input.text.toString(),
             binding.etPhone.input.text.toString(),
             "JSSATE",
@@ -366,7 +366,7 @@ class SignupFragment(
             "",
             "",
             paymentResponse.server_order_id!!,
-            binding.etAdmNumber.input.text.toString().capitalize(),
+            binding.etAdmNumber.input.text.toString().toUpperCase(),
             "JSSATE",
             binding.etPhone.input.text.toString(),
             binding.etName.input.text.toString(),

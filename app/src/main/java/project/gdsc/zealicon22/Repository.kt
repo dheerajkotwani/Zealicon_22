@@ -26,6 +26,7 @@ class Repository @Inject constructor(
 
     companion object {
         const val DATA_STORED = "DATA_STORED"
+        const val MY_DATA_STORED = "MY_DATA_STORED"
     }
 
     private var fetched = false
@@ -46,9 +47,30 @@ class Repository @Inject constructor(
 
     }.flowOn(Dispatchers.IO)
 
+    suspend fun getMyEvents(zealId: String) = flow {
+        emit(ResultHandler.Loading)
+        fetchMyEventsFromNetwork(zealId).collect {
+            if (it is ResultHandler.Success) {
+                it.result.forEach { e ->
+                    sp.edit().putBoolean("EventId:${e.event.id}", true).apply()
+                }
+                emit(it)
+            } else emit(it)
+        }
+
+    }.flowOn(Dispatchers.IO)
+
     private suspend fun fetchDataFromNetwork() = flow {
         runCatching {
             emit(ResultHandler.Success(api.getEvents().body()!!))
+        }.getOrElse { emit(ResultHandler.Failure(it)) }
+    }.flowOn(Dispatchers.IO)
+
+    private suspend fun fetchMyEventsFromNetwork(zealId: String) = flow {
+        runCatching {
+            Timber.d("Zeal $zealId")
+            Timber.d("Zeal ${api.getMyEvents(zealId).body()!!}")
+            emit(ResultHandler.Success(api.getMyEvents(zealId).body()!!))
         }.getOrElse { emit(ResultHandler.Failure(it)) }
     }.flowOn(Dispatchers.IO)
 

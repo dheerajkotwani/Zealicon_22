@@ -14,6 +14,9 @@ interface NetworkService {
     @GET("/events/all")
     suspend fun getEvents(): Response<List<Events>>
 
+    @GET("/events/registration/")
+    suspend fun getMyEvents(@Query("zeal_id") zealId : String): Response<List<MyEvents>>
+
     @GET("/payment")
     suspend fun getOrderId(): Response<PaymentResponse>
 

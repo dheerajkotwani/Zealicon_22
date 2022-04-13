@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "277437922269",
+    "project_id": "zealicon22-3b1b9",
+    "storage_bucket": "zealicon22-3b1b9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:277437922269:android:c7136bae8370a391025434",
+        "android_client_info": {
+          "package_name": "project.gdsc.zealicon22"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "277437922269-h132p1i4j2ba40n5e7mmanapb1qr7ah8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6u5LYRaQWhpnZ-OGgKFqL_wouiV8LNnE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "277437922269-h132p1i4j2ba40n5e7mmanapb1qr7ah8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

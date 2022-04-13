@@ -22,6 +22,9 @@ import javax.inject.Inject
 import project.gdsc.zealicon22.utils.formatTo
 import project.gdsc.zealicon22.utils.getDateTime
 
+/**
+ * @Updated: Karan Verma on 12/04/22
+ */
 @AndroidEntryPoint
 class EventDetailsFragment : Fragment() {
 
