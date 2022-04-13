@@ -20,6 +20,7 @@ import project.gdsc.zealicon22.models.Events
 import project.gdsc.zealicon22.models.MyEvents
 import project.gdsc.zealicon22.models.ResultHandler
 import javax.inject.Inject
+import project.gdsc.zealicon22.utils.showToast
 
 /**
  * @Updated: Karan Verma on 13/04/22
@@ -83,7 +84,10 @@ class MyEventsFragment : Fragment() {
         if (sp.getString("ZEAL_ID", "").isNullOrBlank()){
             binding.noEventsText.visibility = View.VISIBLE
             binding.noEventsText.text = "Please login to see your events !"
-        }else viewModel.getMyEvents()
+        } else {
+            viewModel.getMyEvents()
+        }
+
     }
 
     private val onEventCardClick: (event: Events) -> Unit = {

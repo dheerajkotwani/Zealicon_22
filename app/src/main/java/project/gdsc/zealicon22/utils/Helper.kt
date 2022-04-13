@@ -1,5 +1,7 @@
 package project.gdsc.zealicon22.utils
 
+import android.content.Context
+import android.widget.Toast
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -15,4 +17,8 @@ fun Date.formatTo(
     val formatter = SimpleDateFormat(dateFormat, Locale.getDefault())
     formatter.timeZone = timeZone
     return formatter.format(this)
+}
+
+fun showToast(context: Context, message: String) {
+    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }

@@ -158,13 +158,18 @@
         },
         {
           "name": "Shrey Jain",
-          "position": "Web Developer",
+          "position": "Designer",
           "image": "https://hackncs.com/img/team/shrey.jpg"
         },
         {
           "name": "Vaibhav Shukla",
           "position": "Designer",
           "image": "https://hackncs.com/img/team/vaibhav.jpg"
+        },
+        {
+          "name": "Shivam Singh",
+          "position": "Dev Ops",
+          "image": "https://hackncs.com/img/team/shivam.jpg"
         }
       ]
     }
