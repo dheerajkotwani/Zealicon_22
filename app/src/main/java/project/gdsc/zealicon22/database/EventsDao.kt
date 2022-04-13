@@ -1,9 +1,6 @@
 package project.gdsc.zealicon22.database
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 import project.gdsc.zealicon22.models.Events
 
@@ -15,8 +12,11 @@ import project.gdsc.zealicon22.models.Events
 interface EventsDao {
 
     @Query("SELECT * FROM events_table")
-    fun getAllEvents(): Flow<List<Events>>
+    fun getAllEvents(): List<Events>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveEvents(list: List<Events>)
+
+    @Query("DELETE FROM events_table")
+    fun deleteEvents()
 }

@@ -30,19 +30,19 @@ class Repository @Inject constructor(
         const val DATA_STORED = "DATA_STORED"
     }
 
-    suspend fun getEvents() = flow {
-        emit(ResultHandler.Loading)
+    private var fetched = true
 
-        if (sp.getBoolean(DATA_STORED, false))
-            dao.getAllEvents().collect { res ->
-                emit(ResultHandler.Success(res))
-            }
-        else fetchDataFromNetwork().collect {
+    suspend fun getEvents() = flow {
+
+        emit(ResultHandler.Success(dao.getAllEvents()))
+
+        fetchDataFromNetwork().takeIf { !fetched }?.collect {
             if (it is ResultHandler.Success) {
                 emit(it)
+                eraseEvents()
                 saveEvents(it.result)
                 sp.edit().putBoolean(DATA_STORED, true).apply()
-            } else emit(it)
+            }
         }
 
     }.flowOn(Dispatchers.IO)
@@ -76,6 +76,10 @@ class Repository @Inject constructor(
 
     private suspend fun saveEvents(list: List<Events>) {
         dao.saveEvents(list)
+    }
+
+    private suspend fun eraseEvents() {
+        dao.deleteEvents()
     }
 
     suspend fun registerForEvent(body: RegisterBody) = flow {
