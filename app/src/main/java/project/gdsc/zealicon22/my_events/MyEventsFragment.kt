@@ -1,6 +1,7 @@
 package project.gdsc.zealicon22.my_events
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import com.google.gson.Gson
+import dagger.hilt.android.AndroidEntryPoint
 import project.gdsc.zealicon22.DetailActivity
 import project.gdsc.zealicon22.MainViewModel
 import project.gdsc.zealicon22.R
@@ -17,10 +19,12 @@ import project.gdsc.zealicon22.databinding.FragmentMyEventsBinding
 import project.gdsc.zealicon22.models.Events
 import project.gdsc.zealicon22.models.MyEvents
 import project.gdsc.zealicon22.models.ResultHandler
+import javax.inject.Inject
 
 /**
  * @Updated: Karan Verma on 13/04/22
  */
+@AndroidEntryPoint
 class MyEventsFragment : Fragment() {
 
     private var _binding: FragmentMyEventsBinding? = null
@@ -29,6 +33,9 @@ class MyEventsFragment : Fragment() {
     private var eventsAdapter: EventsAdapter? = null
 
     private val viewModel: MainViewModel by activityViewModels()
+
+    @Inject
+    lateinit var sp: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,6 +68,7 @@ class MyEventsFragment : Fragment() {
                     } else binding.noEventsText.visibility = View.VISIBLE
                 }
                 is ResultHandler.Failure -> {
+                    binding.noEventsText.visibility = View.GONE
                     Toast.makeText(
                         requireContext(),
                         "Oops! Something went wrong.",
@@ -72,7 +80,10 @@ class MyEventsFragment : Fragment() {
     }
 
     private fun getData() {
-        viewModel.getMyEvents()
+        if (sp.getString("ZEAL_ID", "").isNullOrBlank()){
+            binding.noEventsText.visibility = View.VISIBLE
+            binding.noEventsText.text = "Please login to see your events !"
+        }else viewModel.getMyEvents()
     }
 
     private val onEventCardClick: (event: Events) -> Unit = {
