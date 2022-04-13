@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import project.gdsc.zealicon22.databinding.FragmentReachBinding
+import project.gdsc.zealicon22.interfaces.UpdateFragmentListener
 import project.gdsc.zealicon22.teams.ContactType
 import project.gdsc.zealicon22.teams.TeamDetails
 import project.gdsc.zealicon22.teams.TeamsModalItem
@@ -15,7 +16,7 @@ import project.gdsc.zealicon22.teams.TeamsModalItem
 /**
  * @author Dheeraj Kotwani on 07/04/22.
  */
-class ReachFragment : Fragment() {
+class ReachFragment(val updateFragmentListener: UpdateFragmentListener) : Fragment() {
 
     private var _binding: FragmentReachBinding? = null
     private val binding get() = _binding!!
@@ -49,7 +50,6 @@ class ReachFragment : Fragment() {
         binding.rvReach.adapter = adapter
 
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
