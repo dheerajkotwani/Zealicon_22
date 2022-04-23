@@ -1,5 +1,6 @@
 package project.gdsc.zealicon22.signup
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -27,6 +28,7 @@ class ZealIdFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -36,7 +38,7 @@ class ZealIdFragment : Fragment() {
         val paymentSuccess = Gson().fromJson<PaymentSuccess>(userData, PaymentSuccess::class.java)
 
         binding.textZealId.text = paymentSuccess.zeal_id
-        binding.textHeyUser.text = "Hey, ${paymentSuccess.fullname}"
+        binding.textHeyUser.text = "Hey, ${paymentSuccess.fullname.substringBefore(" ")}"
 
         MainActivity.justRegistered = true
 
