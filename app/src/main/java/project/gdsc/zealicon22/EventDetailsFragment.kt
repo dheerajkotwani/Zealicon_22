@@ -64,7 +64,7 @@ class EventDetailsFragment : Fragment() {
         }
         binding.eventClock.apply {
             setIcon(this, R.drawable.ic_clock)
-            eventUnitInfo.text = getDateTime(events.datetime).formatTo("HH:mm") + " HOURS"
+            eventUnitInfo.text = getDateTime(events.datetime).formatTo("HH:mm a")
         }
         binding.eventPhone.apply {
             setIcon(this, R.drawable.ic_phone)

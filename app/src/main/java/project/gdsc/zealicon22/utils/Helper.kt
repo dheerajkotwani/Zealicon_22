@@ -7,7 +7,7 @@ import java.util.*
 
 fun getDateTime(datetime: String): Date =
     SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
-        .apply { timeZone = TimeZone.getTimeZone("UTC") }
+//        .apply { timeZone = TimeZone.getTimeZone("IST") }
         .parse(datetime.substringBefore('+'))!!
 
 fun Date.formatTo(
