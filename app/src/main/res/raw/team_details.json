@@ -157,6 +157,11 @@
           "image": "https://res.cloudinary.com/de4by5q8o/image/upload/v1628878134/shubhransh_imbfzd.png"
         },
         {
+          "name": "Satyam Shukla",
+          "position": "Designer",
+          "image": "https://res.cloudinary.com/de4by5q8o/image/upload/v1628849455/satyam_hidj6i.jpg"
+        },
+        {
           "name": "Shrey Jain",
           "position": "Designer",
           "image": "https://hackncs.com/img/team/shrey.jpg"
@@ -170,6 +175,36 @@
           "name": "Shivam Singh",
           "position": "Dev Ops",
           "image": "https://hackncs.com/img/team/shivam.jpg"
+        },
+        {
+          "name": "Kushal Gautam",
+          "position": "Designer",
+          "image": "https://firebasestorage.googleapis.com/v0/b/zealicon22-3b1b9.appspot.com/o/designer%2FKushal%20gautam.jpeg?alt=media&token=b16437c6-529e-4391-afeb-b791155bdea6"
+        },
+        {
+          "name": "Udbhav",
+          "position": "Designer",
+          "image": "https://firebasestorage.googleapis.com/v0/b/zealicon22-3b1b9.appspot.com/o/designer%2FUdbhav%20Patel.jpeg?alt=media&token=893c59b1-e00d-4349-9da8-ec4ee031c277"
+        },
+        {
+          "name": "Arnika Sharma",
+          "position": "Designer",
+          "image": "https://firebasestorage.googleapis.com/v0/b/zealicon22-3b1b9.appspot.com/o/designer%2FArnika%20Sharma%201.png?alt=media&token=c04a5aa7-2496-45fd-aece-8f17cf871f51"
+        },
+        {
+          "name": "Ashwin Raj",
+          "position": "Designer",
+          "image": "https://firebasestorage.googleapis.com/v0/b/zealicon22-3b1b9.appspot.com/o/designer%2FAshwin%20Raj%20vats.jpeg?alt=media&token=fb1f57de-2364-4d19-b45a-3fb8b91f98db"
+        },
+        {
+          "name": "Utkarsh",
+          "position": "Designer",
+          "image": "https://firebasestorage.googleapis.com/v0/b/zealicon22-3b1b9.appspot.com/o/designer%2FUtkarsh.png?alt=media&token=dd1f6a46-4ca2-454e-8291-8f19f9f481f3"
+        },
+        {
+          "name": "Aman Bansal",
+          "position": "Designer",
+          "image": "https://firebasestorage.googleapis.com/v0/b/zealicon22-3b1b9.appspot.com/o/designer%2FAman%20Bansal.jpeg?alt=media&token=db14e673-420c-404a-873d-469f2f55b9d0"
         }
       ]
     }
