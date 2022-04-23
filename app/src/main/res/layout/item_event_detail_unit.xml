@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/black">
@@ -15,13 +15,17 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/event_unit_info"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="@string/date_26"
         android:textSize="16dp"
+        android:layout_marginEnd="4dp"
         android:textColor="@color/white"
+        android:singleLine="true"
+        android:ellipsize="end"
         android:fontFamily="@font/cartoonist_hand"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/event_unit_info_icon"
         app:layout_constraintBottom_toBottomOf="@id/event_unit_info_icon"
         app:layout_constraintStart_toEndOf="@id/event_unit_info_icon"/>
