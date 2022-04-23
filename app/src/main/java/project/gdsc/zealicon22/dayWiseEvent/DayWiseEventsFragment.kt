@@ -73,7 +73,8 @@ class DayWiseEventsFragment : Fragment() {
 
     private fun setObservers() {
         viewModel.selectedDay.observe(viewLifecycleOwner){
-           eventsAdapter.setList(it)
+
+            eventsAdapter.setList(it)
             setData(it)
         }
     }

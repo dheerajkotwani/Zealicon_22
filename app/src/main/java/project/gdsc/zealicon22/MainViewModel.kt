@@ -83,7 +83,7 @@ class MainViewModel @Inject constructor(
                     val d = (getDateTime(it.datetime).formatTo("dd").toIntOrNull() ?: 26) - 25
                     d == day
                 } else true
-            }
+            }.sortedBy { it.id }
         else listOf()
     }
 
